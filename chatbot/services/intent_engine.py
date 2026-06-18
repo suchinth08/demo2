@@ -16,6 +16,7 @@ import platform
 import re
 import subprocess
 import tempfile
+import time
 from pathlib import Path
 from typing import Optional
 
@@ -196,27 +197,33 @@ Return ONLY the updated JSON object, no prose, no markdown code fences.
 def _call_openrouter_provider(system: str, messages: list[dict], max_tokens: int) -> str:
     """OpenRouter API call using the free-tier model (used when LLM_PROVIDER=openrouter).
     Uses the OpenAI-compatible /chat/completions endpoint — no extra SDK needed.
+    Retries up to 4 times on 429 with exponential backoff.
     """
     import httpx
     full_messages = [{"role": "system", "content": system}] + messages
     cap = min(max_tokens, OPENROUTER_MAX_TOKENS)
-    resp = httpx.post(
-        "https://openrouter.ai/api/v1/chat/completions",
-        headers={
-            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-            "Content-Type": "application/json",
-            "X-Title": "Ask-Liquid-Data",
-        },
-        json={
-            "model": OPENROUTER_MODEL,
-            "messages": full_messages,
-            "max_tokens": cap,
-            "temperature": 0.1,
-        },
-        timeout=120.0,
-    )
-    resp.raise_for_status()
-    return resp.json()["choices"][0]["message"]["content"].strip()
+    delays = [5, 15, 30, 60]
+    for attempt, delay in enumerate(delays + [None]):
+        resp = httpx.post(
+            "https://openrouter.ai/api/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                "Content-Type": "application/json",
+                "X-Title": "Ask-Liquid-Data",
+            },
+            json={
+                "model": OPENROUTER_MODEL,
+                "messages": full_messages,
+                "max_tokens": cap,
+                "temperature": 0.1,
+            },
+            timeout=120.0,
+        )
+        if resp.status_code == 429 and delay is not None:
+            time.sleep(delay)
+            continue
+        resp.raise_for_status()
+        return resp.json()["choices"][0]["message"]["content"].strip()
 
 
 def _call_groq_provider(system: str, messages: list[dict], max_tokens: int) -> str:
