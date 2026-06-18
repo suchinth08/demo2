@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>AI for BI — Pitch for Circana | Market Insights Acceleration</title>
+<style>
+  :root {
+    --circana-magenta: #C8389B;
+    --circana-purple: #6B2C8E;
+    --circana-deep:   #2A0F40;
+    --ink:            #15151A;
+    --ink-2:          #4A4A55;
+    --line:           #E6E1EE;
+    --soft:           #F7F4FB;
+    --accent-warm:    #FF6A3D;
+    --good:           #2BA84A;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #F2EEF7; color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.5; }
+  .page { max-width: 1180px; margin: 0 auto; background: #fff; box-shadow: 0 4px 30px rgba(42, 15, 64, 0.08); }
+  header.hero {
+    background: linear-gradient(135deg, var(--circana-deep) 0%, var(--circana-purple) 55%, var(--circana-magenta) 100%);
+    color: #fff;
+    padding: 40px 56px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::after {
+    content: "";
+    position: absolute; right: -120px; top: -120px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+  }
+  .brandbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
+  .brandbar img { height: 44px; background: #fff; padding: 8px 14px; border-radius: 8px; }
+  .brandbar .partner { font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.85; }
+  h1 { font-size: 36px; line-height: 1.15; margin: 0 0 12px; font-weight: 700; }
+  .subtitle { font-size: 18px; opacity: 0.92; max-width: 820px; margin: 0 0 6px; }
+  .meta { font-size: 13px; opacity: 0.75; margin-top: 18px; letter-spacing: 0.04em; }
+
+  section { padding: 36px 56px; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 { font-size: 22px; color: var(--circana-deep); margin: 0 0 6px; letter-spacing: -0.01em; }
+  h2 .num { color: var(--circana-magenta); font-weight: 700; margin-right: 10px; }
+  .lede { color: var(--ink-2); font-size: 15px; margin: 0 0 22px; max-width: 900px; }
+
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    background: #fff;
+  }
+  .card.soft { background: var(--soft); border-color: #E6DDF1; }
+  .card h3 { margin: 0 0 6px; font-size: 15px; color: var(--circana-purple); }
+  .card p  { margin: 0; font-size: 14px; color: var(--ink-2); }
+  .layerblock { border-left: 4px solid var(--circana-magenta); padding-left: 14px; margin-bottom: 16px; }
+  .layerblock h4 { margin: 0 0 4px; color: var(--circana-deep); font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .layerblock p { margin: 0; font-size: 14px; color: var(--ink-2); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--soft); color: var(--circana-deep); font-weight: 600; font-size: 13px; letter-spacing: 0.02em; text-transform: uppercase; }
+  td.first { font-weight: 600; color: var(--ink); width: 30%; }
+  td.mid { width: 28%; color: var(--ink-2); }
+  td.last { color: var(--ink); }
+
+  .usecase {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 14px;
+    background: #fff;
+    transition: box-shadow 0.2s;
+  }
+  .usecase:hover { box-shadow: 0 4px 16px rgba(107, 44, 142, 0.08); }
+  .usecase .badge {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--circana-purple), var(--circana-magenta));
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 22px;
+  }
+  .usecase h3 { margin: 0 0 6px; color: var(--circana-deep); font-size: 17px; }
+  .usecase .why { font-size: 14px; color: var(--ink-2); margin: 0 0 10px; }
+  .usecase .kvs { display: flex; gap: 22px; flex-wrap: wrap; font-size: 13px; }
+  .kv { color: var(--ink-2); }
+  .kv b { color: var(--ink); display: block; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--circana-purple); margin-bottom: 2px; }
+
+  .phase {
+    display: grid; grid-template-columns: 120px 1fr; gap: 16px;
+    padding: 14px 18px; border: 1px solid var(--line); border-radius: 10px; margin-bottom: 10px;
+  }
+  .phase .label { font-weight: 700; color: var(--circana-magenta); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .phase .body { font-size: 14px; color: var(--ink-2); }
+  .phase .body b { color: var(--ink); }
+
+  .pill { display: inline-block; padding: 3px 10px; background: var(--soft); color: var(--circana-purple); border-radius: 999px; font-size: 12px; font-weight: 600; margin-right: 6px; margin-bottom: 4px; }
+  .callout {
+    background: linear-gradient(135deg, var(--circana-deep), var(--circana-purple));
+    color: #fff;
+    padding: 22px 26px;
+    border-radius: 12px;
+    margin-top: 8px;
+  }
+  .callout h3 { margin: 0 0 8px; color: #fff; font-size: 16px; letter-spacing: 0.02em; }
+  .callout p  { margin: 0; font-size: 14px; opacity: 0.95; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 20px; }
+  .stat { background: rgba(255,255,255,0.08); padding: 14px 16px; border-radius: 10px; }
+  .stat .num { font-size: 22px; font-weight: 700; }
+  .stat .lbl { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+
+  footer { padding: 22px 56px 32px; font-size: 12px; color: var(--ink-2); }
+  footer .accentline { height: 4px; background: linear-gradient(90deg, var(--circana-purple), var(--circana-magenta), var(--accent-warm)); border-radius: 4px; margin-bottom: 14px; }
+
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; }
+    section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="brandbar">
+      <img src="../circana-logo.png" alt="Circana" />
+      <span class="partner">AI for BI &nbsp;|&nbsp; Market Insights Pitch Brief</span>
+    </div>
+    <h1>From Dashboards to Decisions:<br/>Conversational, Agentic AI for Circana's CPG &amp; GM Market Insights</h1>
+    <p class="subtitle">A three-layer AI-for-BI reference — natural-language analytics, a programmable policy engine, and human-in-the-loop agents — purpose-built for FMCG, CPG, and General Merchandise insights teams, and designed to compound the value of Circana's Liquid Data&reg; and Liquid AI&trade;.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">$5.8T</div><div class="lbl">Global Consumer Spend tracked by Circana</div></div>
+      <div class="stat"><div class="num">42M</div><div class="lbl">CPG &amp; GM items actively measured</div></div>
+      <div class="stat"><div class="num">477K</div><div class="lbl">Stores in the panel</div></div>
+      <div class="stat"><div class="num">26</div><div class="lbl">Industries covered &mdash; CPG, GM, Beauty, Durables, Tech</div></div>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="num">01</span>Executive Thesis</h2>
+    <p class="lede">Circana sits on the largest commercial dataset in CPG and General Merchandise. The unsolved problem in market insights today is the <b>last mile</b>: turning that data into a brand manager's, category leader's, or customer-team's next action in seconds — with auditable, defensible insight. Liquid AI is Circana's horizontal GenAI platform; the white-space opportunity is the <i>verticalized, persona-shaped analyst surfaces</i> that sit on top of it. This brief proposes a proven three-layer AI-for-BI reference — already running end-to-end, retargetable to CPG, FMCG, and GM in a single quarter — that lights up five immediately monetizable use cases.</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>The market gap</h3>
+        <p>CPG and GM brand teams generate enormous POS, panel, media, and price data but lack the tools to extract insight at the speed decisions require. The average time from a share-shift signal to a management decision is <b>2&ndash;3 weeks</b>.</p>
+      </div>
+      <div class="card">
+        <h3>What we offer</h3>
+        <p>A working three-layer reference architecture (NL chatbot &rarr; rules engine &rarr; 7 agents) plus a delivery playbook for standing it up on a new commercial domain in &lt; 12 weeks &mdash; with the audit trail, citation, and governance an enterprise CPG client expects.</p>
+      </div>
+      <div class="card">
+        <h3>Why this wins now</h3>
+        <p>It is <b>complementary to Liquid AI</b>, not competitive. Liquid AI is the platform; we accelerate the persona-shaped surfaces (CPG Brand, Category, Retailer, Innovation, Customer Team) that a horizontal platform will always need on top.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span>The Asset &mdash; A Three-Layer AI-for-BI Reference Tuned for CPG &amp; GM</h2>
+    <p class="lede">A working reference architecture across all three layers, configurable for any commercial domain that Circana tracks &mdash; food &amp; beverage, beauty, healthcare, durables, tech, fashion, automotive aftermarket, foodservice.</p>
+
+    <div class="layerblock">
+      <h4>Layer 1 &middot; Conversational BI for Market Insights</h4>
+      <p>Intent engine (LLM-powered) &rarr; query library against a CPG/GM semantic ontology (share, velocity, ACV, distribution, price-gap, promo lift, basket affinity) &rarr; auto-chosen visualization &rarr; AI-written narrative with the "so-what". Multi-turn memory; CPG-native synonym resolution ("velocity" / "rate of sale" / "ROS"); precise time-expression handling ("last 4 weeks", "L52W", "YTD vs YA").</p>
+    </div>
+    <div class="layerblock">
+      <h4>Layer 2 &middot; Policy / Rules-as-a-Service for Commercial Guardrails</h4>
+      <p>A programmable rules engine that continuously evaluates live data against codified commercial policy &mdash; <b>JBP commitments, retailer contract thresholds, distribution targets, MAP / MSRP guardrails, brand-health watchlists, promo-ROI floors, OSA service levels</b>. Violations flow as ranked alerts with full evidence chain.</p>
+    </div>
+    <div class="layerblock">
+      <h4>Layer 3 &middot; Agentic Actions for Insights at Scale</h4>
+      <p>Autonomous agents that monitor signals, draft artifacts, and propose actions with explicit human approval gates &mdash; a Share-Movement Watcher, an MBR / Category-Review Auto-Drafter, a Root-Cause Investigator, an Innovation / Pacesetter Watcher, a Retailer-Readiness Agent, an Insight-Distribution Agent, and a Pricing &amp; Promo Investigator.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top: 18px;">
+      <div class="card soft"><h3>Tech stack (transferable)</h3><p>FastAPI &middot; LLM-agnostic (Groq, Azure OpenAI, Bedrock, or on-prem Llama) &middot; DuckDB / Snowflake / BigQuery &middot; Malloy semantic layer &middot; Vega-Lite &middot; immutable audit log.</p></div>
+      <div class="card soft"><h3>What's already built</h3><p>13 chart types, multi-domain query library, follow-up resolution, session memory, agent runtime with tool-calling, policy DSL, narrative generator &mdash; all domain-agnostic and reusable.</p></div>
+      <div class="card soft"><h3>What we configure for Circana</h3><p>The <b>ontology</b> (CPG/GM measures &amp; dimensions), the <b>query library</b>, and the <b>policy pack</b>. Everything else is the same engine. That is why a 12-week vertical pilot is realistic, not aspirational.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span>The Insight-Workflow Mapping</h2>
+    <p class="lede">Every recurring CPG / GM analyst workflow has a direct AI-for-BI capability that replaces it — measured against today's analyst-led baseline.</p>
+    <table>
+      <thead>
+        <tr><th>Analyst Workflow (CPG / GM)</th><th>Today's Baseline</th><th>With AI for BI</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="first">Weekly share &amp; velocity review</td><td class="mid">4&ndash;8 hours of analyst pulls and slide-making</td><td class="last">30-second NL query, auto-narrative, auto-chart</td></tr>
+        <tr><td class="first">Monthly MBR / Category Review drafting</td><td class="mid">8&ndash;20 hours per report, per category</td><td class="last">Agent-drafted deck with cited Circana sources; analyst edits</td></tr>
+        <tr><td class="first">Share-loss / share-gain root cause</td><td class="mid">1&ndash;2 weeks across multiple data cuts</td><td class="last">1&ndash;2 hours via multi-hop root-cause agent with hypothesis ranking</td></tr>
+        <tr><td class="first">Promo ROI / lift deep-dive</td><td class="mid">Bespoke analyst engagement, 3&ndash;5 days</td><td class="last">Conversational drill: lift, halo, cannibalization &mdash; in minutes</td></tr>
+        <tr><td class="first">Innovation / Pacesetter scan</td><td class="mid">Annual report cycle</td><td class="last">Continuous agent flagging Year-1 launches 6 months earlier</td></tr>
+        <tr><td class="first">Retailer JBP / Top-to-Top prep</td><td class="mid">5 days, multi-team</td><td class="last">Readiness Agent produces a single brief, 1 day</td></tr>
+        <tr><td class="first">Distribution / OSA gap monitoring</td><td class="mid">Discovered at monthly review</td><td class="last">Real-time policy alert with evidence chain</td></tr>
+        <tr><td class="first">Price-pack architecture / price-gap review</td><td class="mid">Bespoke project, weeks of analyst time</td><td class="last">Self-serve conversational query against the panel</td></tr>
+        <tr><td class="first">Macro-trend ripple analysis (e.g. GLP-1, weather, BNPL)</td><td class="mid">Thought-leadership reports, lagging</td><td class="last">Continuous agent surfacing impacted categories &amp; SKUs</td></tr>
+        <tr><td class="first">Ad-hoc executive question turnaround</td><td class="mid">2&ndash;4 hours per question</td><td class="last">Under 60 seconds, with follow-up suggestions</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span>Top Use Cases to Pitch</h2>
+    <p class="lede">Five concrete plays, ranked for client demand &times; build feasibility. All five are direct configurations of the existing three-layer reference.</p>
+
+    <div class="usecase">
+      <div class="badge">1</div>
+      <div>
+        <h3>"Ask Liquid Data" &mdash; Conversational Share, Velocity &amp; Distribution</h3>
+        <p class="why">Brand managers, category leaders, and customer-team analysts ask in plain English: <i>"Which categories are losing share in Kroger over the last 8 weeks and why?"</i> &mdash; answered in seconds with a chart, a narrative, and three suggested follow-ups. Covers CPG (food, beverage, beauty, HBA), General Merchandise (toys, home, apparel, tech), and Foodservice. Direct lift of Layer 1, configured against the Liquid Data semantic layer.</p>
+        <div class="kvs">
+          <div class="kv"><b>Target buyer</b>VP Insights / Category Leadership at CPG &amp; GM manufacturers</div>
+          <div class="kv"><b>Lift</b>Low &middot; ontology + query-library swap</div>
+          <div class="kv"><b>Time-to-pilot</b>10&ndash;12 weeks</div>
+          <div class="kv"><b>Headline KPI</b>Insights / analyst / day &times;5&ndash;10</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="usecase">
+      <div class="badge">2</div>
+      <div>
+        <h3>Auto-Drafted MBRs, Category Reviews &amp; Quarterly Business Reviews</h3>
+        <p class="why">A CPG or GM manufacturer produces hundreds of MBRs and category reviews per month, each consuming 6&ndash;20 analyst hours. An agent assembles share, distribution, price, promo lift, innovation, and consumer-panel slides with cited Circana sources and a written narrative &mdash; the analyst becomes the editor, not the author. Can be productized as a billable Circana service tier (Premium MBR-as-a-Service).</p>
+        <div class="kvs">
+          <div class="kv"><b>Target buyer</b>Circana Custom Analytics &amp; Client Services, manufacturer Insights teams</div>
+          <div class="kv"><b>Lift</b>Medium &middot; new template pack + agent orchestration</div>
+          <div class="kv"><b>Headline KPI</b>Report cycle 5 days &rarr; same-day</div>
+          <div class="kv"><b>Commercial angle</b>New recurring-revenue service tier</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="usecase">
+      <div class="badge">3</div>
+      <div>
+        <h3>"Why Is Share Moving?" Root-Cause Agent &mdash; Force-Multiplier on Complete Why&trade;</h3>
+        <p class="why">Multi-hop reasoning across POS, panel, distribution, price-gap, promo, media spend, retail media, weather, and macro signals &mdash; producing a ranked hypothesis list with evidence and confidence scores. Direct accelerator on Circana's existing Complete Why&trade; solution: the analyst gets the answer in 2 hours instead of 2 weeks, with the same defensibility.</p>
+        <div class="kvs">
+          <div class="kv"><b>Target buyer</b>Brand Director, Revenue Growth Management, Category Captain teams</div>
+          <div class="kv"><b>Lift</b>Medium-High &middot; needs Liquid Data tool wrappers</div>
+          <div class="kv"><b>Headline KPI</b>Time-to-root-cause: 2 wks &rarr; 2 hrs</div>
+          <div class="kv"><b>Differentiator</b>Auditable hypothesis chain, no hallucination</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="usecase">
+      <div class="badge">4</div>
+      <div>
+        <h3>Continuous Innovation &amp; Pacesetter Watch Agent (CPG + GM)</h3>
+        <p class="why">Circana publishes "New Product Pacesetters" annually ($6.2B in Year-1 sales from the 2025 list). Convert that into a <b>continuous agent</b>: scans Year-1 trajectories of every new launch, flags emerging Pacesetter candidates 6 months earlier, identifies stalled launches that need intervention, and writes a one-page brief per candidate. Spans CPG and Durables / GM (electronics, beauty, toys).</p>
+        <div class="kvs">
+          <div class="kv"><b>Target buyer</b>Innovation Heads at CPG &amp; GM manufacturers; Circana Innovation Practice</div>
+          <div class="kv"><b>Lift</b>Medium &middot; new policy pack + watcher agent</div>
+          <div class="kv"><b>Headline KPI</b>Pacesetter call lead-time +6 months</div>
+          <div class="kv"><b>Commercial angle</b>Reactivates the Pacesetter brand as a year-round signal, not an annual report</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="usecase">
+      <div class="badge">5</div>
+      <div>
+        <h3>Retailer / Top-to-Top JBP Readiness Agent</h3>
+        <p class="why">90 days before a JBP or top-to-top with a Walmart, Kroger, Target, Costco, or Amazon, the agent assembles category share, distribution gaps, promo effectiveness, OSA, competitor moves, and recommended asks &mdash; into a single readiness brief with a score. Becomes the indispensable weekly artifact for any Customer Team Lead. Direct adjacency to Circana's Market Share Drivers solution.</p>
+        <div class="kvs">
+          <div class="kv"><b>Target buyer</b>Customer Team Leads at top-100 CPG &amp; GM accounts</div>
+          <div class="kv"><b>Lift</b>Medium &middot; reuse readiness scoring framework</div>
+          <div class="kv"><b>Headline KPI</b>Top-to-top prep 5 days &rarr; 1 day</div>
+          <div class="kv"><b>Bonus</b>Drives stickiness with Circana's largest accounts</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span>Positioning vs. Liquid AI &mdash; Complement, Don't Compete</h2>
+    <p class="lede">Liquid AI is Circana's horizontal GenAI <i>platform</i>. The white space is the <i>verticalized, persona-shaped analyst surfaces</i> on top &mdash; a category that, by definition, a horizontal platform cannot fully ship itself.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Where Liquid AI sits</h3>
+        <p>Data plane, retrieval, governance, LLM orchestration, the security boundary &mdash; the platform plumbing that every persona surface will build on. Strategic to Circana; not the place a partner should try to substitute.</p>
+      </div>
+      <div class="card">
+        <h3>Where we sit on top</h3>
+        <p>Domain-specific intent engines, policy packs (JBP, MAP, distribution), ready-built agents per persona (Brand, Category, Retailer, Innovation, Customer Team), and the deliverable-quality narrative + audit layer that lets a Brand Director defend an insight to their CFO.</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top: 14px;">
+      <h3>The one-sentence pitch to Circana</h3>
+      <p>"You've built the platform &mdash; let us build the personas. We bring a proven AI-for-BI reference, port it onto Liquid Data and Liquid AI, and stand up two verticalized analyst experiences inside one quarter &mdash; defensible insights, auditable narratives, agent-driven artifacts, ready to monetize."</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">06</span>Proposed Engagement Path</h2>
+    <p class="lede">Land with a paid 12-week proof-of-value on one use case; expand into a multi-quarter build-out.</p>
+
+    <div class="phase">
+      <div class="label">Weeks 0&ndash;2<br/>Discover</div>
+      <div class="body"><b>Co-select use case #1</b> (recommended: "Ask Liquid Data" + auto-MBR). Map the Liquid Data semantic layer to our ontology shape. Identify 5 reference clients for narrative testing. <span class="pill">Workshop</span> <span class="pill">Data access</span> <span class="pill">Persona interviews</span></div>
+    </div>
+    <div class="phase">
+      <div class="label">Weeks 3&ndash;8<br/>Build PoV</div>
+      <div class="body">Configure intent engine on the Circana ontology; stand up the query library for the chosen domain; integrate Vega rendering into a Circana-branded surface; codify 5&ndash;10 policy rules (JBP, distribution, share-loss thresholds); <b>working demo on real client data</b> by week 8.</div>
+    </div>
+    <div class="phase">
+      <div class="label">Weeks 9&ndash;12<br/>Pilot &amp; Measure</div>
+      <div class="body">Pilot with 2 client design partners; instrument time-to-insight, report-cycle-time, and adoption; deliver the business case for scale-up; agree the commercial model (per-seat, per-report, or platform tier).</div>
+    </div>
+    <div class="phase">
+      <div class="label">Q2 onward<br/>Scale</div>
+      <div class="body">Add use cases 2&ndash;5 in parallel tracks; deepen Liquid AI integration; productize policy packs per retailer / per category; co-sell into Circana's existing top-100 accounts as a value-add tier.</div>
+    </div>
+
+    <div class="callout" style="margin-top: 14px;">
+      <h3>Why this de-risks the deal for Circana</h3>
+      <p>A working three-layer reference exists today &mdash; not a slideware demo. The architecture is LLM-agnostic, runs in their cloud, and was originally built under one of the most demanding governance regimes in any industry. Circana is buying speed-to-market and risk transfer, not unproven IP.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">07</span>Recommended Next Steps</h2>
+    <div class="grid-3">
+      <div class="card"><h3>1. Align the offering</h3><p>Confirm internal naming, commercial model, and the lead practice. Resolve IP-clearance for the reference assets so they can be demonstrated externally.</p></div>
+      <div class="card"><h3>2. Targeted Circana intro</h3><p>Request a 45-minute working session with Liquid AI product leadership and one Client Services VP. Lead with a use case #1 demo on a public CPG dataset (or synthetic panel) reskinned in Circana branding.</p></div>
+      <div class="card"><h3>3. Reference-client lining</h3><p>Identify 2 CPG / GM clients who would co-pilot. Their participation de-risks the Circana commercial conversation and makes the PoV self-funding.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="accentline"></div>
+    <div><b>AI for BI &middot; Market Insights Acceleration for Circana</b> &nbsp;|&nbsp; Pitch Brief, May 2026 &nbsp;|&nbsp; <b>Internal opportunity assessment &mdash; not for external distribution without review</b></div>
+    <div style="margin-top: 6px; opacity: 0.7;">Circana, Liquid Data, Liquid AI, and Complete Why are trademarks of Circana, LLC.</div>
+  </footer>
+
+</div>
+</body>
+</html>

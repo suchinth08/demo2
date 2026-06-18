@@ -1,0 +1,101 @@
+doc_id,doc_number,doc_title,doc_type,business_function,gxp_classification,current_version,status,effective_date,next_review_date,last_review_date,review_freq_months,owner_dept_id,doc_owner_id,regulatory_ref,is_controlled,site_id,training_required
+DOC-0001,SOP-QA-001,SOP for Handling Out of Specification Results - Philadelphia Manufacturing,SOP,QA,GMP,3.2,Effective,2022-01-07,2023-12-28,2022-01-07,24,8,19,21 CFR 211.192,True,SITE-US-01,True
+DOC-0002,SOP-QA-002,SOP for CAPA Management - Philadelphia Manufacturing,SOP,QA,GMP,1.3,Effective,2021-06-20,2023-06-10,2021-06-20,24,6,84,21 CFR 820.100,True,SITE-US-01,True
+DOC-0003,SOP-QA-003,SOP for Deviation Reporting and Investigation - Philadelphia Manufacturing,SOP,QA,GMP,3.2,Effective,2020-03-05,2022-02-23,2020-03-05,24,1,101,21 CFR 211.192,True,SITE-US-01,True
+DOC-0004,SOP-QA-004,SOP for Batch Record Review - Philadelphia Manufacturing,SOP,QA,GMP,4.3,Effective,2023-03-07,2025-02-24,2023-03-07,24,2,61,21 CFR 211.186,True,SITE-US-01,True
+DOC-0005,SOP-QA-005,SOP for Change Control Management - Philadelphia Manufacturing,SOP,QA,GMP,1.1,Effective,2022-09-18,2024-09-07,2022-09-18,24,5,77,ICH Q10,True,SITE-US-01,True
+DOC-0006,SOP-QA-006,SOP for Supplier Qualification - Philadelphia Manufacturing,SOP,QA,GMP,1.0,Effective,2023-01-07,2024-12-27,2023-01-07,24,7,60,21 CFR 211.84,True,SITE-US-01,True
+DOC-0007,SOP-MFG-007,SOP for Cleanroom Gowning Procedure - Philadelphia Manufacturing,SOP,Mfg,GMP,2.0,Effective,2023-02-02,2025-01-22,2023-02-02,24,5,11,EU GMP Annex 1,True,SITE-US-01,True
+DOC-0008,SOP-MFG-008,SOP for Equipment Cleaning Validation - Philadelphia Manufacturing,SOP,Mfg,GMP,1.1,Effective,2022-06-25,2024-06-14,2022-06-25,24,6,80,21 CFR 211.67,True,SITE-US-01,True
+DOC-0009,SOP-MFG-009,SOP for Line Clearance - Philadelphia Manufacturing,SOP,Mfg,GMP,4.2,Effective,2021-01-13,2023-01-03,2021-01-13,24,9,55,21 CFR 211.130,True,SITE-US-01,True
+DOC-0010,SOP-MFG-010,SOP for Temperature Excursion Management - Philadelphia Manufacturing,SOP,Mfg,GMP,2.3,Effective,2023-06-16,2025-06-05,2023-06-16,24,10,71,21 CFR 211.68,True,SITE-US-01,True
+DOC-0011,SOP-QC-011,SOP for HPLC System Suitability Testing - Philadelphia Manufacturing,SOP,QC,GMP,4.2,Effective,2022-06-20,2024-06-09,2022-06-20,24,2,42,USP <621>,True,SITE-US-01,True
+DOC-0012,SOP-QC-012,SOP for Microbial Limit Testing - Philadelphia Manufacturing,SOP,QC,GMP,3.0,Effective,2021-11-27,2023-11-17,2021-11-27,24,2,16,USP <61>,True,SITE-US-01,True
+DOC-0013,SOP-QC-013,SOP for Stability Sample Management - Philadelphia Manufacturing,SOP,QC,GMP,2.1,Effective,2023-06-10,2025-05-30,2023-06-10,24,1,109,ICH Q1A,True,SITE-US-01,True
+DOC-0014,SOP-RA-014,SOP for Regulatory Submission Management - Philadelphia Manufacturing,SOP,RA,GMP,2.3,Effective,2022-09-05,2024-08-25,2022-09-05,24,1,45,21 CFR 314,True,SITE-US-01,True
+DOC-0015,SOP-EHS-015,SOP for Hazardous Material Handling - Philadelphia Manufacturing,SOP,EHS,Non-GxP,1.3,Effective,2020-08-20,2022-06-26,2020-08-20,24,4,107,OSHA 29 CFR,True,SITE-US-01,True
+DOC-0016,Policy-QA-016,GMP Training Policy - Philadelphia Manufacturing,Policy,QA,GMP,4.1,Effective,2023-05-05,2025-04-24,2023-05-05,24,7,41,21 CFR 211.68,True,SITE-US-01,True
+DOC-0017,Policy-QA-017,Data Integrity Policy - Philadelphia Manufacturing,Policy,QA,GMP,2.0,Effective,2021-05-24,2023-05-14,2021-05-24,24,9,75,21 CFR Part 11,True,SITE-US-01,True
+DOC-0018,Policy-QA-018,Document Control Policy - Philadelphia Manufacturing,Policy,QA,GMP,1.3,Effective,2021-06-16,2023-06-06,2021-06-16,24,8,1,21 CFR Part 11,True,SITE-US-01,True
+DOC-0019,WI-MFG-019,Work Instruction: Tablet Compression Operation - Philadelphia Manufacturing,WI,Mfg,GMP,3.1,Effective,2020-04-10,2021-12-15,2020-04-10,24,9,75,21 CFR 211,True,SITE-US-01,False
+DOC-0020,WI-MFG-020,Work Instruction: Autoclave Loading/Unloading - Philadelphia Manufacturing,WI,Mfg,GMP,3.3,Effective,2021-05-27,2023-05-17,2021-05-27,24,7,88,EU GMP,True,SITE-US-01,False
+DOC-0021,SOP-QA-021,SOP for Handling Out of Specification Results - Boston R&D Center,SOP,QA,GMP,4.3,Effective,2021-07-15,2023-07-05,2021-07-15,24,18,147,21 CFR 211.192,True,SITE-US-02,True
+DOC-0022,SOP-QA-022,SOP for CAPA Management - Boston R&D Center,SOP,QA,GMP,4.2,Effective,2020-04-12,2022-04-02,2020-04-12,24,13,121,21 CFR 820.100,True,SITE-US-02,True
+DOC-0023,SOP-QA-023,SOP for Deviation Reporting and Investigation - Boston R&D Center,SOP,QA,GMP,3.3,Effective,2021-09-28,2023-09-18,2021-09-28,24,18,142,21 CFR 211.192,True,SITE-US-02,True
+DOC-0024,SOP-QA-024,SOP for Batch Record Review - Boston R&D Center,SOP,QA,GMP,4.2,Effective,2023-01-05,2024-12-25,2023-01-05,24,16,135,21 CFR 211.186,True,SITE-US-02,True
+DOC-0025,SOP-QA-025,SOP for Change Control Management - Boston R&D Center,SOP,QA,GMP,1.3,Effective,2021-01-28,2023-01-18,2021-01-28,24,13,136,ICH Q10,True,SITE-US-02,True
+DOC-0026,SOP-QA-026,SOP for Supplier Qualification - Boston R&D Center,SOP,QA,GMP,4.3,Effective,2022-01-26,2024-01-16,2022-01-26,24,13,132,21 CFR 211.84,True,SITE-US-02,True
+DOC-0027,SOP-MFG-027,SOP for Cleanroom Gowning Procedure - Boston R&D Center,SOP,Mfg,GMP,3.0,Effective,2022-05-07,2024-04-26,2022-05-07,24,12,146,EU GMP Annex 1,True,SITE-US-02,True
+DOC-0028,SOP-MFG-028,SOP for Equipment Cleaning Validation - Boston R&D Center,SOP,Mfg,GMP,3.1,Effective,2021-11-15,2023-11-05,2021-11-15,24,11,121,21 CFR 211.67,True,SITE-US-02,True
+DOC-0029,SOP-MFG-029,SOP for Line Clearance - Boston R&D Center,SOP,Mfg,GMP,2.0,Effective,2022-05-21,2024-05-10,2022-05-21,24,13,130,21 CFR 211.130,True,SITE-US-02,True
+DOC-0030,SOP-MFG-030,SOP for Temperature Excursion Management - Boston R&D Center,SOP,Mfg,GMP,4.3,Effective,2021-08-25,2023-08-15,2021-08-25,24,18,151,21 CFR 211.68,True,SITE-US-02,True
+DOC-0031,SOP-QC-031,SOP for HPLC System Suitability Testing - Boston R&D Center,SOP,QC,GMP,3.0,Effective,2021-09-28,2023-09-18,2021-09-28,24,17,122,USP <621>,True,SITE-US-02,True
+DOC-0032,SOP-QC-032,SOP for Microbial Limit Testing - Boston R&D Center,SOP,QC,GMP,3.0,Effective,2020-07-31,2022-05-29,2020-07-31,24,16,153,USP <61>,True,SITE-US-02,True
+DOC-0033,SOP-QC-033,SOP for Stability Sample Management - Boston R&D Center,SOP,QC,GMP,4.0,Effective,2021-05-29,2023-05-19,2021-05-29,24,11,155,ICH Q1A,True,SITE-US-02,True
+DOC-0034,SOP-RA-034,SOP for Regulatory Submission Management - Boston R&D Center,SOP,RA,GMP,4.3,Effective,2020-01-31,2021-08-17,2020-01-31,24,13,133,21 CFR 314,True,SITE-US-02,True
+DOC-0035,SOP-EHS-035,SOP for Hazardous Material Handling - Boston R&D Center,SOP,EHS,Non-GxP,3.3,Effective,2020-06-11,2022-06-01,2020-06-11,24,11,138,OSHA 29 CFR,True,SITE-US-02,True
+DOC-0036,Policy-QA-036,GMP Training Policy - Boston R&D Center,Policy,QA,GMP,4.2,Effective,2022-07-02,2024-06-21,2022-07-02,24,13,148,21 CFR 211.68,True,SITE-US-02,True
+DOC-0037,Policy-QA-037,Data Integrity Policy - Boston R&D Center,Policy,QA,GMP,1.1,Effective,2020-06-04,2022-05-25,2020-06-04,24,11,134,21 CFR Part 11,True,SITE-US-02,True
+DOC-0038,Policy-QA-038,Document Control Policy - Boston R&D Center,Policy,QA,GMP,4.2,Effective,2022-12-18,2024-12-07,2022-12-18,24,14,148,21 CFR Part 11,True,SITE-US-02,True
+DOC-0039,WI-MFG-039,Work Instruction: Tablet Compression Operation - Boston R&D Center,WI,Mfg,GMP,4.0,Effective,2021-12-09,2023-11-29,2021-12-09,24,18,156,21 CFR 211,True,SITE-US-02,False
+DOC-0040,WI-MFG-040,Work Instruction: Autoclave Loading/Unloading - Boston R&D Center,WI,Mfg,GMP,2.2,Effective,2021-12-18,2023-12-08,2021-12-18,24,15,153,EU GMP,True,SITE-US-02,False
+DOC-0041,SOP-QA-041,SOP for Handling Out of Specification Results - Dublin Manufacturing,SOP,QA,GMP,1.1,Effective,2020-12-24,2022-12-14,2020-12-24,24,27,202,21 CFR 211.192,True,SITE-EU-01,True
+DOC-0042,SOP-QA-042,SOP for CAPA Management - Dublin Manufacturing,SOP,QA,GMP,3.0,Effective,2021-06-02,2023-05-23,2021-06-02,24,19,247,21 CFR 820.100,True,SITE-EU-01,True
+DOC-0043,SOP-QA-043,SOP for Deviation Reporting and Investigation - Dublin Manufacturing,SOP,QA,GMP,3.2,Effective,2022-05-29,2024-05-18,2022-05-29,24,26,204,21 CFR 211.192,True,SITE-EU-01,True
+DOC-0044,SOP-QA-044,SOP for Batch Record Review - Dublin Manufacturing,SOP,QA,GMP,1.0,Effective,2020-10-25,2022-10-15,2020-10-25,24,21,185,21 CFR 211.186,True,SITE-EU-01,True
+DOC-0045,SOP-QA-045,SOP for Change Control Management - Dublin Manufacturing,SOP,QA,GMP,4.2,Effective,2020-11-11,2022-11-01,2020-11-11,24,27,239,ICH Q10,True,SITE-EU-01,True
+DOC-0046,SOP-QA-046,SOP for Supplier Qualification - Dublin Manufacturing,SOP,QA,GMP,1.3,Effective,2022-10-03,2024-09-22,2022-10-03,24,26,276,21 CFR 211.84,True,SITE-EU-01,True
+DOC-0047,SOP-MFG-047,SOP for Cleanroom Gowning Procedure - Dublin Manufacturing,SOP,Mfg,GMP,2.2,Effective,2022-03-26,2024-03-15,2022-03-26,24,21,223,EU GMP Annex 1,True,SITE-EU-01,True
+DOC-0048,SOP-MFG-048,SOP for Equipment Cleaning Validation - Dublin Manufacturing,SOP,Mfg,GMP,4.1,Effective,2020-12-13,2022-10-16,2020-12-13,24,26,206,21 CFR 211.67,True,SITE-EU-01,True
+DOC-0049,SOP-MFG-049,SOP for Line Clearance - Dublin Manufacturing,SOP,Mfg,GMP,1.0,Effective,2020-01-26,2022-01-15,2020-01-26,24,28,261,21 CFR 211.130,True,SITE-EU-01,True
+DOC-0050,SOP-MFG-050,SOP for Temperature Excursion Management - Dublin Manufacturing,SOP,Mfg,GMP,1.2,Effective,2022-03-03,2024-02-21,2022-03-03,24,24,252,21 CFR 211.68,True,SITE-EU-01,True
+DOC-0051,SOP-QC-051,SOP for HPLC System Suitability Testing - Dublin Manufacturing,SOP,QC,GMP,2.2,Effective,2021-02-02,2022-08-07,2021-02-02,24,27,267,USP <621>,True,SITE-EU-01,True
+DOC-0052,SOP-QC-052,SOP for Microbial Limit Testing - Dublin Manufacturing,SOP,QC,GMP,2.2,Effective,2020-10-23,2022-10-13,2020-10-23,24,22,273,USP <61>,True,SITE-EU-01,True
+DOC-0053,SOP-QC-053,SOP for Stability Sample Management - Dublin Manufacturing,SOP,QC,GMP,1.0,Effective,2021-09-17,2023-04-29,2021-09-17,24,26,221,ICH Q1A,True,SITE-EU-01,True
+DOC-0054,SOP-RA-054,SOP for Regulatory Submission Management - Dublin Manufacturing,SOP,RA,GMP,1.3,Effective,2022-10-31,2024-10-20,2022-10-31,24,24,183,21 CFR 314,True,SITE-EU-01,True
+DOC-0055,SOP-EHS-055,SOP for Hazardous Material Handling - Dublin Manufacturing,SOP,EHS,Non-GxP,3.2,Effective,2021-07-25,2023-07-15,2021-07-25,24,23,215,OSHA 29 CFR,True,SITE-EU-01,True
+DOC-0056,Policy-QA-056,GMP Training Policy - Dublin Manufacturing,Policy,QA,GMP,2.2,Effective,2020-04-19,2022-04-09,2020-04-19,24,20,221,21 CFR 211.68,True,SITE-EU-01,True
+DOC-0057,Policy-QA-057,Data Integrity Policy - Dublin Manufacturing,Policy,QA,GMP,2.3,Effective,2023-05-19,2025-05-08,2023-05-19,24,27,174,21 CFR Part 11,True,SITE-EU-01,True
+DOC-0058,Policy-QA-058,Document Control Policy - Dublin Manufacturing,Policy,QA,GMP,3.1,Effective,2020-02-01,2022-01-21,2020-02-01,24,28,176,21 CFR Part 11,True,SITE-EU-01,True
+DOC-0059,WI-MFG-059,Work Instruction: Tablet Compression Operation - Dublin Manufacturing,WI,Mfg,GMP,3.3,Effective,2020-10-28,2022-10-18,2020-10-28,24,28,233,21 CFR 211,True,SITE-EU-01,False
+DOC-0060,WI-MFG-060,Work Instruction: Autoclave Loading/Unloading - Dublin Manufacturing,WI,Mfg,GMP,4.1,Effective,2023-04-01,2025-03-21,2023-04-01,24,28,168,EU GMP,True,SITE-EU-01,False
+DOC-0061,SOP-QA-061,SOP for Handling Out of Specification Results - Frankfurt QC Laboratory,SOP,QA,GMP,3.3,Effective,2021-09-18,2023-09-08,2021-09-18,24,31,311,21 CFR 211.192,True,SITE-EU-02,True
+DOC-0062,SOP-QA-062,SOP for CAPA Management - Frankfurt QC Laboratory,SOP,QA,GMP,4.1,Effective,2020-08-02,2022-07-23,2020-08-02,24,33,305,21 CFR 820.100,True,SITE-EU-02,True
+DOC-0063,SOP-QA-063,SOP for Deviation Reporting and Investigation - Frankfurt QC Laboratory,SOP,QA,GMP,1.3,Effective,2021-04-21,2023-01-07,2021-04-21,24,31,298,21 CFR 211.192,True,SITE-EU-02,True
+DOC-0064,SOP-QA-064,SOP for Batch Record Review - Frankfurt QC Laboratory,SOP,QA,GMP,2.3,Effective,2020-09-27,2022-09-17,2020-09-27,24,31,314,21 CFR 211.186,True,SITE-EU-02,True
+DOC-0065,SOP-QA-065,SOP for Change Control Management - Frankfurt QC Laboratory,SOP,QA,GMP,1.1,Effective,2021-04-27,2023-04-17,2021-04-27,24,30,316,ICH Q10,True,SITE-EU-02,True
+DOC-0066,SOP-QA-066,SOP for Supplier Qualification - Frankfurt QC Laboratory,SOP,QA,GMP,2.1,Effective,2022-10-20,2024-07-27,2022-10-20,24,29,317,21 CFR 211.84,True,SITE-EU-02,True
+DOC-0067,SOP-MFG-067,SOP for Cleanroom Gowning Procedure - Frankfurt QC Laboratory,SOP,Mfg,GMP,2.1,Effective,2023-02-14,2025-02-03,2023-02-14,24,31,288,EU GMP Annex 1,True,SITE-EU-02,True
+DOC-0068,SOP-MFG-068,SOP for Equipment Cleaning Validation - Frankfurt QC Laboratory,SOP,Mfg,GMP,1.1,Effective,2020-04-01,2022-03-22,2020-04-01,24,32,292,21 CFR 211.67,True,SITE-EU-02,True
+DOC-0069,SOP-MFG-069,SOP for Line Clearance - Frankfurt QC Laboratory,SOP,Mfg,GMP,4.3,Effective,2020-01-05,2021-08-06,2020-01-05,24,35,288,21 CFR 211.130,True,SITE-EU-02,True
+DOC-0070,SOP-MFG-070,SOP for Temperature Excursion Management - Frankfurt QC Laboratory,SOP,Mfg,GMP,4.3,Effective,2020-04-02,2022-03-23,2020-04-02,24,30,281,21 CFR 211.68,True,SITE-EU-02,True
+DOC-0071,SOP-QC-071,SOP for HPLC System Suitability Testing - Frankfurt QC Laboratory,SOP,QC,GMP,1.2,Effective,2023-01-26,2025-01-15,2023-01-26,24,32,304,USP <621>,True,SITE-EU-02,True
+DOC-0072,SOP-QC-072,SOP for Microbial Limit Testing - Frankfurt QC Laboratory,SOP,QC,GMP,3.0,Effective,2022-02-24,2024-02-14,2022-02-24,24,32,316,USP <61>,True,SITE-EU-02,True
+DOC-0073,SOP-QC-073,SOP for Stability Sample Management - Frankfurt QC Laboratory,SOP,QC,GMP,2.0,Effective,2021-08-15,2023-08-05,2021-08-15,24,29,311,ICH Q1A,True,SITE-EU-02,True
+DOC-0074,SOP-RA-074,SOP for Regulatory Submission Management - Frankfurt QC Laboratory,SOP,RA,GMP,2.1,Effective,2021-07-19,2023-07-09,2021-07-19,24,34,300,21 CFR 314,True,SITE-EU-02,True
+DOC-0075,SOP-EHS-075,SOP for Hazardous Material Handling - Frankfurt QC Laboratory,SOP,EHS,Non-GxP,3.0,Effective,2022-04-16,2024-04-05,2022-04-16,24,29,281,OSHA 29 CFR,True,SITE-EU-02,True
+DOC-0076,Policy-QA-076,GMP Training Policy - Frankfurt QC Laboratory,Policy,QA,GMP,1.3,Effective,2021-02-10,2023-01-31,2021-02-10,24,35,292,21 CFR 211.68,True,SITE-EU-02,True
+DOC-0077,Policy-QA-077,Data Integrity Policy - Frankfurt QC Laboratory,Policy,QA,GMP,3.2,Effective,2020-01-08,2021-12-28,2020-01-08,24,35,309,21 CFR Part 11,True,SITE-EU-02,True
+DOC-0078,Policy-QA-078,Document Control Policy - Frankfurt QC Laboratory,Policy,QA,GMP,1.3,Effective,2020-06-01,2022-05-22,2020-06-01,24,35,305,21 CFR Part 11,True,SITE-EU-02,True
+DOC-0079,WI-MFG-079,Work Instruction: Tablet Compression Operation - Frankfurt QC Laboratory,WI,Mfg,GMP,1.0,Effective,2022-05-14,2024-05-03,2022-05-14,24,35,304,21 CFR 211,True,SITE-EU-02,False
+DOC-0080,WI-MFG-080,Work Instruction: Autoclave Loading/Unloading - Frankfurt QC Laboratory,WI,Mfg,GMP,1.1,Effective,2021-09-04,2023-08-25,2021-09-04,24,33,281,EU GMP,True,SITE-EU-02,False
+DOC-0081,SOP-QA-081,SOP for Handling Out of Specification Results - Hyderabad API Manufacturing,SOP,QA,GMP,1.3,Effective,2022-07-04,2024-06-23,2022-07-04,24,46,425,21 CFR 211.192,True,SITE-AP-01,True
+DOC-0082,SOP-QA-082,SOP for CAPA Management - Hyderabad API Manufacturing,SOP,QA,GMP,3.3,Effective,2023-04-26,2025-04-15,2023-04-26,24,37,387,21 CFR 820.100,True,SITE-AP-01,True
+DOC-0083,SOP-QA-083,SOP for Deviation Reporting and Investigation - Hyderabad API Manufacturing,SOP,QA,GMP,1.2,Effective,2023-06-13,2025-06-02,2023-06-13,24,45,418,21 CFR 211.192,True,SITE-AP-01,True
+DOC-0084,SOP-QA-084,SOP for Batch Record Review - Hyderabad API Manufacturing,SOP,QA,GMP,2.2,Effective,2021-02-02,2023-01-23,2021-02-02,24,45,339,21 CFR 211.186,True,SITE-AP-01,True
+DOC-0085,SOP-QA-085,SOP for Change Control Management - Hyderabad API Manufacturing,SOP,QA,GMP,4.1,Effective,2022-02-12,2024-02-02,2022-02-12,24,43,398,ICH Q10,True,SITE-AP-01,True
+DOC-0086,SOP-QA-086,SOP for Supplier Qualification - Hyderabad API Manufacturing,SOP,QA,GMP,2.3,Effective,2022-07-29,2024-07-18,2022-07-29,24,45,392,21 CFR 211.84,True,SITE-AP-01,True
+DOC-0087,SOP-MFG-087,SOP for Cleanroom Gowning Procedure - Hyderabad API Manufacturing,SOP,Mfg,GMP,1.3,Effective,2022-12-01,2024-11-20,2022-12-01,24,45,408,EU GMP Annex 1,True,SITE-AP-01,True
+DOC-0088,SOP-MFG-088,SOP for Equipment Cleaning Validation - Hyderabad API Manufacturing,SOP,Mfg,GMP,1.2,Effective,2022-09-20,2024-09-09,2022-09-20,24,37,368,21 CFR 211.67,True,SITE-AP-01,True
+DOC-0089,SOP-MFG-089,SOP for Line Clearance - Hyderabad API Manufacturing,SOP,Mfg,GMP,4.1,Effective,2023-04-26,2025-04-15,2023-04-26,24,42,379,21 CFR 211.130,True,SITE-AP-01,True
+DOC-0090,SOP-MFG-090,SOP for Temperature Excursion Management - Hyderabad API Manufacturing,SOP,Mfg,GMP,4.0,Effective,2020-06-07,2022-05-28,2020-06-07,24,46,351,21 CFR 211.68,True,SITE-AP-01,True
+DOC-0091,SOP-QC-091,SOP for HPLC System Suitability Testing - Hyderabad API Manufacturing,SOP,QC,GMP,1.1,Effective,2020-09-16,2022-04-19,2020-09-16,24,42,379,USP <621>,True,SITE-AP-01,True
+DOC-0092,SOP-QC-092,SOP for Microbial Limit Testing - Hyderabad API Manufacturing,SOP,QC,GMP,2.3,Effective,2022-12-05,2024-11-24,2022-12-05,24,37,359,USP <61>,True,SITE-AP-01,True
+DOC-0093,SOP-QC-093,SOP for Stability Sample Management - Hyderabad API Manufacturing,SOP,QC,GMP,1.2,Effective,2020-06-10,2022-05-31,2020-06-10,24,39,330,ICH Q1A,True,SITE-AP-01,True
+DOC-0094,SOP-RA-094,SOP for Regulatory Submission Management - Hyderabad API Manufacturing,SOP,RA,GMP,3.0,Effective,2022-08-02,2024-07-22,2022-08-02,24,44,383,21 CFR 314,True,SITE-AP-01,True
+DOC-0095,SOP-EHS-095,SOP for Hazardous Material Handling - Hyderabad API Manufacturing,SOP,EHS,Non-GxP,1.1,Effective,2022-07-24,2024-07-13,2022-07-24,24,44,358,OSHA 29 CFR,True,SITE-AP-01,True
+DOC-0096,Policy-QA-096,GMP Training Policy - Hyderabad API Manufacturing,Policy,QA,GMP,1.0,Effective,2022-02-27,2024-02-17,2022-02-27,24,45,407,21 CFR 211.68,True,SITE-AP-01,True
+DOC-0097,Policy-QA-097,Data Integrity Policy - Hyderabad API Manufacturing,Policy,QA,GMP,2.2,Effective,2023-02-03,2025-01-23,2023-02-03,24,38,398,21 CFR Part 11,True,SITE-AP-01,True
+DOC-0098,Policy-QA-098,Document Control Policy - Hyderabad API Manufacturing,Policy,QA,GMP,4.1,Effective,2023-04-27,2025-04-16,2023-04-27,24,43,355,21 CFR Part 11,True,SITE-AP-01,True
+DOC-0099,WI-MFG-099,Work Instruction: Tablet Compression Operation - Hyderabad API Manufacturing,WI,Mfg,GMP,4.2,Effective,2020-12-28,2022-12-18,2020-12-28,24,45,396,21 CFR 211,True,SITE-AP-01,False
+DOC-0100,WI-MFG-100,Work Instruction: Autoclave Loading/Unloading - Hyderabad API Manufacturing,WI,Mfg,GMP,3.2,Effective,2020-06-01,2022-05-22,2020-06-01,24,41,438,EU GMP,True,SITE-AP-01,False

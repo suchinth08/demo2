@@ -1,0 +1,16 @@
+supplier_id,supplier_code,supplier_name,supplier_type,qualification_status,qualification_date,requalification_due_dt,country,regulatory_approvals,risk_rating,is_gmp_critical
+1,SUP-0001,Sigma API Solutions,API,Approved,2022-08-02,2025-08-01,USA,FDA DMF,High,True
+2,SUP-0002,Merck KGaA Chemicals,API,Approved,2020-07-17,2023-07-17,Germany,FDA DMF,Low,True
+3,SUP-0003,Divi's Laboratories,API,Approved,2019-10-13,2022-10-12,India,FDA DMF,Medium,True
+4,SUP-0004,Lonza AG,API,Approved,2022-10-17,2025-10-16,Switzerland,FDA DMF,Low,True
+5,SUP-0005,BASF Pharma,Excipient,Approved,2022-01-21,2025-01-20,Germany,,Low,False
+6,SUP-0006,Roquette Freres,Excipient,Approved,2021-05-14,2024-05-13,France,,Low,False
+7,SUP-0007,Colorcon Ltd,Excipient,Approved,2019-07-11,2022-07-10,UK,,Medium,False
+8,SUP-0008,Huhtamaki Packaging,Packaging,Approved,2021-10-31,2024-10-30,Finland,,Low,False
+9,SUP-0009,Schott Pharma,Packaging,Approved,2022-02-23,2025-02-22,Germany,,Low,False
+10,SUP-0010,Berry Plastics,Packaging,Approved,2022-08-23,2025-08-22,USA,,Medium,False
+11,SUP-0011,Catalent Pharma,CMO,Approved,2021-05-09,2024-05-08,USA,,Medium,True
+12,SUP-0012,Patheon-Thermo,CMO,Approved,2022-04-21,2025-04-20,USA,,Medium,True
+13,SUP-0013,Covance CRO,CRO,Approved,2019-01-14,2022-01-13,USA,,Low,False
+14,SUP-0014,Quintiles IMS,CRO,Approved,2019-11-23,2022-11-22,USA,,Low,False
+15,SUP-0015,ALS Laboratories,Service,Approved,2020-11-27,2023-11-27,Australia,,Medium,False

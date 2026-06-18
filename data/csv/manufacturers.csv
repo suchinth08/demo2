@@ -1,0 +1,31 @@
+manufacturer_id,manufacturer_name,hq_country,is_private_label
+MFR-001,PepsiCo,USA,False
+MFR-002,The Coca-Cola Company,USA,False
+MFR-003,Keurig Dr Pepper,USA,False
+MFR-004,Mondelez International,USA,False
+MFR-005,Kellanova,USA,False
+MFR-006,General Mills,USA,False
+MFR-007,Post Holdings,USA,False
+MFR-008,Nestle,Switzerland,False
+MFR-009,National Beverage,USA,False
+MFR-010,Celsius Holdings,USA,False
+MFR-011,Monster Beverage,USA,False
+MFR-012,Red Bull GmbH,Austria,False
+MFR-013,Liquid Death Inc.,USA,False
+MFR-014,L'Oreal Group,France,False
+MFR-015,Procter & Gamble,USA,False
+MFR-016,Unilever,UK,False
+MFR-017,Estee Lauder Companies,USA,False
+MFR-018,Colgate-Palmolive,USA,False
+MFR-019,Apple Inc.,USA,False
+MFR-020,Samsung Electronics,South Korea,False
+MFR-021,Sony Group,Japan,False
+MFR-022,LG Electronics,South Korea,False
+MFR-023,Bose Corporation,USA,False
+MFR-024,The LEGO Group,Denmark,False
+MFR-025,Mattel,USA,False
+MFR-026,Hasbro,USA,False
+MFR-027,Keurig,USA,False
+MFR-028,iRobot (Amazon),USA,False
+MFR-029,SharkNinja,USA,False
+MFR-030,Private Label,USA,True

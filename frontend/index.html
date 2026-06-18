@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ask Liquid Data · Market Insights AI</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/png" href="/circana-favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://unpkg.com/lucide@0.447.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <style>
+    /* ── Design Tokens — Circana palette ─────────────── */
+    :root {
+      --magenta:         #C8389B;
+      --purple:          #6B2C8E;
+      --deep:            #2A0F40;
+      --grad:            linear-gradient(135deg, #2A0F40 0%, #6B2C8E 55%, #C8389B 100%);
+      --grad-soft:       linear-gradient(135deg, #F7F4FB 0%, #FBEAF5 100%);
+      --grad-bar:        linear-gradient(90deg, #6B2C8E, #C8389B, #FF6A3D);
+
+      --bg:              #ffffff;
+      --bg-secondary:    #FAF8FD;
+      --bg-sidebar:      #F2EEF7;
+      --bg-hover:        #ECE3F4;
+
+      --text-primary:    #15151A;
+      --text-secondary:  #4A4A55;
+      --text-hint:       #8A8A99;
+
+      --border:          #E6E1EE;
+      --border-focus:    var(--magenta);
+
+      --shadow-sm:       0 1px 3px rgba(42,15,64,.10), 0 1px 2px rgba(42,15,64,.06);
+      --shadow-md:       0 2px 6px rgba(42,15,64,.13), 0 1px 3px rgba(42,15,64,.08);
+
+      --green:  #2BA84A; --amber: #F2A516; --red: #D9342B;
+      --green-bg: #E6F6EA; --amber-bg: #FEF3E0; --red-bg: #FCE7E5;
+
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-pill: 50px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg); color: var(--text-primary);
+      display: flex; flex-direction: column; overflow: hidden;
+      font-size: 14px;
+    }
+
+    /* ── Top bar ───────────────────────────────────── */
+    .topbar {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 64px;
+      display: flex; align-items: center; gap: 14px;
+      flex-shrink: 0; position: relative; z-index: 10;
+      box-shadow: var(--shadow-sm);
+    }
+    .topbar-logo {
+      display: flex; align-items: center; gap: 14px; text-decoration: none;
+    }
+    .topbar-logo img {
+      height: 32px;
+      width: auto;
+    }
+    .topbar-divider { width: 1px; height: 24px; background: var(--border); }
+    .topbar-product {
+      display: flex; flex-direction: column;
+    }
+    .topbar-product-name {
+      font-size: 14px; font-weight: 700; color: var(--deep);
+      letter-spacing: -0.01em; line-height: 1.1;
+    }
+    .topbar-subtitle {
+      font-size: 11px; color: var(--text-secondary);
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .model-chip {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 5px 12px;
+      font-size: 12px; font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .model-chip svg { color: var(--magenta); }
+    .session-chip {
+      font-size: 11px; color: var(--text-hint);
+      background: var(--bg-secondary);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      display: none;
+    }
+    .session-chip.visible { display: block; }
+
+    /* ── Layout ────────────────────────────────────── */
+    .layout { display: flex; flex: 1; overflow: hidden; }
+
+    /* ── Sidebar ──────────────────────────────────── */
+    .sidebar {
+      width: 264px; background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .sidebar-header { padding: 18px 16px 10px; }
+
+    .new-chat-btn {
+      width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500; color: var(--text-primary);
+      cursor: pointer; box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, background .2s;
+    }
+    .new-chat-btn:hover { box-shadow: var(--shadow-md); background: #fff; }
+    .new-chat-btn svg { color: var(--magenta); }
+
+    /* History */
+    .history-list { display: flex; flex-direction: column; }
+    .history-empty {
+      padding: 8px 16px 4px; font-size: 12px;
+      color: var(--text-hint); font-style: italic;
+    }
+    .history-item {
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 9px 16px 9px 14px;
+      margin-right: 12px;
+      border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+      cursor: pointer;
+      transition: background .15s;
+      border: none; background: none; text-align: left;
+      width: calc(100% - 12px);
+      border-left: 2px solid transparent;
+    }
+    .history-item:hover { background: var(--bg-hover); }
+    .history-item.active {
+      background: #FBEAF5;
+      border-left: 2px solid var(--magenta);
+    }
+    .history-item.active .history-label { color: var(--purple); font-weight: 600; }
+    .history-label {
+      font-size: 13px; color: var(--text-primary);
+      line-height: 1.3;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .history-meta {
+      font-size: 11px; color: var(--text-hint);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .history-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-hint); }
+    .history-domain {
+      color: var(--magenta); font-weight: 600;
+      text-transform: capitalize;
+    }
+    .history-show-more {
+      padding: 6px 16px;
+      font-size: 12px; color: var(--magenta);
+      background: none; border: none; cursor: pointer;
+      text-align: left; font-family: 'Inter', sans-serif;
+    }
+    .history-show-more:hover { text-decoration: underline; }
+
+    /* Agent buttons */
+    .agent-btn {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 16px;
+      margin-right: 12px;
+      width: calc(100% - 12px);
+      border: none; background: var(--bg);
+      border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+      cursor: pointer; text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 600;
+      color: var(--purple);
+      border-left: 3px solid var(--magenta);
+      transition: background .15s;
+    }
+    .agent-btn:hover { background: var(--grad-soft); }
+    .agent-btn svg { color: var(--magenta); flex-shrink: 0; }
+    .agent-btn-sub {
+      display: block; font-weight: 400; font-size: 11px;
+      color: var(--text-secondary); margin-top: 2px;
+    }
+
+    /* Agent modal */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(42, 15, 64, 0.55);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: flex-start; justify-content: center;
+      padding-top: 48px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: #fff; border-radius: 16px;
+      width: min(820px, 95vw);
+      max-height: 86vh; overflow-y: auto;
+      box-shadow: 0 12px 40px rgba(42, 15, 64, 0.4);
+    }
+    .modal-header {
+      padding: 20px 24px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+      position: sticky; top: 0; background: #fff; z-index: 1;
+    }
+    .modal-header-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-header-icon svg { color: white; }
+    .modal-title { font-size: 16px; font-weight: 700; color: var(--deep); }
+    .modal-subtitle { font-size: 12px; color: var(--text-secondary); margin-top: 1px; }
+    .modal-close {
+      margin-left: auto; background: none; border: none; cursor: pointer;
+      padding: 6px; border-radius: 8px; color: var(--text-secondary);
+    }
+    .modal-close:hover { background: var(--bg-secondary); }
+    .modal-body { padding: 20px 24px 24px; }
+
+    .form-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-row label {
+      font-size: 11px; font-weight: 600; color: var(--purple);
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .form-row input {
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      color: var(--text-primary); outline: none;
+      transition: border-color .15s;
+    }
+    .form-row input:focus { border-color: var(--magenta); }
+    .form-help { font-size: 11px; color: var(--text-hint); }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px;
+      background: var(--grad);
+      color: white;
+      border: none; border-radius: var(--radius-md);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-primary:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px;
+      background: var(--bg);
+      color: var(--purple);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { border-color: var(--magenta); }
+
+    .agent-progress {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 16px;
+      background: var(--grad-soft);
+      border-radius: var(--radius-md);
+      color: var(--purple); font-size: 13px; font-weight: 500;
+    }
+
+    /* Root cause result cards */
+    .rc-summary {
+      background: var(--grad-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin-bottom: 16px;
+    }
+    .rc-summary-label {
+      font-size: 11px; font-weight: 700; color: var(--purple);
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
+    }
+    .rc-summary-text { font-size: 14px; line-height: 1.6; color: var(--text-primary); }
+    .rc-share-row {
+      display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .rc-stat {
+      flex: 1; min-width: 140px;
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 12px 14px;
+    }
+    .rc-stat .lbl { font-size: 10px; color: var(--text-hint); text-transform: uppercase; letter-spacing: 0.06em; }
+    .rc-stat .val { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-top: 2px; }
+    .rc-stat.delta-pos .val { color: var(--green); }
+    .rc-stat.delta-neg .val { color: var(--red); }
+    .hyp-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      background: #fff;
+      border-left: 4px solid var(--text-hint);
+    }
+    .hyp-card.supports_gain { border-left-color: var(--green); }
+    .hyp-card.supports_loss { border-left-color: var(--red); }
+    .hyp-card.neutral       { border-left-color: var(--text-hint); }
+    .hyp-head {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px;
+    }
+    .hyp-family-tag {
+      font-size: 10px; font-weight: 700;
+      padding: 3px 8px; border-radius: var(--radius-pill);
+      background: var(--purple); color: white;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .hyp-headline { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .hyp-conf {
+      margin-left: auto;
+      font-size: 11px; color: var(--text-hint);
+      display: flex; align-items: center; gap: 4px;
+    }
+    .hyp-bar {
+      height: 4px; background: var(--bg-hover);
+      border-radius: 2px; margin: 6px 0;
+      overflow: hidden;
+    }
+    .hyp-bar-fill {
+      height: 100%; background: var(--grad-bar);
+      border-radius: 2px;
+    }
+    .hyp-narrative { font-size: 13px; color: var(--text-secondary); line-height: 1.55; margin-top: 6px; }
+
+    .sidebar-section { padding: 8px 0; }
+    .section-label {
+      padding: 6px 16px;
+      font-size: 11px; font-weight: 700;
+      color: var(--purple);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 9px 16px;
+      border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+      margin-right: 12px;
+      cursor: pointer;
+      font-size: 13px; font-weight: 500;
+      color: var(--text-secondary);
+      transition: background .15s, color .15s;
+      border: none; background: none;
+      width: calc(100% - 12px); text-align: left;
+    }
+    .nav-item:hover { background: var(--bg-hover); color: var(--text-primary); }
+    .nav-item svg { flex-shrink: 0; color: var(--text-hint); }
+    .nav-item:hover svg { color: var(--magenta); }
+    .sidebar-divider { height: 1px; background: var(--border); margin: 8px 16px; }
+
+    /* ── Main ─────────────────────────────────────── */
+    .main-panel {
+      flex: 1; display: flex; flex-direction: column;
+      background: var(--bg); overflow: hidden;
+    }
+    .chat-history {
+      flex: 1; overflow-y: auto; padding: 24px 0;
+      display: flex; flex-direction: column; gap: 0;
+      scroll-behavior: smooth;
+    }
+    .chat-history::-webkit-scrollbar { width: 6px; }
+    .chat-history::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ── Welcome ──────────────────────────────────── */
+    .welcome {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 48px 24px; text-align: center;
+    }
+    .welcome-logo {
+      width: 96px; height: 96px;
+      border-radius: 24px;
+      background: #ffffff;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 22px;
+      box-shadow: 0 6px 24px rgba(107, 44, 142, 0.18);
+      border: 1px solid var(--border);
+      padding: 14px;
+    }
+    .welcome-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .welcome-logo svg { color: white; }
+    .welcome h2 {
+      font-size: 30px; font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      background: var(--grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: -0.02em;
+    }
+    .welcome-subtitle {
+      font-size: 14px; color: var(--text-secondary);
+      max-width: 540px; line-height: 1.6; margin-bottom: 32px;
+    }
+    .welcome-chips {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; max-width: 720px;
+    }
+    .welcome-chip {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 11px 16px;
+      font-size: 13px; color: var(--text-primary);
+      cursor: pointer;
+      transition: box-shadow .2s, border-color .2s, transform .15s;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+    }
+    .welcome-chip:hover {
+      border-color: var(--magenta);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+    }
+    .welcome-chip svg { color: var(--magenta); flex-shrink: 0; }
+
+    /* ── Message rows ─────────────────────────────── */
+    .message-row {
+      padding: 8px 24px; display: flex; gap: 16px; align-items: flex-start;
+      max-width: 960px; width: 100%; margin: 0 auto;
+    }
+    .message-row.user-row { flex-direction: row-reverse; }
+    .user-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .user-avatar svg { color: white; }
+    .user-bubble {
+      background: var(--grad-soft);
+      border: 1px solid #EAD5E8;
+      border-radius: var(--radius-lg) var(--radius-lg) var(--radius-sm) var(--radius-lg);
+      padding: 12px 16px;
+      font-size: 14px; line-height: 1.6; color: var(--text-primary);
+      max-width: 72%;
+    }
+    .bot-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .bot-avatar svg { color: white; }
+    .bot-content { flex: 1; min-width: 0; }
+
+    .intent-row { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+    .intent-tag {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 9px; border-radius: var(--radius-sm);
+      letter-spacing: 0.03em;
+    }
+    .tag-intent { background: #F3E5F5; color: var(--purple); border: 1px solid #E1BEE7; }
+    .tag-domain { background: #FBEAF5; color: var(--magenta); border: 1px solid #F4C3DD; }
+
+    .narrative-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px; margin-bottom: 12px;
+      line-height: 1.7; color: var(--text-primary);
+      font-size: 14px; box-shadow: var(--shadow-sm);
+    }
+    .narrative-card .followup-hint {
+      margin-top: 10px; padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--magenta);
+      display: flex; align-items: flex-start; gap: 6px;
+    }
+    .narrative-card .followup-hint svg { flex-shrink: 0; margin-top: 2px; }
+
+    /* ── Viz Card ─────────────────────────────────── */
+    .viz-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden; margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .viz-card-header {
+      padding: 12px 16px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg-secondary);
+    }
+    .viz-card-header svg { color: var(--magenta); }
+    .viz-card-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .viz-card-body { padding: 16px; }
+
+    /* Metric Cards */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .metric-tile {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      position: relative; overflow: hidden;
+    }
+    .metric-tile::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .metric-tile.green::before  { background: var(--green); }
+    .metric-tile.amber::before  { background: var(--amber); }
+    .metric-tile.red::before    { background: var(--red); }
+    .metric-tile.neutral::before { background: var(--grad); }
+
+    .metric-tile-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 10px;
+    }
+    .metric-tile.green .metric-tile-icon  { background: var(--green-bg); }
+    .metric-tile.green .metric-tile-icon svg { color: var(--green); }
+    .metric-tile.amber .metric-tile-icon  { background: var(--amber-bg); }
+    .metric-tile.amber .metric-tile-icon svg { color: var(--amber); }
+    .metric-tile.red .metric-tile-icon    { background: var(--red-bg); }
+    .metric-tile.red .metric-tile-icon svg { color: var(--red); }
+    .metric-tile.neutral .metric-tile-icon { background: #F3E5F5; }
+    .metric-tile.neutral .metric-tile-icon svg { color: var(--purple); }
+
+    .metric-label {
+      font-size: 11px; font-weight: 500; color: var(--text-hint);
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px;
+    }
+    .metric-value {
+      font-size: 28px; font-weight: 600;
+      line-height: 1; color: var(--text-primary);
+    }
+    .metric-value .unit { font-size: 14px; color: var(--text-secondary); }
+    .metric-tile.green .metric-value { color: var(--green); }
+    .metric-tile.amber .metric-value { color: #B36500; }
+    .metric-tile.red   .metric-value { color: var(--red); }
+    .chart-container { overflow-x: auto; }
+
+    /* Tables */
+    .table-container { overflow-x: auto; border-radius: var(--radius-sm); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead { position: sticky; top: 0; z-index: 1; }
+    thead th {
+      background: var(--bg-secondary); color: var(--text-secondary);
+      font-weight: 600; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 10px 14px; text-align: left;
+      border-bottom: 2px solid var(--border); white-space: nowrap;
+    }
+    tbody tr { border-bottom: 1px solid #F4EEF8; }
+    tbody tr:hover { background: var(--bg-secondary); }
+    tbody td { padding: 10px 14px; color: var(--text-primary); white-space: nowrap; }
+    .rag-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: var(--radius-pill);
+      font-size: 11px; font-weight: 600;
+    }
+    .rag-pill.green { background: var(--green-bg); color: var(--green); }
+    .rag-pill.amber { background: var(--amber-bg); color: #B36500; }
+    .rag-pill.red   { background: var(--red-bg);   color: var(--red); }
+
+    /* Thinking animation */
+    .thinking-row {
+      padding: 12px 24px; display: flex; gap: 16px; align-items: flex-start;
+      max-width: 960px; width: 100%; margin: 0 auto;
+    }
+    .thinking-body {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      display: flex; align-items: center; gap: 10px;
+      box-shadow: var(--shadow-sm);
+      color: var(--text-secondary); font-size: 13px;
+    }
+    .dot-pulse { display: flex; gap: 4px; align-items: center; }
+    .dot-pulse span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--magenta); opacity: 0.4;
+      animation: pulse 1.4s infinite;
+    }
+    .dot-pulse span:nth-child(2) { animation-delay: 0.2s; background: var(--purple); }
+    .dot-pulse span:nth-child(3) { animation-delay: 0.4s; background: var(--deep); }
+    @keyframes pulse {
+      0%, 80%, 100% { transform: scale(0.7); opacity: 0.3; }
+      40%           { transform: scale(1.1); opacity: 1; }
+    }
+
+    /* Follow-up pills */
+    .suggestion-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .suggestion-pill {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 7px 14px;
+      font-size: 12px; font-weight: 500; color: var(--text-secondary);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: border-color .2s, color .2s, box-shadow .2s;
+    }
+    .suggestion-pill:hover {
+      border-color: var(--magenta); color: var(--magenta);
+      box-shadow: var(--shadow-sm);
+    }
+    .suggestion-pill svg { color: var(--magenta); }
+
+    /* Error */
+    .error-row { padding: 8px 24px; max-width: 960px; margin: 0 auto; width: 100%; }
+    .error-alert {
+      background: var(--red-bg); border: 1px solid #F5C6C3;
+      border-radius: var(--radius-md);
+      padding: 12px 16px; font-size: 13px; color: var(--red);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    /* Input */
+    .input-area {
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      padding: 16px 24px 20px;
+      flex-shrink: 0;
+    }
+    .input-wrap { max-width: 880px; margin: 0 auto; position: relative; }
+    .input-box {
+      width: 100%; background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 14px 56px 14px 48px;
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      color: var(--text-primary); resize: none; outline: none;
+      min-height: 52px; max-height: 140px; line-height: 1.5;
+      transition: border-color .2s, box-shadow .2s;
+      display: block;
+    }
+    .input-box:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(200, 56, 155, 0.12);
+    }
+    .input-box::placeholder { color: var(--text-hint); }
+    .input-icon-left {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--text-hint); pointer-events: none;
+    }
+    .send-btn {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--grad); border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: opacity .2s, transform .15s;
+    }
+    .send-btn:hover { opacity: 0.92; transform: translateY(-50%) scale(1.05); }
+    .send-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: translateY(-50%); }
+    .send-btn svg { color: white; }
+
+    .input-footer {
+      text-align: center; font-size: 11px;
+      color: var(--text-hint); margin-top: 8px;
+    }
+    .input-footer .powered {
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .input-footer .accent { color: var(--magenta); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- ── Top Navigation ──────────────────────────────────────────── -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <img src="/circana-logo.png" alt="Circana" />
+    <div class="topbar-divider"></div>
+    <div class="topbar-product">
+      <span class="topbar-product-name">Ask Liquid Data</span>
+      <span class="topbar-subtitle">Conversational Market Insights</span>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="model-chip">
+      <i data-lucide="sparkles" width="13" height="13"></i>
+      Ujwal Yelma
+    </div>
+    <span class="session-chip" id="sessionChip"></span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- ── Sidebar ──────────────────────────────────────────────── -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <button class="new-chat-btn" onclick="newChat()">
+        <i data-lucide="plus" width="16" height="16"></i>
+        New conversation
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">AI Agents</div>
+      <button class="agent-btn" onclick="openRootCauseModal()">
+        <i data-lucide="search-check" width="18" height="18"></i>
+        <span>Why Is Share Moving?
+          <span class="agent-btn-sub">Multi-hypothesis root-cause investigation</span>
+        </span>
+      </button>
+      <button class="agent-btn" onclick="openMbrModal()" style="margin-top: 6px;">
+        <i data-lucide="file-text" width="18" height="18"></i>
+        <span>Generate MBR
+          <span class="agent-btn-sub">5-section Monthly Business Review .pptx</span>
+        </span>
+      </button>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Recent conversations</div>
+      <div id="historyList" class="history-list">
+        <div class="history-empty">No conversations yet.</div>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Share</div>
+      <button class="nav-item" onclick="send('Which brands are losing share in Energy Drinks?')">
+        <i data-lucide="trending-down" width="16" height="16"></i>
+        <span>Share losers in Energy Drinks</span>
+      </button>
+      <button class="nav-item" onclick="send('Top 10 share gainers across all CPG categories last quarter')">
+        <i data-lucide="trending-up" width="16" height="16"></i>
+        <span>Top share gainers</span>
+      </button>
+      <button class="nav-item" onclick="send('Show Coca-Cola share trend in Carbonated Beverages')">
+        <i data-lucide="line-chart" width="16" height="16"></i>
+        <span>Coca-Cola share trend</span>
+      </button>
+      <button class="nav-item" onclick="send('Compare brand share by retailer in Sparkling Water')">
+        <i data-lucide="store" width="16" height="16"></i>
+        <span>Share by retailer · Sparkling Water</span>
+      </button>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Velocity &amp; Distribution</div>
+      <button class="nav-item" onclick="send('Top 10 brands by velocity in CPG')">
+        <i data-lucide="zap" width="16" height="16"></i>
+        <span>Top velocity ranking</span>
+      </button>
+      <button class="nav-item" onclick="send('Which high-velocity brands have distribution gaps?')">
+        <i data-lucide="alert-triangle" width="16" height="16"></i>
+        <span>Distribution gap opportunities</span>
+      </button>
+      <button class="nav-item" onclick="send('Show ACV distribution by retailer for Liquid Death')">
+        <i data-lucide="map-pin" width="16" height="16"></i>
+        <span>Liquid Death ACV by retailer</span>
+      </button>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Pricing &amp; Promotion</div>
+      <button class="nav-item" onclick="send('Show the price index for Energy Drinks vs category average')">
+        <i data-lucide="dollar-sign" width="16" height="16"></i>
+        <span>Price index · Energy Drinks</span>
+      </button>
+      <button class="nav-item" onclick="send('Top promo lift by brand last quarter')">
+        <i data-lucide="tag" width="16" height="16"></i>
+        <span>Top promo lift</span>
+      </button>
+      <button class="nav-item" onclick="send('Which promo types deliver the highest ROI?')">
+        <i data-lucide="percent" width="16" height="16"></i>
+        <span>Promo ROI by event type</span>
+      </button>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Panel &amp; Innovation</div>
+      <button class="nav-item" onclick="send('Household penetration ranking across CPG brands')">
+        <i data-lucide="users" width="16" height="16"></i>
+        <span>Penetration ranking</span>
+      </button>
+      <button class="nav-item" onclick="send('Show the panel penetration trend for Celsius')">
+        <i data-lucide="activity" width="16" height="16"></i>
+        <span>Celsius penetration trend</span>
+      </button>
+      <button class="nav-item" onclick="send('Show me the Pacesetter candidates from the last 18 months')">
+        <i data-lucide="rocket" width="16" height="16"></i>
+        <span>Pacesetter watch</span>
+      </button>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Category Health</div>
+      <button class="nav-item" onclick="send('Which categories are growing fastest?')">
+        <i data-lucide="bar-chart-3" width="16" height="16"></i>
+        <span>Category growth ranking</span>
+      </button>
+      <button class="nav-item" onclick="send('Show monthly trend for Carbonated Beverages')">
+        <i data-lucide="trending-up" width="16" height="16"></i>
+        <span>CSDs monthly trend</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Main Panel ────────────────────────────────────────────── -->
+  <main class="main-panel">
+    <div class="chat-history" id="chatHistory">
+
+      <div class="welcome" id="welcomeScreen">
+        <div class="welcome-logo">
+          <img src="/circana-favicon.png" alt="Circana" />
+        </div>
+        <h2>Ask Liquid Data</h2>
+        <p class="welcome-subtitle">
+          Conversational market insights across CPG and General Merchandise. Ask about
+          share, velocity, distribution, promo, panel, and innovation in plain English —
+          get charts, narratives, and the next question to ask in seconds.
+        </p>
+        <div class="welcome-chips">
+          <button class="welcome-chip" onclick="send('Top 10 share gainers across all CPG last quarter')">
+            <i data-lucide="trending-up" width="15" height="15"></i>
+            Top share gainers · L13W
+          </button>
+          <button class="welcome-chip" onclick="send('Show me the Pacesetter candidates')">
+            <i data-lucide="rocket" width="15" height="15"></i>
+            Pacesetter candidates
+          </button>
+          <button class="welcome-chip" onclick="send('Which high-velocity brands have distribution gaps?')">
+            <i data-lucide="alert-triangle" width="15" height="15"></i>
+            Distribution gap opportunities
+          </button>
+          <button class="welcome-chip" onclick="send('How is Celsius trending in Energy Drinks?')">
+            <i data-lucide="zap" width="15" height="15"></i>
+            Celsius trend · Energy Drinks
+          </button>
+          <button class="welcome-chip" onclick="send('Show brand share by retailer in Sparkling Water')">
+            <i data-lucide="store" width="15" height="15"></i>
+            Share by retailer · Sparkling Water
+          </button>
+          <button class="welcome-chip" onclick="send('Which categories are growing fastest?')">
+            <i data-lucide="bar-chart-3" width="15" height="15"></i>
+            Fastest-growing categories
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="input-area">
+      <div class="input-wrap">
+        <span class="input-icon-left">
+          <i data-lucide="message-circle" width="18" height="18"></i>
+        </span>
+        <textarea
+          id="queryInput"
+          class="input-box"
+          placeholder="Ask about share, velocity, distribution, promo, panel, innovation…"
+          rows="1"
+          onkeydown="handleKey(event)"
+          oninput="autoResize(this)"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendQuery()" title="Send (Enter)">
+          <i data-lucide="send" width="15" height="15"></i>
+        </button>
+      </div>
+      <p class="input-footer">
+        <span class="powered"></span>
+        &nbsp;·&nbsp;
+        <span class="accent">CPG &amp; GM Market Measurement</span>
+      </p>
+    </div>
+  </main>
+
+</div>
+
+<!-- ── Root-Cause Agent Modal ─────────────────────────────────────────────── -->
+<div class="modal-backdrop" id="rcModal" onclick="if(event.target===this)closeRcModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><polyline points="8 11 11 13 14 9"/>
+        </svg>
+      </div>
+      <div>
+        <div class="modal-title">Why Is Share Moving?</div>
+        <div class="modal-subtitle">Multi-hypothesis investigation across distribution, velocity, pricing, promo, innovation, and retailer mix</div>
+      </div>
+      <button class="modal-close" onclick="closeRcModal()" title="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body" id="rcBody">
+      <div class="form-row">
+        <label>Brand name (required)</label>
+        <input type="text" id="rcBrand" placeholder="e.g. Liquid Death, Celsius, Coca-Cola" />
+        <span class="form-help">The brand whose share movement you want investigated.</span>
+      </div>
+      <div class="form-row">
+        <label>Category (optional)</label>
+        <input type="text" id="rcCategory" placeholder="e.g. Sparkling Water  (auto-detected if blank)" />
+      </div>
+      <div style="display:flex; gap:10px; margin-top:8px;">
+        <button class="btn-primary" id="rcRunBtn" onclick="runRootCause()">
+          <i data-lucide="zap" width="14" height="14"></i>
+          Investigate
+        </button>
+        <button class="btn-secondary" onclick="closeRcModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Auto-MBR Modal ────────────────────────────────────────────────────── -->
+<div class="modal-backdrop" id="mbrModal" onclick="if(event.target===this)closeMbrModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+        </svg>
+      </div>
+      <div>
+        <div class="modal-title">Generate MBR</div>
+        <div class="modal-subtitle">5-section Monthly Business Review · Share, Distribution, Velocity, Promo, Panel &amp; Innovation</div>
+      </div>
+      <button class="modal-close" onclick="closeMbrModal()" title="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body" id="mbrBody">
+      <div class="form-row">
+        <label>Brand name (one is required)</label>
+        <input type="text" id="mbrBrand" placeholder="e.g. Celsius, Coca-Cola, iPhone" />
+      </div>
+      <div class="form-row">
+        <label>Category (one is required)</label>
+        <input type="text" id="mbrCategory" placeholder="e.g. Energy Drinks, Carbonated Beverages" />
+        <span class="form-help">Provide a brand OR a category (or both). The MBR will be scoped accordingly.</span>
+      </div>
+      <div style="display:flex; gap:10px; margin-top:8px;">
+        <button class="btn-primary" id="mbrRunBtn" onclick="runAutoMBR()">
+          <i data-lucide="play" width="14" height="14"></i>
+          Generate &amp; Download
+        </button>
+        <button class="btn-secondary" onclick="closeMbrModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  lucide.createIcons();
+
+  const API       = 'http://localhost:8000';
+  let sessionId   = null;
+  let userId      = (function() {
+    let u = localStorage.getItem('ald_user_id');
+    if (!u) {
+      u = 'user_' + Math.random().toString(36).slice(2, 9);
+      localStorage.setItem('ald_user_id', u);
+    }
+    return u;
+  })();
+  let historyExpanded = false;
+
+  // SVG icons used during dynamic content injection
+  const ICONS = {
+    send:        `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`,
+    bot:         `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/><path d="M16 8h4V4"/></svg>`,
+    user:        `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+    lightbulb:   `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>`,
+    sparkles:    `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`,
+    barChart:    `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+    table:       `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>`,
+    checkCircle: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+    alertCircle: `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+    arrowRight:  `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`,
+  };
+
+  function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendQuery(); }
+  }
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 140) + 'px';
+  }
+  function send(text) {
+    document.getElementById('queryInput').value = text;
+    sendQuery();
+  }
+
+  async function sendQuery() {
+    const input = document.getElementById('queryInput');
+    const query = input.value.trim();
+    if (!query) return;
+
+    input.value = '';
+    input.style.height = 'auto';
+    hideWelcome();
+    appendUserBubble(query);
+
+    const thinkEl = appendThinking();
+    document.getElementById('sendBtn').disabled = true;
+
+    try {
+      const res = await fetch(`${API}/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query, session_id: sessionId, user_id: userId })
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ detail: res.statusText }));
+        throw new Error(err.detail || 'Server error ' + res.status);
+      }
+
+      const data = await res.json();
+      sessionId = data.session_id;
+
+      const chip = document.getElementById('sessionChip');
+      chip.textContent = 'Session ' + sessionId.slice(0, 8);
+      chip.classList.add('visible');
+
+      thinkEl.remove();
+      appendBotResponse(data);
+      refreshHistory();
+
+    } catch (err) {
+      thinkEl.remove();
+      appendError(err.message);
+    } finally {
+      document.getElementById('sendBtn').disabled = false;
+      input.focus();
+    }
+  }
+
+  function hideWelcome() {
+    const w = document.getElementById('welcomeScreen');
+    if (w) w.style.display = 'none';
+  }
+
+  function appendUserBubble(text) {
+    const history = document.getElementById('chatHistory');
+    const row = document.createElement('div');
+    row.className = 'message-row user-row';
+    row.innerHTML = `
+      <div class="user-avatar">${ICONS.user}</div>
+      <div class="user-bubble">${esc(text)}</div>
+    `;
+    history.appendChild(row);
+    scrollBottom();
+    return row;
+  }
+
+  function appendThinking() {
+    const history = document.getElementById('chatHistory');
+    const row = document.createElement('div');
+    row.className = 'thinking-row';
+    row.innerHTML = `
+      <div class="bot-avatar">${ICONS.bot}</div>
+      <div class="thinking-body">
+        <div class="dot-pulse"><span></span><span></span><span></span></div>
+        Reading the market…
+      </div>
+    `;
+    history.appendChild(row);
+    scrollBottom();
+    return row;
+  }
+
+  function appendBotResponse(data) {
+    const history = document.getElementById('chatHistory');
+    const row = document.createElement('div');
+    row.className = 'message-row';
+    row.innerHTML = `
+      <div class="bot-avatar">${ICONS.bot}</div>
+      <div class="bot-content" id="botContent_${data.turn_id}"></div>
+    `;
+    history.appendChild(row);
+
+    const content = document.getElementById(`botContent_${data.turn_id}`);
+
+    if (data.intent?.intent) {
+      const tagRow = document.createElement('div');
+      tagRow.className = 'intent-row';
+      tagRow.innerHTML = `
+        <span class="intent-tag tag-intent">${esc(data.intent.intent)}</span>
+        <span class="intent-tag tag-domain">${esc(data.intent.domain || '—')}</span>
+      `;
+      content.appendChild(tagRow);
+    }
+
+    if (data.narrative) {
+      const parts   = data.narrative.split(/Follow-up:/i);
+      const mainTxt = parts[0].trim();
+      const followTxt = parts[1]?.trim() || null;
+
+      const narCard = document.createElement('div');
+      narCard.className = 'narrative-card';
+      narCard.innerHTML = esc(mainTxt).replace(/\n/g, '<br>');
+      if (followTxt) {
+        narCard.innerHTML += `
+          <div class="followup-hint">
+            ${ICONS.lightbulb}
+            <span><strong>Follow-up:</strong> ${esc(followTxt)}</span>
+          </div>`;
+      }
+      content.appendChild(narCard);
+    }
+
+    const vizType = data.viz_type || 'bar_chart';
+    const vizSpec = data.viz_spec || {};
+    const rows    = data.data || [];
+
+    if (rows.length > 0 || vizSpec?.cards?.length) {
+      const vizCard = buildVizCard(vizType, vizSpec, rows, data.intent);
+      if (vizCard) content.appendChild(vizCard);
+    }
+
+    if (data.suggested_followups?.length) {
+      const pillRow = document.createElement('div');
+      pillRow.className = 'suggestion-row';
+      data.suggested_followups.forEach(q => {
+        const btn = document.createElement('button');
+        btn.className = 'suggestion-pill';
+        btn.innerHTML = `${ICONS.arrowRight}${esc(q)}`;
+        btn.onclick = () => send(q);
+        pillRow.appendChild(btn);
+      });
+      content.appendChild(pillRow);
+    }
+
+    scrollBottom();
+  }
+
+  function appendError(msg) {
+    const history = document.getElementById('chatHistory');
+    const row = document.createElement('div');
+    row.className = 'error-row';
+    row.innerHTML = `
+      <div class="error-alert">
+        ${ICONS.alertCircle}
+        <span>${esc(msg)}</span>
+      </div>`;
+    history.appendChild(row);
+    scrollBottom();
+  }
+
+  function buildVizCard(vizType, vizSpec, rows, intent) {
+    const card = document.createElement('div');
+    card.className = 'viz-card';
+
+    const header = document.createElement('div');
+    header.className = 'viz-card-header';
+    const titleMap = {
+      'metric_card':    [ICONS.sparkles, 'Key Metrics'],
+      'line_chart':     [ICONS.barChart, 'Trend'],
+      'bar_chart':      [ICONS.barChart, 'Breakdown'],
+      'horizontal_bar': [ICONS.barChart, 'Ranking'],
+      'grouped_bar':    [ICONS.barChart, 'Comparison'],
+      'data_table':     [ICONS.table,    'Detail View'],
+      'table_with_rag': [ICONS.table,    'Detail (RAG-coded)'],
+    };
+    const [ico, ttl] = titleMap[vizType] || [ICONS.barChart, 'Results'];
+    header.innerHTML = `${ico}<span class="viz-card-title">${ttl}</span>`;
+    card.appendChild(header);
+
+    const body = document.createElement('div');
+    body.className = 'viz-card-body';
+
+    if (vizType === 'metric_card' && vizSpec?.cards?.length) {
+      renderMetricCards(body, vizSpec.cards);
+    } else if (vizType === 'data_table' || vizType === 'table_with_rag') {
+      renderTable(body, rows, vizType === 'table_with_rag');
+    } else if (rows.length > 0) {
+      const spec = patchSpec(vizSpec.$schema ? vizSpec : autoChartSpec(vizType, rows, intent));
+      if (spec) {
+        const chartDiv = document.createElement('div');
+        chartDiv.className = 'chart-container';
+        body.appendChild(chartDiv);
+        vegaEmbed(chartDiv, spec, {
+          actions: false,
+          renderer: 'svg',
+          theme: 'default'
+        }).catch(console.error);
+      } else {
+        renderTable(body, rows, false);
+      }
+    } else {
+      return null;
+    }
+
+    card.appendChild(body);
+    return card;
+  }
+
+  function patchSpec(spec) {
+    if (!spec) return null;
+    spec.background = '#ffffff';
+    spec.config = spec.config || {};
+    spec.config.view = { stroke: null, fill: '#ffffff' };
+    spec.config.axis = {
+      gridColor: '#F4EEF8', domainColor: '#E6E1EE',
+      tickColor: '#E6E1EE', labelColor: '#4A4A55',
+      titleColor: '#15151A',
+      labelFont: 'Inter, sans-serif', titleFont: 'Inter, sans-serif',
+    };
+    spec.config.legend = {
+      labelColor: '#4A4A55', titleColor: '#15151A',
+      labelFont: 'Inter, sans-serif',
+    };
+    spec.config.title = { color: '#15151A', font: 'Inter, sans-serif' };
+    spec.config.bar = { color: '#C8389B' };
+    return spec;
+  }
+
+  function autoChartSpec(vizType, rows, intent) {
+    if (!rows.length) return null;
+    const cols     = Object.keys(rows[0]);
+    const numCols  = cols.filter(c => typeof rows[0][c] === 'number');
+    const catCols  = cols.filter(c => typeof rows[0][c] === 'string');
+    const timeCols = cols.filter(c => /month|quarter|year|date|week_ending|period/.test(c.toLowerCase()));
+
+    if (!numCols.length) return null;
+
+    const yField = numCols[0];
+    const values = rows.map(r => {
+      const out = {};
+      cols.forEach(k => { out[k] = r[k] == null ? null : r[k]; });
+      return out;
+    });
+    const base = { "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                   "width": "container", "height": 300, "data": { "values": values } };
+
+    // Circana palette for series
+    const PALETTE = ['#6B2C8E','#C8389B','#FF6A3D','#2BA84A','#F2A516','#2A0F40','#8E5DAB','#E479C0'];
+
+    if (timeCols.length && (vizType === 'line_chart' || vizType === 'trend')) {
+      const colorField = catCols.find(c => /brand|category|retailer/.test(c.toLowerCase()));
+      if (colorField) {
+        return { ...base,
+          mark: { type: 'line', point: { filled: true, size: 60 }, strokeWidth: 2.5 },
+          encoding: {
+            x: { field: timeCols[0], type: 'temporal', title: humanize(timeCols[0]),
+                 axis: { labelAngle: -25 } },
+            y: { field: yField, type: 'quantitative', title: humanize(yField) },
+            color: { field: colorField, type: 'nominal', scale: { range: PALETTE } }
+          }
+        };
+      }
+      // No color field — fold up to 3 numeric metrics into series
+      const folds = numCols.slice(0, 3);
+      return { ...base,
+        transform: [{ fold: folds, as: ['metric', 'value'] }],
+        mark: { type: 'line', point: { filled: true, size: 60 }, strokeWidth: 2.5 },
+        encoding: {
+          x: { field: timeCols[0], type: 'temporal', title: humanize(timeCols[0]),
+               axis: { labelAngle: -25 } },
+          y: { field: 'value', type: 'quantitative' },
+          color: { field: 'metric', type: 'nominal', scale: { range: PALETTE } }
+        }
+      };
+    }
+
+    if (vizType === 'horizontal_bar' && catCols.length) {
+      return { ...base, height: Math.max(220, rows.length * 26),
+        mark: { type: 'bar', tooltip: true, cornerRadiusEnd: 4 },
+        encoding: {
+          y: { field: catCols[0], type: 'nominal', sort: '-x', title: humanize(catCols[0]) },
+          x: { field: yField, type: 'quantitative', title: humanize(yField) },
+          color: {
+            condition: { test: `datum['${yField}'] < 0`, value: '#D9342B' },
+            field: yField, type: 'quantitative',
+            scale: { range: ['#F2C9E1', '#C8389B', '#6B2C8E'] }
+          },
+          tooltip: [...catCols, ...numCols].map(f => ({ field: f, title: humanize(f) }))
+        }
+      };
+    }
+
+    if (vizType === 'grouped_bar' && catCols.length >= 2) {
+      return { ...base,
+        mark: { type: 'bar', tooltip: true, cornerRadiusEnd: 4 },
+        encoding: {
+          x: { field: catCols[0], type: 'nominal', title: humanize(catCols[0]),
+               axis: { labelAngle: -25 } },
+          y: { field: yField, type: 'quantitative', title: humanize(yField) },
+          color: { field: catCols[1], type: 'nominal', scale: { range: PALETTE } },
+          xOffset: { field: catCols[1] },
+          tooltip: [...catCols, ...numCols].map(f => ({ field: f, title: humanize(f) }))
+        }
+      };
+    }
+
+    if (vizType === 'pie' && catCols.length) {
+      return { ...base, "height": 280,
+        mark: { type: 'arc', innerRadius: 70, tooltip: true },
+        encoding: {
+          theta: { field: yField, type: 'quantitative' },
+          color: { field: catCols[0], type: 'nominal', scale: { range: PALETTE } },
+          tooltip: [...catCols, ...numCols].map(f => ({ field: f }))
+        }
+      };
+    }
+
+    if (catCols.length) {
+      return { ...base,
+        mark: { type: 'bar', tooltip: true, cornerRadiusEnd: 4 },
+        encoding: {
+          x: { field: catCols[0], type: 'nominal', sort: '-y',
+               title: humanize(catCols[0]), axis: { labelAngle: -25 } },
+          y: { field: yField, type: 'quantitative', title: humanize(yField) },
+          color: {
+            condition: { test: `datum['${yField}'] < 0`, value: '#D9342B' },
+            value: '#C8389B'
+          },
+          tooltip: [...catCols, ...numCols].map(f => ({ field: f, title: humanize(f) }))
+        }
+      };
+    }
+    return null;
+  }
+
+  function renderMetricCards(container, cards) {
+    const grid = document.createElement('div');
+    grid.className = 'metric-grid';
+
+    cards.forEach(c => {
+      const tile = document.createElement('div');
+      const val  = parseFloat(c.value);
+      let rag = 'neutral';
+
+      if (!isNaN(val)) {
+        const m = (c.metric || '').toLowerCase();
+        if (m.includes('share') || m.includes('penetration') || m.includes('acv') || m.includes('lift')) {
+          rag = val >= 20 ? 'green' : val >= 5 ? 'amber' : 'red';
+        } else if (m.includes('gap') || m.includes('on_promo')) {
+          rag = val <= 20 ? 'green' : val <= 50 ? 'amber' : 'red';
+        }
+      }
+
+      const icon    = rag === 'green' ? ICONS.checkCircle : rag === 'red' ? ICONS.alertCircle : ICONS.sparkles;
+      const display = isNaN(val) ? (c.value ?? '—') : (Number.isInteger(val) ? val : val.toFixed(1));
+      const unit    = ((c.metric || '').toLowerCase().includes('pct')) ? '%' : '';
+
+      tile.className = `metric-tile ${rag}`;
+      tile.innerHTML = `
+        <div class="metric-tile-icon">${icon}</div>
+        <div class="metric-label">${humanize(c.metric)}</div>
+        <div class="metric-value">${display}<span class="unit">${unit}</span></div>
+      `;
+      grid.appendChild(tile);
+    });
+    container.appendChild(grid);
+  }
+
+  function renderTable(container, rows, ragEnabled) {
+    if (!rows.length) return;
+    const cols = Object.keys(rows[0]);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'table-container';
+
+    const tbl = document.createElement('table');
+    tbl.innerHTML = `<thead><tr>${cols.map(c => `<th>${humanize(c)}</th>`).join('')}</tr></thead>`;
+
+    const tbody = document.createElement('tbody');
+    rows.forEach(row => {
+      const tr = document.createElement('tr');
+      cols.forEach(col => {
+        const td  = document.createElement('td');
+        const val = row[col];
+        const n   = parseFloat(val);
+
+        if (ragEnabled && !isNaN(n) &&
+            (col.includes('share') || col.includes('acv') || col.includes('gap') ||
+             col.includes('lift') || col.includes('pct'))) {
+          let rag = 'amber';
+          if (col.includes('gap')) {
+            rag = n <= 20 ? 'green' : n <= 50 ? 'amber' : 'red';
+          } else if (col.includes('share') || col.includes('acv') || col.includes('penetration')) {
+            rag = n >= 50 ? 'green' : n >= 20 ? 'amber' : 'red';
+          } else {
+            rag = n >= 30 ? 'green' : n >= 10 ? 'amber' : 'red';
+          }
+          td.innerHTML = `<span class="rag-pill ${rag}">${n.toFixed(1)}</span>`;
+        } else {
+          td.textContent = val == null ? '—' : (typeof val === 'number' ? val.toFixed(2) : val);
+        }
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+
+    tbl.appendChild(tbody);
+    wrap.appendChild(tbl);
+    container.appendChild(wrap);
+  }
+
+  function humanize(s) {
+    return (s || '')
+      .replace(/_pct/g, ' %')
+      .replace(/_mm/g, ' (MM)')
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, l => l.toUpperCase());
+  }
+  function esc(s) {
+    return String(s ?? '')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function scrollBottom() {
+    const h = document.getElementById('chatHistory');
+    setTimeout(() => { h.scrollTop = h.scrollHeight; }, 60);
+  }
+
+  function newChat() {
+    sessionId = null;
+    document.getElementById('chatHistory').innerHTML = '';
+    const w = document.createElement('div');
+    w.className = 'welcome';
+    w.id = 'welcomeScreen';
+    w.innerHTML = WELCOME_HTML;
+    document.getElementById('chatHistory').appendChild(w);
+    lucide.createIcons();
+    document.querySelectorAll('.history-item.active').forEach(el => el.classList.remove('active'));
+    document.getElementById('sessionChip').classList.remove('visible');
+    document.getElementById('queryInput').focus();
+  }
+
+  // ── Conversation history (sidebar) ───────────────────────────────────────
+  async function refreshHistory() {
+    try {
+      const res = await fetch(`${API}/sessions?user_id=${encodeURIComponent(userId)}`);
+      if (!res.ok) return;
+      const sessions = await res.json();
+      const list = document.getElementById('historyList');
+      // Drop empty / no-turn sessions
+      const meaningful = sessions.filter(s => s.turn_count > 0);
+      if (!meaningful.length) {
+        list.innerHTML = '<div class="history-empty">No conversations yet.</div>';
+        return;
+      }
+      const shown = historyExpanded ? meaningful : meaningful.slice(0, 8);
+      list.innerHTML = shown.map(s => {
+        const label = (s.first_query || s.last_query || 'Conversation').replace(/"/g, '&quot;');
+        const isActive = s.session_id === sessionId;
+        return `
+          <button class="history-item ${isActive ? 'active' : ''}"
+                  data-session-id="${s.session_id}"
+                  title="${label}">
+            <span class="history-label">${esc(truncate(label, 48))}</span>
+            <span class="history-meta">
+              <span>${s.turn_count} ${s.turn_count === 1 ? 'turn' : 'turns'}</span>
+              ${s.last_domain ? `<span class="dot"></span><span class="history-domain">${esc(s.last_domain)}</span>` : ''}
+              <span class="dot"></span>
+              <span>${relTime(s.last_active)}</span>
+            </span>
+          </button>
+        `;
+      }).join('') + (meaningful.length > 8
+        ? `<button class="history-show-more" onclick="toggleHistoryExpanded()">
+             ${historyExpanded ? 'Show fewer' : `Show all ${meaningful.length}`}
+           </button>`
+        : '');
+      list.querySelectorAll('.history-item').forEach(el => {
+        el.onclick = () => loadSession(el.dataset.sessionId);
+      });
+    } catch (e) {
+      console.error('refreshHistory failed', e);
+    }
+  }
+
+  function toggleHistoryExpanded() {
+    historyExpanded = !historyExpanded;
+    refreshHistory();
+  }
+
+  async function loadSession(sid) {
+    try {
+      const res = await fetch(`${API}/sessions/${sid}/full`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const session = await res.json();
+
+      sessionId = sid;
+      const chip = document.getElementById('sessionChip');
+      chip.textContent = 'Session ' + sid.slice(0, 8);
+      chip.classList.add('visible');
+
+      // Clear current view, then replay each turn
+      const history = document.getElementById('chatHistory');
+      history.innerHTML = '';
+      for (const t of session.turns) {
+        appendUserBubble(t.user_query);
+        appendBotResponse({
+          turn_id:    t.turn_id,
+          user_query: t.user_query,
+          intent:     t.intent,
+          narrative:  t.narrative,
+          viz_type:   t.viz_type,
+          viz_spec:   t.viz_spec,
+          data:       t.data,
+          suggested_followups: [],   // we don't replay suggestions for old turns
+        });
+      }
+      refreshHistory();
+      scrollBottom();
+    } catch (e) {
+      appendError('Could not load session: ' + e.message);
+    }
+  }
+
+  function truncate(s, n) {
+    s = s || '';
+    return s.length > n ? s.slice(0, n - 1) + '…' : s;
+  }
+
+  function relTime(iso) {
+    if (!iso) return '';
+    const then = new Date(iso).getTime();
+    const diffSec = Math.max(0, (Date.now() - then) / 1000);
+    if (diffSec < 60)     return 'just now';
+    if (diffSec < 3600)   return Math.floor(diffSec / 60) + 'm ago';
+    if (diffSec < 86400)  return Math.floor(diffSec / 3600) + 'h ago';
+    if (diffSec < 604800) return Math.floor(diffSec / 86400) + 'd ago';
+    return new Date(iso).toLocaleDateString();
+  }
+
+  // Cache the welcome HTML so newChat() can rebuild it cleanly
+  const WELCOME_HTML = document.getElementById('welcomeScreen').innerHTML;
+
+  // Initial load + refresh after every turn
+  refreshHistory();
+  setInterval(refreshHistory, 30000);   // gentle background refresh
+
+  // ── AI Agents: Root Cause + Auto MBR ─────────────────────────────────────
+
+  function openRcModal() { document.getElementById('rcModal').classList.add('open'); setTimeout(() => document.getElementById('rcBrand').focus(), 80); }
+  function closeRcModal() {
+    document.getElementById('rcModal').classList.remove('open');
+    // Restore form state
+    document.getElementById('rcBody').innerHTML = `
+      <div class="form-row">
+        <label>Brand name (required)</label>
+        <input type="text" id="rcBrand" placeholder="e.g. Liquid Death, Celsius, Coca-Cola" />
+        <span class="form-help">The brand whose share movement you want investigated.</span>
+      </div>
+      <div class="form-row">
+        <label>Category (optional)</label>
+        <input type="text" id="rcCategory" placeholder="e.g. Sparkling Water  (auto-detected if blank)" />
+      </div>
+      <div style="display:flex; gap:10px; margin-top:8px;">
+        <button class="btn-primary" id="rcRunBtn" onclick="runRootCause()">
+          <i data-lucide="zap" width="14" height="14"></i> Investigate
+        </button>
+        <button class="btn-secondary" onclick="closeRcModal()">Cancel</button>
+      </div>`;
+    lucide.createIcons();
+  }
+  window.openRootCauseModal = openRcModal;
+
+  async function runRootCause() {
+    const brand = document.getElementById('rcBrand').value.trim();
+    const category = document.getElementById('rcCategory').value.trim();
+    if (!brand) {
+      alert('Brand name is required.');
+      return;
+    }
+    document.getElementById('rcBody').innerHTML = `
+      <div class="agent-progress">
+        <div class="dot-pulse"><span></span><span></span><span></span></div>
+        Investigating share movement for <b>${esc(brand)}</b>${category?' in <b>'+esc(category)+'</b>':''}…
+        <span style="margin-left:auto; font-size:11px; color:var(--text-hint);">~15-30 seconds</span>
+      </div>`;
+    try {
+      const res = await fetch(`${API}/agents/root-cause`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ brand_name: brand, category_name: category || null }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ detail: res.statusText }));
+        throw new Error(err.detail || 'HTTP ' + res.status);
+      }
+      renderRootCause(await res.json());
+    } catch (e) {
+      document.getElementById('rcBody').innerHTML =
+        `<div class="error-alert">${ICONS.alertCircle}<span>${esc(e.message)}</span></div>`;
+    }
+  }
+
+  function renderRootCause(data) {
+    const sm = data.share_movement || {};
+    const change = sm.share_pt_change ?? 0;
+    const changeCls = change > 0 ? 'delta-pos' : change < 0 ? 'delta-neg' : '';
+    const changeStr = (change > 0 ? '+' : '') + change.toFixed(2) + ' pts';
+
+    const stats = `
+      <div class="rc-share-row">
+        <div class="rc-stat">
+          <div class="lbl">Brand · Category</div>
+          <div class="val" style="font-size:14px; font-weight:600;">${esc(data.brand_name)} · ${esc(data.category_name || '—')}</div>
+        </div>
+        <div class="rc-stat">
+          <div class="lbl">Prior 13W Share</div>
+          <div class="val">${(sm.prior_share_pct ?? 0).toFixed(2)}%</div>
+        </div>
+        <div class="rc-stat">
+          <div class="lbl">Current 13W Share</div>
+          <div class="val">${(sm.current_share_pct ?? 0).toFixed(2)}%</div>
+        </div>
+        <div class="rc-stat ${changeCls}">
+          <div class="lbl">Share Pt Change</div>
+          <div class="val">${changeStr}</div>
+        </div>
+      </div>`;
+
+    const hyps = (data.hypotheses || []).map(h => {
+      const conf = (h.confidence || 'low').toUpperCase();
+      return `
+        <div class="hyp-card ${esc(h.direction)}">
+          <div class="hyp-head">
+            <span class="hyp-family-tag">${esc(h.family)}</span>
+            <span class="hyp-headline">${esc(h.headline)}</span>
+            <span class="hyp-conf">${conf} confidence · magnitude ${(h.magnitude||0).toFixed(0)}</span>
+          </div>
+          <div class="hyp-bar"><div class="hyp-bar-fill" style="width:${Math.min(100, h.magnitude||0)}%;"></div></div>
+          <div class="hyp-narrative">${esc(h.narrative || '')}</div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('rcBody').innerHTML = `
+      ${stats}
+      <div class="rc-summary">
+        <div class="rc-summary-label">Executive Summary</div>
+        <div class="rc-summary-text">${esc(data.summary || '').replace(/\n/g,'<br>')}</div>
+      </div>
+      <div style="font-size:12px; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:.06em; margin: 8px 0 8px;">Ranked Hypotheses</div>
+      ${hyps}
+      <div style="margin-top:12px; display:flex; gap:10px;">
+        <button class="btn-secondary" onclick="closeRcModal()">Close</button>
+      </div>`;
+    lucide.createIcons();
+  }
+
+  // ── Auto MBR ─────────────────────────────────────────────────────────────
+
+  function openMbrModal() { document.getElementById('mbrModal').classList.add('open'); setTimeout(() => document.getElementById('mbrBrand').focus(), 80); }
+  function closeMbrModal() {
+    document.getElementById('mbrModal').classList.remove('open');
+    document.getElementById('mbrBody').innerHTML = `
+      <div class="form-row">
+        <label>Brand name (one is required)</label>
+        <input type="text" id="mbrBrand" placeholder="e.g. Celsius, Coca-Cola, iPhone" />
+      </div>
+      <div class="form-row">
+        <label>Category (one is required)</label>
+        <input type="text" id="mbrCategory" placeholder="e.g. Energy Drinks, Carbonated Beverages" />
+        <span class="form-help">Provide a brand OR a category (or both). The MBR will be scoped accordingly.</span>
+      </div>
+      <div style="display:flex; gap:10px; margin-top:8px;">
+        <button class="btn-primary" id="mbrRunBtn" onclick="runAutoMBR()">
+          <i data-lucide="play" width="14" height="14"></i> Generate &amp; Download
+        </button>
+        <button class="btn-secondary" onclick="closeMbrModal()">Cancel</button>
+      </div>`;
+    lucide.createIcons();
+  }
+  window.openMbrModal = openMbrModal;
+
+  async function runAutoMBR() {
+    const brand = document.getElementById('mbrBrand').value.trim();
+    const category = document.getElementById('mbrCategory').value.trim();
+    if (!brand && !category) {
+      alert('Provide a brand or a category.');
+      return;
+    }
+    document.getElementById('mbrBody').innerHTML = `
+      <div class="agent-progress">
+        <div class="dot-pulse"><span></span><span></span><span></span></div>
+        Generating MBR for <b>${esc(brand || category)}</b> — gathering data, drafting narratives, building deck…
+        <span style="margin-left:auto; font-size:11px; color:var(--text-hint);">~30-60 seconds</span>
+      </div>`;
+    try {
+      const res = await fetch(`${API}/agents/auto-mbr`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ brand_name: brand || null, category_name: category || null }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ detail: res.statusText }));
+        throw new Error(err.detail || 'HTTP ' + res.status);
+      }
+      renderMbrResult(await res.json());
+    } catch (e) {
+      document.getElementById('mbrBody').innerHTML =
+        `<div class="error-alert">${ICONS.alertCircle}<span>${esc(e.message)}</span></div>`;
+    }
+  }
+
+  function renderMbrResult(data) {
+    const dl = `${API}/agents/auto-mbr/download/${encodeURIComponent(data.filename)}`;
+    const sections = data.section_narratives || {};
+    const sectionList = Object.entries(sections).map(([k, v]) => `
+      <div style="border:1px solid var(--border); border-radius:10px; padding:12px 14px; margin-bottom:8px;">
+        <div style="font-size:11px; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px;">
+          ${esc(humanize(k))}
+        </div>
+        <div style="font-size:13px; color:var(--text-secondary); line-height:1.55;">${esc(v || '')}</div>
+      </div>`).join('');
+
+    document.getElementById('mbrBody').innerHTML = `
+      <div class="rc-summary">
+        <div class="rc-summary-label">Executive Summary  ·  ${esc(data.scope_label)}</div>
+        <div class="rc-summary-text">${esc(data.executive_summary || '').replace(/\n/g,'<br>')}</div>
+      </div>
+
+      <div style="font-size:12px; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:.06em; margin: 12px 0 8px;">Section Narratives</div>
+      ${sectionList}
+
+      <div style="font-size:12px; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:.06em; margin: 12px 0 8px;">Recommended Actions</div>
+      <div style="background:var(--bg-secondary); border:1px solid var(--border); border-radius:10px; padding:12px 14px; font-size:13px; color:var(--text-primary); line-height:1.6; white-space:pre-wrap;">${esc(data.recommendations || '')}</div>
+
+      <div style="margin-top:16px; display:flex; gap:10px; align-items:center;">
+        <a class="btn-primary" href="${dl}" download>
+          ${ICONS.arrowRight} Download .pptx (${esc(data.filename)})
+        </a>
+        <button class="btn-secondary" onclick="closeMbrModal()">Close</button>
+      </div>`;
+    lucide.createIcons();
+  }
+
+  document.getElementById('queryInput').focus();
+</script>
+</body>
+</html>

@@ -1,0 +1,687 @@
+# ============================================================
+# PHARMA COMPLIANCE DOMAIN ONTOLOGY
+# Used by LLM intent engine to understand user queries and
+# map natural language to structured analytical concepts.
+# ============================================================
+
+ontology:
+  domain: pharma_compliance
+  version: "1.0"
+  regulatory_frameworks:
+    - "FDA 21 CFR 210/211"
+    - "FDA 21 CFR Part 11"
+    - "FDA 21 CFR 820"
+    - "ICH Q9 (Risk Management)"
+    - "ICH Q10 (Pharmaceutical Quality System)"
+    - "EU GMP Annex 11"
+    - "ICH E6(R2) GCP"
+
+# ─────────────────────────────────────────
+# ENTITIES — core business objects
+# ─────────────────────────────────────────
+entities:
+
+  CAPA:
+    label: "Corrective and Preventive Action"
+    table: capa_records
+    pk: capa_id
+    synonyms:
+      - "corrective action"
+      - "CA/PA"
+      - "corrective and preventive action"
+      - "remediation"
+      - "corrective measure"
+    regulatory_refs:
+      - "21 CFR 820.100"
+      - "ICH Q10 Section 3"
+    attributes:
+      - severity        # Critical | Major | Minor
+      - source_type     # Audit | Deviation | Complaint | Inspection
+      - root_cause_category
+      - status
+      - cycle_time      # initiation_date → actual_close_date
+      - effectiveness_check_result
+
+  Deviation:
+    label: "Manufacturing Deviation / Non-Conformance"
+    table: deviation_records
+    pk: deviation_id
+    synonyms:
+      - "non-conformance"
+      - "NC"
+      - "nonconformity"
+      - "discrepancy"
+      - "exception report"
+      - "deviation event"
+      - "out of procedure"
+      - "OOP"
+    regulatory_refs:
+      - "21 CFR 211.192"
+    attributes:
+      - deviation_category  # Equipment | Process | Personnel | Material | Environmental
+      - severity
+      - batch_disposition_impact
+      - shift
+      - manufacturing_area
+
+  AuditFinding:
+    label: "Audit Finding / Observation"
+    table: audit_findings
+    pk: finding_id
+    synonyms:
+      - "finding"
+      - "observation"
+      - "483 observation"
+      - "Form 483"
+      - "deficiency"
+      - "citation"
+      - "audit observation"
+      - "inspection finding"
+    attributes:
+      - classification    # Critical | Major | Minor | Observation
+      - regulatory_ref
+      - process_area
+      - is_repeat_finding
+
+  Audit:
+    label: "Audit / Inspection"
+    table: audits
+    pk: audit_id
+    synonyms:
+      - "inspection"
+      - "GMP audit"
+      - "regulatory inspection"
+      - "quality audit"
+      - "surveillance audit"
+      - "supplier audit"
+    attributes:
+      - audit_type        # Internal | External-Regulatory | Supplier
+      - auditing_body     # FDA | EMA | ISO
+      - overall_rating
+
+  TrainingRecord:
+    label: "Employee Training Record"
+    table: training_records
+    pk: training_record_id
+    synonyms:
+      - "training"
+      - "GMP training"
+      - "qualification"
+      - "SOP training"
+      - "read and understand"
+      - "R&U"
+      - "e-learning"
+      - "competency"
+    attributes:
+      - training_type     # Initial | Refresher | Remedial | Change-Driven
+      - delivery_method
+      - status
+      - assessment_score
+      - attempt_number
+
+  ChangeRequest:
+    label: "Change Control Record"
+    table: change_requests
+    pk: change_id
+    synonyms:
+      - "change"
+      - "change control"
+      - "CCR"
+      - "engineering change"
+      - "process change"
+      - "change request"
+      - "MOC"                   # Management of Change
+    attributes:
+      - change_category   # Process | Equipment | Material | Facility | Software
+      - change_type       # Minor | Major | Critical | Emergency
+      - regulatory_filing_required
+      - product_impact
+
+  Document:
+    label: "Controlled Document / SOP"
+    table: documents
+    pk: doc_id
+    synonyms:
+      - "SOP"
+      - "procedure"
+      - "standard operating procedure"
+      - "work instruction"
+      - "WI"
+      - "policy"
+      - "controlled document"
+      - "specification"
+      - "protocol"
+    attributes:
+      - doc_type
+      - status
+      - next_review_date
+      - review_freq_months
+
+  Supplier:
+    label: "Supplier / Vendor"
+    table: suppliers
+    pk: supplier_id
+    synonyms:
+      - "vendor"
+      - "supplier"
+      - "contract manufacturer"
+      - "CMO"
+      - "CRO"
+      - "API manufacturer"
+      - "excipient supplier"
+    attributes:
+      - supplier_type     # API | Excipient | Packaging | CRO | CMO
+      - qualification_status
+      - risk_rating
+
+  Risk:
+    label: "Risk Register Item"
+    table: risk_register
+    pk: risk_id
+    synonyms:
+      - "risk"
+      - "risk item"
+      - "FMEA"
+      - "risk assessment"
+      - "RPN"
+      - "risk priority number"
+      - "quality risk"
+    attributes:
+      - initial_rpn
+      - residual_rpn
+      - risk_category
+      - risk_acceptance_status
+      - icq9_tool_used
+
+  Batch:
+    label: "Manufacturing Batch / Lot"
+    table: batch_records
+    pk: batch_id
+    synonyms:
+      - "batch"
+      - "lot"
+      - "production batch"
+      - "manufactured lot"
+      - "released batch"
+    attributes:
+      - batch_status      # Released | Rejected | On Hold | In Process
+      - manufacturing_line
+      - manufacturing_date
+
+  RegulatoryInspection:
+    label: "Regulatory Authority Inspection"
+    table: regulatory_inspections
+    pk: inspection_id
+    synonyms:
+      - "FDA inspection"
+      - "EMA inspection"
+      - "regulatory inspection"
+      - "GMP inspection"
+      - "PAI"
+      - "pre-approval inspection"
+    attributes:
+      - inspecting_authority
+      - form_483_observation_count
+      - overall_outcome    # NAI | VAI | OAI
+
+# ─────────────────────────────────────────
+# METRICS — all computable KPIs
+# ─────────────────────────────────────────
+metrics:
+
+  # CAPA Metrics
+  capa_on_time_closure_rate:
+    label: "CAPA On-Time Closure Rate"
+    formula: "(CAPAs closed on or before target_close_date / Total closed CAPAs) * 100"
+    unit: "%"
+    benchmark: "> 90%"
+    synonyms: ["CAPA closure rate", "on-time CAPA", "CAPA timeliness"]
+
+  capa_cycle_time:
+    label: "CAPA Cycle Time"
+    formula: "AVG(actual_close_date - initiation_date) in days"
+    unit: "days"
+    benchmark: "Critical < 30d, Major < 60d, Minor < 90d"
+    synonyms: ["CAPA age", "CAPA duration", "time to close CAPA"]
+
+  capa_recurrence_rate:
+    label: "CAPA Recurrence Rate"
+    formula: "(CAPAs with reopen_count > 0 / Total closed CAPAs) * 100"
+    unit: "%"
+    benchmark: "< 5%"
+    synonyms: ["repeat CAPA", "CAPA reopen rate", "CAPA effectiveness failure"]
+
+  capa_effectiveness_rate:
+    label: "CAPA Effectiveness Rate"
+    formula: "(Effectiveness checks with result=Pass / Total effectiveness checks) * 100"
+    unit: "%"
+    benchmark: "> 85%"
+
+  # Deviation Metrics
+  deviation_rate_per_batch:
+    label: "Deviation Rate per 1000 Batches"
+    formula: "(Total deviations / Total batches released) * 1000"
+    unit: "deviations per 1000 batches"
+    synonyms: ["deviation frequency", "deviation rate", "NC rate"]
+
+  critical_deviation_rate:
+    label: "Critical Deviation Rate"
+    formula: "(Critical deviations / Total deviations) * 100"
+    unit: "%"
+    benchmark: "< 2%"
+
+  mean_time_to_investigate:
+    label: "Mean Time to Investigate (MTTI)"
+    formula: "AVG(investigation_close_date - detection_date) in days"
+    unit: "days"
+    benchmark: "< 30 days"
+    synonyms: ["MTTI", "investigation cycle time", "time to close investigation"]
+
+  # Audit Metrics
+  critical_finding_rate:
+    label: "Critical Finding Rate"
+    formula: "(Critical audit findings / Total audit findings) * 100"
+    unit: "%"
+    benchmark: "0% target"
+
+  repeat_finding_rate:
+    label: "Repeat Finding Rate"
+    formula: "(Findings flagged is_repeat=True / Total findings) * 100"
+    unit: "%"
+    benchmark: "< 5%"
+    synonyms: ["repeat observation rate", "recurring finding rate"]
+
+  # Training Metrics
+  training_compliance_rate:
+    label: "Training Compliance Rate"
+    formula: "(Completed training records / Total assigned training records) * 100"
+    unit: "%"
+    benchmark: "> 98% for GMP roles"
+    synonyms: ["training completion rate", "GMP training rate", "training adherence"]
+
+  first_pass_assessment_rate:
+    label: "First-Pass Assessment Rate"
+    formula: "(Records passed on attempt_number=1 / Total assessed records) * 100"
+    unit: "%"
+    benchmark: "> 90%"
+
+  # Quality / Batch Metrics
+  right_first_time_rate:
+    label: "Right First Time (RFT) Rate"
+    formula: "(Batches released without deviation, rework, or retest / Total batches released) * 100"
+    unit: "%"
+    benchmark: "Site-specific, typically > 95%"
+    synonyms: ["RFT", "right first time", "first-time right", "batch RFT"]
+
+  batch_rejection_rate:
+    label: "Batch Rejection Rate"
+    formula: "(Rejected batches / Total batches) * 100"
+    unit: "%"
+    synonyms: ["lot rejection rate", "batch failure rate"]
+
+  # Risk Metrics
+  rpn:
+    label: "Risk Priority Number (RPN)"
+    formula: "Severity × Occurrence × Detectability (each 1-10 per ICH Q9)"
+    unit: "score (1-1000)"
+    threshold_high: 100
+    synonyms: ["risk score", "RPN", "criticality score", "risk priority"]
+
+  risk_reduction_percentage:
+    label: "Risk Reduction %"
+    formula: "(initial_rpn - residual_rpn) / initial_rpn * 100"
+    unit: "%"
+
+  # Supplier Metrics
+  supplier_rejection_rate:
+    label: "Supplier Incoming Rejection Rate"
+    formula: "(Rejected incoming lots / Total incoming lots) * 100"
+    unit: "%"
+    benchmark: "< 1% for critical API suppliers"
+
+  supplier_audit_score:
+    label: "Supplier Audit Score"
+    formula: "100 - [(Critical×10) + (Major×5) + (Minor×2)] normalized to 100"
+    unit: "score 0-100"
+    benchmark: "> 75 for continued approval"
+
+# ─────────────────────────────────────────
+# DIMENSIONS — analytical slicing axes
+# ─────────────────────────────────────────
+dimensions:
+
+  time:
+    hierarchies:
+      - Day → Week → Month → Quarter → Year
+      - Fiscal Quarter (Q1=Jan-Mar, Q2=Apr-Jun, Q3=Jul-Sep, Q4=Oct-Dec)
+    synonyms:
+      "this year": "YEAR = CURRENT_YEAR"
+      "last year": "YEAR = CURRENT_YEAR - 1"
+      "YTD": "year-to-date from Jan 1"
+      "this quarter": "current fiscal quarter"
+      "last quarter": "prior fiscal quarter"
+      "rolling 12 months": "trailing 12-month window from today"
+      "last month": "prior calendar month"
+      "last inspection cycle": "date range of last regulatory inspection"
+
+  site:
+    hierarchy: Site → Country → Region
+    values:
+      - SITE-US-01: "Philadelphia Manufacturing (USA)"
+      - SITE-US-02: "Boston R&D (USA)"
+      - SITE-EU-01: "Dublin Manufacturing (Ireland)"
+      - SITE-EU-02: "Frankfurt QC Lab (Germany)"
+      - SITE-AP-01: "Hyderabad API Manufacturing (India)"
+    synonyms:
+      - "facility"
+      - "plant"
+      - "location"
+      - "manufacturing site"
+
+  department:
+    hierarchy: Team → Department → Business Unit → Site
+    key_departments:
+      - "Quality Assurance (QA)"
+      - "Quality Control (QC)"
+      - "Manufacturing"
+      - "Regulatory Affairs"
+      - "Clinical Operations"
+      - "Supply Chain"
+      - "Engineering"
+      - "Pharmacovigilance"
+
+  severity:
+    values: [Critical, Major, Minor, Observation]
+    ordering: Critical > Major > Minor > Observation
+    synonyms:
+      - "classification"
+      - "level"
+      - "criticality"
+      - "risk level"
+
+  root_cause_category:
+    taxonomy:
+      - Training:     ["lack of training", "inadequate training", "training gap"]
+      - Procedure:    ["SOP gap", "procedure inadequacy", "missing procedure"]
+      - Equipment:    ["equipment failure", "instrument malfunction", "calibration"]
+      - System:       ["IT system", "software issue", "ERP", "LIMS"]
+      - Material:     ["raw material", "incoming material", "API quality"]
+      - Human Error:  ["operator error", "transcription error", "calculation error"]
+      - Communication: ["miscommunication", "handoff failure", "unclear instructions"]
+
+  product:
+    hierarchy: Batch → Product → Dosage Form → Therapeutic Area
+    synonyms:
+      - "drug product"
+      - "drug substance"
+      - "API"
+      - "finished product"
+      - "formulation"
+
+  regulatory_framework:
+    values:
+      - "21 CFR 211"     # US GMP Drug Products
+      - "21 CFR 820"     # US Quality System Regulation
+      - "EU GMP"         # European GMP
+      - "ICH Q9"         # Risk Management
+      - "ICH Q10"        # Pharmaceutical Quality System
+      - "ICH E6(R2)"     # Good Clinical Practice
+    synonyms:
+      - "regulation"
+      - "guideline"
+      - "CFR"
+      - "GMP requirement"
+
+# ─────────────────────────────────────────
+# INTENT TAXONOMY — NLU classification
+# ─────────────────────────────────────────
+intents:
+
+  METRIC_SNAPSHOT:
+    description: "User wants a single KPI value"
+    patterns:
+      - "what is the {metric}"
+      - "what's our {metric}"
+      - "current {metric}"
+      - "tell me the {metric}"
+    example: "What is our current CAPA on-time closure rate?"
+    viz_default: metric_card
+
+  TREND_ANALYSIS:
+    description: "User wants to see how a metric changes over time"
+    patterns:
+      - "show {metric} over time"
+      - "trend of {metric}"
+      - "{metric} month by month"
+      - "is {metric} increasing"
+      - "how has {metric} changed"
+      - "{metric} YoY"
+      - "{metric} history"
+    example: "Show me deviation trend for the last 12 months"
+    viz_default: line_chart
+
+  BREAKDOWN:
+    description: "User wants to slice a metric by a dimension"
+    patterns:
+      - "break down {metric} by {dimension}"
+      - "{metric} by {dimension}"
+      - "{metric} per {dimension}"
+      - "split {metric} by {dimension}"
+      - "{metric} across {dimension}"
+    example: "Break down open CAPAs by department"
+    viz_default: bar_chart
+
+  RANKING:
+    description: "User wants top/bottom performers"
+    patterns:
+      - "top {n} {entity} by {metric}"
+      - "which {entity} has the highest {metric}"
+      - "rank {entity} by {metric}"
+      - "worst {entity} for {metric}"
+      - "best performing {entity}"
+    example: "Which site has the most overdue CAPAs?"
+    viz_default: horizontal_bar
+
+  COMPARISON:
+    description: "User wants to compare two or more values"
+    patterns:
+      - "compare {a} vs {b}"
+      - "difference between {a} and {b}"
+      - "{a} versus {b}"
+      - "how does {a} compare to {b}"
+    example: "Compare training compliance rate between Site US-01 and EU-01"
+    viz_default: grouped_bar_chart
+
+  ANOMALY_DETECTION:
+    description: "User wants to understand an unusual pattern"
+    patterns:
+      - "why did {metric} spike"
+      - "why did {metric} drop"
+      - "unusual {metric}"
+      - "what caused the {metric} increase"
+      - "explain the {metric} in {time_period}"
+    example: "Why did deviations spike in Q3 at Frankfurt?"
+    viz_default: line_chart_annotated
+
+  DRILL_DOWN:
+    description: "User wants more detail behind an aggregate"
+    patterns:
+      - "show me the details behind that"
+      - "what's driving {metric}"
+      - "break that down further"
+      - "show individual {entity}"
+      - "which specific {entity} are contributing"
+    example: "Show me the individual CAPAs behind that overdue count"
+    viz_default: data_table
+
+  OVERDUE_ALERT:
+    description: "User wants to see items past their due date"
+    patterns:
+      - "what is overdue"
+      - "show overdue {entity}"
+      - "past due {entity}"
+      - "expiring {entity}"
+      - "due in next {n} days"
+    example: "Show all training records expiring in the next 30 days"
+    viz_default: table_with_rag
+
+  RISK_ASSESSMENT:
+    description: "User wants to assess or view risk status"
+    patterns:
+      - "high risk {entity}"
+      - "risk distribution"
+      - "top risks"
+      - "RPN greater than {threshold}"
+      - "unacceptable risks"
+    example: "Show all risks with RPN greater than 150"
+    viz_default: risk_matrix
+
+  COMPLIANCE_SCORE:
+    description: "User wants an overall compliance health view"
+    patterns:
+      - "compliance score"
+      - "how are we doing overall"
+      - "quality health"
+      - "compliance dashboard"
+      - "are we inspection ready"
+    example: "Give me an inspection readiness score for Site EU-01"
+    viz_default: radar_chart
+
+  REGULATORY_STATUS:
+    description: "User wants regulatory-specific information"
+    patterns:
+      - "FDA inspection"
+      - "regulatory commitment"
+      - "483 observation"
+      - "warning letter"
+      - "inspection outcome"
+    example: "How many 483 observations have we received in the last 3 FDA inspections?"
+    viz_default: timeline_chart
+
+# ─────────────────────────────────────────
+# FOLLOW-UP RESOLUTION RULES
+# ─────────────────────────────────────────
+followup_resolution:
+
+  dimension_pivot:
+    trigger: "by {new_dimension}"
+    action: "replace group_by dimension; inherit all other context"
+    example: "Now show it by product" → inherit time+metric, swap dimension
+
+  time_change:
+    trigger: "{new_time_expression}"
+    action: "replace time_range; inherit all other context"
+    example: "What about Q4 last year?" → inherit metric+dim, swap time
+
+  metric_swap:
+    trigger: "what about {new_metric}"
+    action: "replace metric; inherit time+dimension context"
+    example: "What about deviation rate instead?" → inherit time+dim, swap metric
+
+  filter_add:
+    trigger: "only for {filter_value}"
+    action: "add filter constraint; inherit all context"
+    example: "Only for critical severity" → add WHERE severity='Critical'
+
+  scope_change:
+    trigger: "{new_entity_scope} / {site} / {department}"
+    action: "update scope filter; inherit metric+time"
+    example: "Now show the same for Site EU-01"
+
+  drill_down:
+    trigger: "show me the details / what's behind that / which ones"
+    action: "switch to detail view; inherit all filters"
+    example: "Show me which CAPAs are causing that overdue count"
+
+# ─────────────────────────────────────────
+# VISUALIZATION RULES
+# ─────────────────────────────────────────
+visualization_rules:
+
+  metric_card:
+    when: "single aggregate value, METRIC_SNAPSHOT intent"
+    components: [big_number, trend_indicator, target_line]
+
+  line_chart:
+    when: "time dimension present, TREND_ANALYSIS intent"
+    features: [moving_average_overlay, threshold_band, anomaly_markers]
+
+  bar_chart:
+    when: "categorical dimension, BREAKDOWN intent, ≤ 15 categories"
+    features: [sort_descending, target_line, value_labels]
+
+  horizontal_bar:
+    when: "RANKING intent, or categorical labels > 8 characters"
+    features: [rank_numbers, benchmark_marker]
+
+  pareto_chart:
+    when: "root cause analysis, BREAKDOWN with count metric"
+    features: [cumulative_percentage_line, 80_percent_marker]
+
+  stacked_bar:
+    when: "part-of-whole, multiple categories summing to total"
+
+  pie_donut:
+    when: "≤ 5 categories, part-of-whole"
+
+  heatmap:
+    when: "two categorical dimensions, matrix view"
+    example: "Deviation category × Department"
+
+  scatter_plot:
+    when: "CORRELATION intent, two continuous metrics"
+    features: [regression_line, quadrant_lines, point_labels]
+
+  risk_matrix:
+    when: "RISK_ASSESSMENT intent, Likelihood × Impact"
+    features: [color_zones (green/yellow/red), bubble_size_for_count]
+
+  radar_chart:
+    when: "COMPLIANCE_SCORE intent, multiple KPIs"
+    features: [target_overlay, benchmark_polygon]
+
+  gauge:
+    when: "single KPI vs. target, status indicator"
+    features: [rag_zones, needle, target_marker]
+
+  data_table:
+    when: "DRILL_DOWN intent, overdue lists, individual records"
+    features: [rag_row_coloring, sortable_columns, exportable]
+
+  timeline:
+    when: "chronological events, inspection history"
+    features: [milestone_markers, annotation_popups]
+
+# ─────────────────────────────────────────
+# COMPLIANCE THRESHOLDS (RAG Status)
+# ─────────────────────────────────────────
+rag_thresholds:
+  training_compliance_rate:
+    green: ">= 98"
+    amber: ">= 90 and < 98"
+    red: "< 90"
+
+  capa_on_time_closure_rate:
+    green: ">= 90"
+    amber: ">= 75 and < 90"
+    red: "< 75"
+
+  critical_finding_rate:
+    green: "= 0"
+    amber: "> 0 and <= 2"
+    red: "> 2"
+
+  repeat_finding_rate:
+    green: "< 5"
+    amber: ">= 5 and < 10"
+    red: ">= 10"
+
+  supplier_rejection_rate:
+    green: "< 1"
+    amber: ">= 1 and < 3"
+    red: ">= 3"
+
+  batch_rejection_rate:
+    green: "< 0.5"
+    amber: ">= 0.5 and < 2"
+    red: ">= 2"

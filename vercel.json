@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "_comment": "Vercel hosts the static frontend (frontend/index.html + assets). Every API path is rewritten to the Railway backend. Replace RAILWAY_API_URL with your Railway service URL after first deploy, or set it via Railway dashboard.",
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/", "destination": "/frontend/index.html" },
+    { "source": "/health", "destination": "https://ask-liquid-data-api-production.up.railway.app/health" },
+    { "source": "/chat", "destination": "https://ask-liquid-data-api-production.up.railway.app/chat" },
+    { "source": "/sessions", "destination": "https://ask-liquid-data-api-production.up.railway.app/sessions" },
+    { "source": "/sessions/:path*", "destination": "https://ask-liquid-data-api-production.up.railway.app/sessions/:path*" },
+    { "source": "/agents/root-cause", "destination": "https://ask-liquid-data-api-production.up.railway.app/agents/root-cause" },
+    { "source": "/agents/auto-mbr", "destination": "https://ask-liquid-data-api-production.up.railway.app/agents/auto-mbr" },
+    { "source": "/agents/auto-mbr/:path*", "destination": "https://ask-liquid-data-api-production.up.railway.app/agents/auto-mbr/:path*" },
+    { "source": "/example-queries", "destination": "https://ask-liquid-data-api-production.up.railway.app/example-queries" },
+    { "source": "/circana-logo.png", "destination": "https://ask-liquid-data-api-production.up.railway.app/circana-logo.png" },
+    { "source": "/circana-favicon.png", "destination": "https://ask-liquid-data-api-production.up.railway.app/circana-favicon.png" },
+    { "source": "/favicon.ico", "destination": "https://ask-liquid-data-api-production.up.railway.app/favicon.ico" },
+    { "source": "/static/:path*", "destination": "https://ask-liquid-data-api-production.up.railway.app/static/:path*" }
+  ]
+}

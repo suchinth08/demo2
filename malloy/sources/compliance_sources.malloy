@@ -1,0 +1,605 @@
+// ============================================================
+// PHARMA COMPLIANCE BI — MALLOY SEMANTIC LAYER
+// All domain sources with business metrics, dimensions, and
+// pre-built analytical views for the chatbot query engine.
+//
+// Backend: DuckDB reading from ../data/csv/*.csv
+// ============================================================
+
+// ─────────────────────────────────────────
+// SOURCE: CAPA Records
+// KPIs: cycle time, on-time closure, recurrence, effectiveness
+// ─────────────────────────────────────────
+source: capa is duckdb.table('../data/csv/capa_records.csv') extend {
+
+  join_one: site       is duckdb.table('../data/csv/sites.csv')       on site_id = site.site_id
+  join_one: department is duckdb.table('../data/csv/departments.csv') on department_id = department.dept_id
+  join_one: owner      is duckdb.table('../data/csv/employees.csv')   on owner_employee_id = owner.employee_id
+
+  // ── Measures ──────────────────────────
+  measure:
+    total_capas            is count()
+    open_capas             is count() { where: status != 'Closed' }
+    overdue_capas          is count() { where: status = 'Overdue' }
+    critical_capas         is count() { where: severity = 'Critical' }
+    major_capas            is count() { where: severity = 'Major' }
+    minor_capas            is count() { where: severity = 'Minor' }
+
+    closed_capas           is count() { where: status = 'Closed' }
+    on_time_closures       is count() { where: actual_close_date != null and actual_close_date <= target_close_date }
+
+    on_time_closure_rate_pct is
+      round(100.0 * on_time_closures / nullif(closed_capas, 0), 1)
+
+    avg_cycle_days is
+      avg(datediff('day', initiation_date,
+        case when actual_close_date != null then actual_close_date
+             else current_date() end))
+
+    recurrence_count is
+      count() { where: reopen_count > 0 }
+
+    recurrence_rate_pct is
+      round(100.0 * recurrence_count / nullif(closed_capas, 0), 1)
+
+    effectiveness_pass_count is
+      count() { where: effectiveness_check_result = 'Pass' }
+
+    effectiveness_rate_pct is
+      round(100.0 * effectiveness_pass_count /
+        nullif(count() { where: effectiveness_check_result != null }, 0), 1)
+
+    overdue_rate_pct is
+      round(100.0 * overdue_capas / nullif(open_capas + overdue_capas, 0), 1)
+
+  // ── Dimensions ───────────────────────
+  dimension:
+    age_days is datediff('day', initiation_date, current_date())
+
+    age_bucket is
+      pick '0–30 days'  when age_days <= 30
+      pick '31–60 days' when age_days <= 60
+      pick '61–90 days' when age_days <= 90
+      else '>90 days'
+
+    is_overdue is actual_close_date is null and target_close_date < current_date()
+
+    fiscal_quarter is
+      pick 'Q1' when month(initiation_date) <= 3
+      pick 'Q2' when month(initiation_date) <= 6
+      pick 'Q3' when month(initiation_date) <= 9
+      else 'Q4'
+
+  // ── Pre-built Analytical Views ────────
+  view: by_site is {
+    group_by: site.site_name
+    aggregate: total_capas, open_capas, overdue_capas,
+               on_time_closure_rate_pct, avg_cycle_days
+    order_by: overdue_capas desc
+  }
+
+  view: by_department is {
+    group_by: department.dept_name, site.site_name
+    aggregate: total_capas, open_capas, overdue_capas, on_time_closure_rate_pct
+    order_by: total_capas desc
+  }
+
+  view: by_severity is {
+    group_by: severity
+    aggregate: total_capas, open_capas, on_time_closure_rate_pct, avg_cycle_days
+  }
+
+  view: by_root_cause is {
+    group_by: root_cause_category
+    aggregate: total_capas
+    order_by: total_capas desc
+  }
+
+  view: trend_monthly is {
+    group_by: initiation_date.month
+    aggregate: total_capas, open_capas, overdue_capas
+    order_by: initiation_date.month
+  }
+
+  view: overdue_list is {
+    where: is_overdue = true
+    select:
+      capa_id, severity, root_cause_category, source_type,
+      site.site_name, department.dept_name,
+      initiation_date, target_close_date, age_days
+    order_by: age_days desc
+    limit: 100
+  }
+
+  view: summary_kpi is {
+    aggregate:
+      total_capas, open_capas, overdue_capas, critical_capas,
+      on_time_closure_rate_pct, avg_cycle_days,
+      recurrence_rate_pct, effectiveness_rate_pct
+  }
+}
+
+// ─────────────────────────────────────────
+// SOURCE: Deviation Records
+// KPIs: deviation rate, severity mix, investigation cycle time
+// ─────────────────────────────────────────
+source: deviations is duckdb.table('../data/csv/deviation_records.csv') extend {
+
+  join_one: site       is duckdb.table('../data/csv/sites.csv')       on site_id = site.site_id
+  join_one: department is duckdb.table('../data/csv/departments.csv') on department_id = department.dept_id
+  join_one: product    is duckdb.table('../data/csv/products.csv')    on product_id = product.product_id
+  join_one: batch      is duckdb.table('../data/csv/batch_records.csv') on batch_id = batch.batch_id
+  join_one: capa_link  is duckdb.table('../data/csv/capa_records.csv') on capa_id = capa_link.capa_id
+
+  measure:
+    total_deviations   is count()
+    critical_devs      is count() { where: severity = 'Critical' }
+    major_devs         is count() { where: severity = 'Major' }
+    minor_devs         is count() { where: severity = 'Minor' }
+    with_batch_impact  is count() { where: batch_disposition_impact != 'None' }
+    with_capa          is count() { where: capa_id != null }
+    unplanned_devs     is count() { where: deviation_type = 'Unplanned' }
+
+    critical_rate_pct is
+      round(100.0 * critical_devs / nullif(total_deviations, 0), 1)
+
+    capa_trigger_rate_pct is
+      round(100.0 * with_capa / nullif(total_deviations, 0), 1)
+
+    batch_impact_rate_pct is
+      round(100.0 * with_batch_impact / nullif(total_deviations, 0), 1)
+
+    avg_investigation_days is
+      avg(datediff('day', detection_date, investigation_close_dt))
+
+  dimension:
+    quarter is
+      pick 'Q1' when month(detection_date) <= 3
+      pick 'Q2' when month(detection_date) <= 6
+      pick 'Q3' when month(detection_date) <= 9
+      else 'Q4'
+
+  view: by_site is {
+    group_by: site.site_name
+    aggregate: total_deviations, critical_devs, major_devs,
+               critical_rate_pct, batch_impact_rate_pct
+    order_by: total_deviations desc
+  }
+
+  view: by_category is {
+    group_by: deviation_category
+    aggregate: total_deviations, critical_devs
+    order_by: total_deviations desc
+  }
+
+  view: pareto_root_cause is {
+    group_by: root_cause_category
+    aggregate: total_deviations
+    order_by: total_deviations desc
+    limit: 10
+  }
+
+  view: trend_monthly is {
+    group_by: detection_date.month
+    aggregate: total_deviations, critical_devs, major_devs
+    order_by: detection_date.month
+  }
+
+  view: by_product is {
+    group_by: product.product_name, product.dosage_form
+    aggregate: total_deviations, critical_rate_pct, batch_impact_rate_pct
+    order_by: total_deviations desc
+  }
+
+  view: by_shift is {
+    group_by: shift
+    aggregate: total_deviations, critical_devs
+  }
+
+  view: batch_impact_list is {
+    where: batch_disposition_impact != 'None'
+    select:
+      deviation_id, severity, deviation_category,
+      batch_disposition_impact, site.site_name,
+      product.product_name, detection_date
+    order_by: detection_date desc
+  }
+}
+
+// ─────────────────────────────────────────
+// SOURCE: Audit Findings
+// KPIs: finding classification, repeat rate, response timeliness
+// ─────────────────────────────────────────
+source: audit_findings is duckdb.table('../data/csv/audit_findings.csv') extend {
+
+  join_one: audit is duckdb.table('../data/csv/audits.csv') on audit_id = audit.audit_id
+  join_one: site  is duckdb.table('../data/csv/sites.csv')  on audit.site_id = site.site_id
+
+  measure:
+    total_findings      is count()
+    critical_findings   is count() { where: classification = 'Critical' }
+    major_findings      is count() { where: classification = 'Major' }
+    minor_findings      is count() { where: classification = 'Minor' }
+    observations        is count() { where: classification = 'Observation' }
+    repeat_findings     is count() { where: is_repeat_finding = true }
+
+    critical_rate_pct is
+      round(100.0 * critical_findings / nullif(total_findings, 0), 1)
+
+    repeat_rate_pct is
+      round(100.0 * repeat_findings / nullif(total_findings, 0), 1)
+
+    accepted_responses is
+      count() { where: response_status = 'Accepted' }
+
+    response_acceptance_rate_pct is
+      round(100.0 * accepted_responses / nullif(total_findings, 0), 1)
+
+  view: by_site is {
+    group_by: site.site_name
+    aggregate: total_findings, critical_findings, major_findings,
+               critical_rate_pct, repeat_rate_pct
+    order_by: critical_findings desc
+  }
+
+  view: by_classification is {
+    group_by: classification
+    aggregate: total_findings, repeat_findings, repeat_rate_pct
+    order_by: total_findings desc
+  }
+
+  view: by_process_area is {
+    group_by: process_area
+    aggregate: total_findings, critical_findings
+    order_by: total_findings desc
+    limit: 10
+  }
+
+  view: by_regulatory_ref is {
+    group_by: regulatory_ref
+    aggregate: total_findings
+    order_by: total_findings desc
+    limit: 15
+  }
+
+  view: repeat_findings_list is {
+    where: is_repeat_finding = true
+    select:
+      finding_id, classification, process_area, regulatory_ref,
+      site.site_name, audit.audit_start_date, response_status
+    order_by: audit.audit_start_date desc
+  }
+}
+
+// ─────────────────────────────────────────
+// SOURCE: Training Records
+// KPIs: compliance rate, overdue, first-pass rate
+// ─────────────────────────────────────────
+source: training is duckdb.table('../data/csv/training_records.csv') extend {
+
+  join_one: employee   is duckdb.table('../data/csv/employees.csv')   on employee_id = employee.employee_id
+  join_one: department is duckdb.table('../data/csv/departments.csv') on employee.department_id = department.dept_id
+  join_one: site       is duckdb.table('../data/csv/sites.csv')       on employee.site_id = site.site_id
+  join_one: document   is duckdb.table('../data/csv/documents.csv')   on doc_id = document.doc_id
+
+  measure:
+    total_assigned   is count()
+    completed        is count() { where: status = 'Completed' }
+    overdue          is count() { where: status = 'Overdue' }
+    in_progress      is count() { where: status = 'In Progress' }
+
+    compliance_rate_pct is
+      round(100.0 * completed / nullif(total_assigned, 0), 1)
+
+    overdue_rate_pct is
+      round(100.0 * overdue / nullif(total_assigned, 0), 1)
+
+    first_pass_rate_pct is
+      round(100.0 *
+        count() { where: attempt_number = 1 and assessment_passed = true } /
+        nullif(count() { where: assessment_score != null }, 0), 1)
+
+    avg_assessment_score is avg(assessment_score)
+
+  view: by_site is {
+    group_by: site.site_name
+    aggregate: total_assigned, completed, overdue,
+               compliance_rate_pct, overdue_rate_pct
+    order_by: compliance_rate_pct asc
+  }
+
+  view: by_department is {
+    group_by: department.dept_name, site.site_name
+    aggregate: total_assigned, compliance_rate_pct, overdue
+    order_by: compliance_rate_pct asc
+  }
+
+  view: by_training_type is {
+    group_by: training_type
+    aggregate: total_assigned, compliance_rate_pct, first_pass_rate_pct
+  }
+
+  view: overdue_list is {
+    where: status = 'Overdue'
+    select:
+      employee.employee_number,
+      employee.first_name, employee.last_name,
+      employee.job_title,
+      department.dept_name, site.site_name,
+      document.doc_title, due_date,
+      datediff('day', due_date, current_date()) as days_overdue
+    order_by: days_overdue desc
+    limit: 100
+  }
+
+  view: expiring_30_days is {
+    where: status != 'Completed' and due_date >= current_date()
+           and due_date <= date_add('day', 30, current_date())
+    select:
+      employee.first_name, employee.last_name,
+      site.site_name, department.dept_name,
+      document.doc_title, due_date
+    order_by: due_date asc
+  }
+
+  view: trend_monthly is {
+    group_by: assigned_date.month
+    aggregate: total_assigned, completed, overdue, compliance_rate_pct
+    order_by: assigned_date.month
+  }
+}
+
+// ─────────────────────────────────────────
+// SOURCE: Batch Records
+// KPIs: batch RFT, rejection rate, disposition cycle time
+// ─────────────────────────────────────────
+source: batches is duckdb.table('../data/csv/batch_records.csv') extend {
+
+  join_one: product is duckdb.table('../data/csv/products.csv') on product_id = product.product_id
+  join_one: site    is duckdb.table('../data/csv/sites.csv')    on site_id = site.site_id
+
+  measure:
+    total_batches   is count()
+    released        is count() { where: batch_status = 'Released' }
+    rejected        is count() { where: batch_status = 'Rejected' }
+    on_hold         is count() { where: batch_status = 'On Hold' }
+
+    rejection_rate_pct is
+      round(100.0 * rejected / nullif(total_batches, 0), 2)
+
+    release_rate_pct is
+      round(100.0 * released / nullif(total_batches, 0), 1)
+
+    avg_disposition_days is
+      avg(datediff('day', manufacturing_date, disposition_date))
+
+  view: by_site is {
+    group_by: site.site_name
+    aggregate: total_batches, released, rejected, rejection_rate_pct
+    order_by: rejection_rate_pct desc
+  }
+
+  view: by_product is {
+    group_by: product.product_name
+    aggregate: total_batches, rejection_rate_pct
+    order_by: rejection_rate_pct desc
+  }
+
+  view: trend_quarterly is {
+    group_by: manufacturing_date.quarter
+    aggregate: total_batches, rejected, rejection_rate_pct, release_rate_pct
+    order_by: manufacturing_date.quarter
+  }
+
+  view: rejected_batches is {
+    where: batch_status = 'Rejected'
+    select:
+      batch_id, batch_number, product.product_name,
+      site.site_name, manufacturing_line,
+      manufacturing_date, batch_status
+    order_by: manufacturing_date desc
+  }
+}
+
+// ─────────────────────────────────────────
+// SOURCE: Supplier Incoming Inspections
+// KPIs: rejection rate, CoA compliance, supplier scorecard
+// ─────────────────────────────────────────
+source: supplier_quality is duckdb.table('../data/csv/supplier_inspections.csv') extend {
+
+  join_one: supplier is duckdb.table('../data/csv/suppliers.csv') on supplier_id = supplier.supplier_id
+
+  measure:
+    total_lots         is count()
+    passed_lots        is count() { where: inspection_result = 'Pass' }
+    failed_lots        is count() { where: inspection_result = 'Fail' }
+    conditional_lots   is count() { where: inspection_result = 'Conditional Release' }
+
+    rejection_rate_pct is
+      round(100.0 * failed_lots / nullif(total_lots, 0), 2)
+
+    coa_compliance_rate_pct is
+      round(100.0 * count() { where: coa_compliant = true } / nullif(total_lots, 0), 1)
+
+  view: supplier_scorecard is {
+    group_by: supplier.supplier_name, supplier.supplier_type,
+              supplier.risk_rating, supplier.qualification_status
+    aggregate: total_lots, rejection_rate_pct, coa_compliance_rate_pct, failed_lots
+    order_by: rejection_rate_pct desc
+  }
+
+  view: rejection_trend is {
+    group_by: supplier.supplier_name, receipt_date.month
+    aggregate: total_lots, failed_lots, rejection_rate_pct
+    order_by: receipt_date.month
+  }
+
+  view: rejection_reasons is {
+    where: inspection_result = 'Fail'
+    group_by: rejection_reason, supplier.supplier_name
+    aggregate: failed_lots
+    order_by: failed_lots desc
+  }
+}
+
+// ─────────────────────────────────────────
+// SOURCE: Risk Register
+// KPIs: RPN distribution, risk reduction, unacceptable risks
+// ─────────────────────────────────────────
+source: risk is duckdb.table('../data/csv/risk_register.csv') extend {
+
+  join_one: site    is duckdb.table('../data/csv/sites.csv')     on site_id = site.site_id
+  join_one: product is duckdb.table('../data/csv/products.csv')  on product_id = product.product_id
+
+  measure:
+    total_risks          is count()
+    active_risks         is count() { where: status = 'Active' }
+    high_rpn_risks       is count() { where: residual_rpn > 100 }
+    unacceptable_risks   is count() { where: risk_acceptance_status = 'Unacceptable' }
+    alarp_risks          is count() { where: risk_acceptance_status = 'ALARP' }
+
+    avg_initial_rpn   is avg(initial_rpn)
+    avg_residual_rpn  is avg(residual_rpn)
+
+    avg_risk_reduction_pct is
+      round(100.0 * avg(initial_rpn - residual_rpn) / nullif(avg(initial_rpn), 0), 1)
+
+    overdue_review_count is
+      count() { where: next_review_date < current_date() and status = 'Active' }
+
+  view: risk_distribution is {
+    group_by: risk_category
+    aggregate: total_risks, high_rpn_risks, avg_residual_rpn
+    order_by: high_rpn_risks desc
+  }
+
+  view: risk_matrix_data is {
+    group_by: residual_severity, residual_occurrence
+    aggregate: total_risks, avg_residual_rpn
+  }
+
+  view: top_risks is {
+    where: status = 'Active'
+    select:
+      risk_id, risk_title, risk_category, business_process,
+      site.site_name, initial_rpn, residual_rpn,
+      risk_acceptance_status, next_review_date
+    order_by: residual_rpn desc
+    limit: 20
+  }
+
+  view: by_site is {
+    group_by: site.site_name
+    aggregate: active_risks, high_rpn_risks, unacceptable_risks,
+               avg_residual_rpn, overdue_review_count
+    order_by: unacceptable_risks desc
+  }
+}
+
+// ─────────────────────────────────────────
+// SOURCE: Change Requests
+// KPIs: cycle time, emergency rate, regulatory impact
+// ─────────────────────────────────────────
+source: changes is duckdb.table('../data/csv/change_requests.csv') extend {
+
+  join_one: site       is duckdb.table('../data/csv/sites.csv')       on site_id = site.site_id
+  join_one: department is duckdb.table('../data/csv/departments.csv') on initiating_dept_id = department.dept_id
+
+  measure:
+    total_changes      is count()
+    closed_changes     is count() { where: status = 'Closed' }
+    open_changes       is count() { where: status != 'Closed' and status != 'Cancelled' }
+    emergency_changes  is count() { where: change_type = 'Emergency' }
+    regulatory_changes is count() { where: regulatory_impact = true }
+
+    emergency_rate_pct is
+      round(100.0 * emergency_changes / nullif(total_changes, 0), 1)
+
+    avg_cycle_days is
+      avg(datediff('day', initiation_date,
+        case when close_date != null then close_date
+             else current_date() end))
+
+  view: by_site is {
+    group_by: site.site_name
+    aggregate: total_changes, open_changes, emergency_rate_pct, avg_cycle_days
+    order_by: total_changes desc
+  }
+
+  view: by_category is {
+    group_by: change_category, change_type
+    aggregate: total_changes, avg_cycle_days
+    order_by: total_changes desc
+  }
+
+  view: cycle_time_by_type is {
+    group_by: change_type
+    aggregate: total_changes, avg_cycle_days
+    order_by: avg_cycle_days desc
+  }
+}
+
+// ─────────────────────────────────────────
+// SOURCE: Regulatory Inspections
+// KPIs: 483 observations trend, commitment on-time rate
+// ─────────────────────────────────────────
+source: regulatory is duckdb.table('../data/csv/regulatory_inspections.csv') extend {
+
+  join_one: site is duckdb.table('../data/csv/sites.csv') on site_id = site.site_id
+
+  measure:
+    total_inspections   is count()
+    with_483            is count() { where: form_483_issued = true }
+    total_observations  is sum(form_483_observation_count)
+    warning_letters     is count() { where: warning_letter_issued = true }
+    nai_outcomes        is count() { where: overall_outcome = 'NAI' }
+    vai_outcomes        is count() { where: overall_outcome = 'VAI' }
+    oai_outcomes        is count() { where: overall_outcome = 'OAI' }
+
+    avg_observations_per_insp is
+      round(avg(form_483_observation_count), 1)
+
+  view: inspection_history is {
+    group_by: site.site_name, inspecting_authority, inspection_start_date.year
+    aggregate: total_inspections, with_483, total_observations, warning_letters
+    order_by: inspection_start_date.year desc
+  }
+
+  view: outcome_distribution is {
+    group_by: overall_outcome, inspecting_authority
+    aggregate: total_inspections
+  }
+
+  view: observation_trend is {
+    group_by: site.site_name, inspection_start_date.year
+    aggregate: total_observations, avg_observations_per_insp
+    order_by: inspection_start_date.year
+  }
+}
+
+// ─────────────────────────────────────────
+// INTEGRATED: COMPLIANCE HEALTH DASHBOARD
+// Cross-domain KPI roll-up for executive view
+// ─────────────────────────────────────────
+source: compliance_health is duckdb.table('../data/csv/capa_records.csv') extend {
+  // This is a convenience source that joins the key tables
+  // for a single-query executive KPI view
+
+  join_one: site is duckdb.table('../data/csv/sites.csv') on site_id = site.site_id
+
+  measure:
+    open_capas       is count() { where: status != 'Closed' }
+    overdue_capas    is count() { where: status = 'Overdue' }
+    critical_open    is count() { where: severity = 'Critical' and status != 'Closed' }
+
+    capa_on_time_pct is
+      round(100.0 *
+        count() { where: actual_close_date != null and actual_close_date <= target_close_date } /
+        nullif(count() { where: status = 'Closed' }, 0), 1)
+
+  view: site_compliance_summary is {
+    group_by: site.site_name, site.country
+    aggregate: open_capas, overdue_capas, critical_open, capa_on_time_pct
+    order_by: overdue_capas desc
+  }
+}

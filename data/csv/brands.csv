@@ -1,0 +1,50 @@
+brand_id,brand_name,manufacturer_id,premium_tier,primary_category_id,share_trend
+BRD-001,Doritos,MFR-001,Mainstream,CAT-001,flat
+BRD-002,Tostitos,MFR-001,Mainstream,CAT-001,up
+BRD-003,Lay's,MFR-001,Mainstream,CAT-002,flat
+BRD-004,Pringles,MFR-005,Mainstream,CAT-002,down
+BRD-005,Ruffles,MFR-001,Mainstream,CAT-002,up
+BRD-006,Private Label Chips,MFR-030,Value,CAT-001,strong_up
+BRD-007,Oreo,MFR-004,Mainstream,CAT-003,up
+BRD-008,Chips Ahoy!,MFR-004,Mainstream,CAT-003,flat
+BRD-009,Cheerios,MFR-006,Mainstream,CAT-004,flat
+BRD-010,Frosted Flakes,MFR-005,Mainstream,CAT-004,down
+BRD-011,Honey Bunches of Oats,MFR-007,Mainstream,CAT-004,up
+BRD-012,Coca-Cola,MFR-002,Mainstream,CAT-005,up
+BRD-013,Pepsi,MFR-001,Mainstream,CAT-005,down
+BRD-014,Dr Pepper,MFR-003,Mainstream,CAT-005,strong_up
+BRD-015,Diet Coke,MFR-002,Mainstream,CAT-006,down
+BRD-016,Coke Zero Sugar,MFR-002,Mainstream,CAT-006,strong_up
+BRD-017,Diet Pepsi,MFR-001,Mainstream,CAT-006,down
+BRD-018,LaCroix,MFR-009,Premium,CAT-007,down
+BRD-019,Bubly,MFR-001,Mainstream,CAT-007,up
+BRD-020,Liquid Death,MFR-013,Premium,CAT-007,strong_up
+BRD-021,Red Bull,MFR-012,Premium,CAT-008,flat
+BRD-022,Monster,MFR-011,Mainstream,CAT-008,flat
+BRD-023,Celsius,MFR-010,Premium,CAT-008,strong_up
+BRD-024,CeraVe,MFR-014,Mainstream,CAT-009,strong_up
+BRD-025,Cetaphil,MFR-014,Mainstream,CAT-009,flat
+BRD-026,Olay,MFR-015,Mainstream,CAT-010,down
+BRD-027,Neutrogena,MFR-008,Mainstream,CAT-010,flat
+BRD-028,The Ordinary,MFR-017,Premium,CAT-010,strong_up
+BRD-029,Maybelline,MFR-014,Mainstream,CAT-011,flat
+BRD-030,L'Oreal Paris,MFR-014,Mainstream,CAT-011,up
+BRD-031,Crest,MFR-015,Mainstream,CAT-012,flat
+BRD-032,Colgate,MFR-018,Mainstream,CAT-012,up
+BRD-033,Sensodyne,MFR-016,Premium,CAT-012,up
+BRD-034,Dove,MFR-016,Mainstream,CAT-013,flat
+BRD-035,Old Spice,MFR-015,Mainstream,CAT-013,up
+BRD-036,iPhone,MFR-019,Premium,CAT-014,up
+BRD-037,Galaxy,MFR-020,Premium,CAT-014,flat
+BRD-038,AirPods,MFR-019,Premium,CAT-015,up
+BRD-039,Sony WH,MFR-021,Premium,CAT-015,flat
+BRD-040,Bose QC,MFR-023,Premium,CAT-015,down
+BRD-041,Samsung TV,MFR-020,Premium,CAT-016,flat
+BRD-042,LG OLED,MFR-022,Premium,CAT-016,up
+BRD-043,Sony Bravia,MFR-021,Premium,CAT-016,down
+BRD-044,LEGO,MFR-024,Premium,CAT-017,strong_up
+BRD-045,Barbie,MFR-025,Mainstream,CAT-018,strong_up
+BRD-046,Keurig K-Series,MFR-027,Mainstream,CAT-019,flat
+BRD-047,Ninja CFP,MFR-029,Mainstream,CAT-019,strong_up
+BRD-048,Roomba,MFR-028,Premium,CAT-020,down
+BRD-049,Shark IQ,MFR-029,Premium,CAT-020,strong_up

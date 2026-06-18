@@ -1,0 +1,21 @@
+category_id,department,category_name,sub_category,total_market_dollars_mm
+CAT-001,CPG-Food,Salty Snacks,Tortilla Chips,6200
+CAT-002,CPG-Food,Salty Snacks,Potato Chips,7800
+CAT-003,CPG-Food,Cookies,Sandwich Cookies,4100
+CAT-004,CPG-Food,Cereal,Ready-to-Eat,10200
+CAT-005,CPG-Beverage,Carbonated Beverages,Regular CSDs,23400
+CAT-006,CPG-Beverage,Carbonated Beverages,Diet CSDs,11700
+CAT-007,CPG-Beverage,Sparkling Water,Flavored,3900
+CAT-008,CPG-Beverage,Energy Drinks,Performance,8700
+CAT-009,CPG-Beauty,Skincare,Facial Cleanser,2900
+CAT-010,CPG-Beauty,Skincare,Moisturizer,5800
+CAT-011,CPG-Beauty,Color Cosmetics,Foundation,2400
+CAT-012,CPG-HBA,Oral Care,Toothpaste,3200
+CAT-013,CPG-HBA,Personal Wash,Body Wash,2700
+CAT-014,GM-Electronics,Smartphones,Premium,88500
+CAT-015,GM-Electronics,Headphones,Wireless,9400
+CAT-016,GM-Electronics,Televisions,OLED/QLED,24300
+CAT-017,GM-Toys,Building Sets,Plastic Bricks,4100
+CAT-018,GM-Toys,Dolls,Fashion Dolls,2200
+CAT-019,GM-Home,Small Appliances,Coffee Makers,3700
+CAT-020,GM-Home,Vacuums,Robotic,2900

@@ -1,0 +1,277 @@
+# =============================================================================
+# Circana-style Market Insights Ontology  (CPG + GM)
+# =============================================================================
+# Domain semantic layer for the "Ask Liquid Data" conversational BI surface.
+# Maps the natural-language vocabulary an insights analyst uses
+# ("share", "velocity", "ACV", "distribution gap", "promo lift")
+# onto the physical measures and dimensions in the data layer.
+# =============================================================================
+
+version: 1.0
+domain: market_insights
+
+# -----------------------------------------------------------------------------
+# DIMENSIONS
+# -----------------------------------------------------------------------------
+dimensions:
+
+  time:
+    week_ending:        { type: date,   grain: week   }
+    period_month:       { type: date,   grain: month  }
+    fiscal_quarter:     { type: derived, expression: "DATE_TRUNC('quarter', week_ending)" }
+    fiscal_year:        { type: derived, expression: "YEAR(week_ending)" }
+    relative_time_synonyms:
+      L4W:   "last 4 weeks"
+      L13W:  "last quarter / last 13 weeks"
+      L26W:  "last half year"
+      L52W:  "last 52 weeks / rolling year"
+      YTD:   "year to date"
+      YA:    "year ago"
+
+  product:
+    sku_id:             { table: products,      key: true }
+    sku_description:    { table: products }
+    brand_id:           { table: products,      fk: brands.brand_id }
+    brand_name:         { table: brands }
+    manufacturer_id:    { table: brands,        fk: manufacturers.manufacturer_id }
+    manufacturer_name:  { table: manufacturers }
+    is_private_label:   { table: manufacturers }
+    premium_tier:       { table: brands, values: [Value, Mainstream, Premium] }
+    pack_size:          { table: products }
+    launch_date:        { table: products }
+
+  category:
+    category_id:        { table: products,      fk: categories.category_id }
+    category_name:      { table: categories }
+    sub_category:       { table: categories }
+    department:         { table: categories,    values: [CPG-Food, CPG-Beverage, CPG-Beauty, CPG-HBA, GM-Electronics, GM-Toys, GM-Home] }
+
+  retailer:
+    retailer_id:        { table: pos_weekly,    fk: retailers.retailer_id }
+    retailer_name:      { table: retailers }
+    channel:            { table: retailers,     values: [Mass, Grocery, Club, eCommerce, Drug, Beauty Specialty, Electronics, Home Improvement] }
+    region:             { table: retailers }
+
+  promo:
+    on_promo:           { table: pos_weekly,    type: boolean }
+    promo_type:         { table: pos_weekly,    values: [None, TPR, Feature, Display, "Feature & Display"] }
+    discount_pct:       { table: pos_weekly,    type: numeric }
+
+# -----------------------------------------------------------------------------
+# MEASURES
+# -----------------------------------------------------------------------------
+measures:
+
+  # ── Sales fundamentals ───────────────────────────────────────────────────
+  dollars:
+    table: pos_weekly
+    expression: "SUM(dollars)"
+    label: "Dollar Sales"
+    synonyms: [revenue, sales, "$ sales", dollars sold, retail dollars]
+
+  units:
+    table: pos_weekly
+    expression: "SUM(units)"
+    label: "Unit Sales"
+    synonyms: [units sold, volume, equivalized units]
+
+  base_dollars:
+    table: pos_weekly
+    expression: "SUM(base_dollars)"
+    label: "Base (Non-Promoted) Dollars"
+
+  base_units:
+    table: pos_weekly
+    expression: "SUM(base_units)"
+    label: "Base (Non-Promoted) Units"
+
+  incremental_dollars:
+    table: pos_weekly
+    expression: "SUM(incremental_dollars)"
+    label: "Incremental Dollars from Promotion"
+    synonyms: [promo lift dollars, incremental sales]
+
+  # ── Share ─────────────────────────────────────────────────────────────────
+  dollar_share_pct:
+    expression: "100.0 * SUM(dollars) / SUM(SUM(dollars)) OVER (PARTITION BY <scope>)"
+    label: "Dollar Share %"
+    synonyms: [share, "$ share", value share, market share]
+    notes: "Scope is typically category × time-bucket"
+
+  unit_share_pct:
+    expression: "100.0 * SUM(units) / SUM(SUM(units)) OVER (PARTITION BY <scope>)"
+    label: "Unit Share %"
+    synonyms: ["volume share", "unit share"]
+
+  share_point_change:
+    expression: "current_share_pct - prior_share_pct"
+    label: "Share Point Change vs Prior Period"
+    synonyms: [share delta, share movement, share gain, share loss]
+
+  # ── Velocity / Rate of Sale ───────────────────────────────────────────────
+  velocity_dollars_per_store_per_week:
+    expression: "SUM(dollars) / NULLIF(SUM(stores_selling), 0)"
+    label: "$ per Store per Week (Velocity)"
+    synonyms: [velocity, "rate of sale", ROS, "dollars per store per week", $/STR/WK]
+
+  velocity_units_per_store_per_week:
+    expression: "SUM(units) / NULLIF(SUM(stores_selling), 0)"
+    label: "Units per Store per Week"
+    synonyms: ["unit velocity", "units per store per week"]
+
+  # ── Distribution ──────────────────────────────────────────────────────────
+  acv_weighted_distribution_pct:
+    expression: "AVG(acv_weighted_distribution_pct)"
+    label: "% ACV Weighted Distribution"
+    synonyms: [ACV, distribution, "% ACV", "% PCV"]
+
+  stores_selling:
+    expression: "SUM(stores_selling)"
+    label: "Stores Selling"
+
+  distribution_gap_pct:
+    expression: "100 - AVG(acv_weighted_distribution_pct)"
+    label: "Distribution Gap (100 - ACV %)"
+    synonyms: ["whitespace", "untapped distribution"]
+
+  # ── Pricing ───────────────────────────────────────────────────────────────
+  avg_price:
+    expression: "AVG(avg_price)"
+    label: "Average Retail Price"
+    synonyms: [price, "$ per unit"]
+
+  base_price:
+    expression: "AVG(base_price)"
+    label: "Base (Non-Promoted) Price"
+
+  price_index_vs_category:
+    expression: "AVG(avg_price) / AVG(category_avg_price) * 100"
+    label: "Price Index vs Category (100 = parity)"
+    synonyms: [price gap, "price vs competitor"]
+
+  # ── Promotion / Lift ──────────────────────────────────────────────────────
+  promo_lift_pct:
+    expression: "100.0 * (SUM(units) - SUM(base_units)) / NULLIF(SUM(base_units), 0)"
+    label: "Promotional Lift %"
+    synonyms: [lift, "promo lift", uplift, incremental %]
+
+  pct_volume_on_promo:
+    expression: "100.0 * SUM(CASE WHEN on_promo THEN units END) / NULLIF(SUM(units), 0)"
+    label: "% Volume Sold on Promotion"
+    synonyms: ["promo dependency", "% on deal"]
+
+  promo_roi:
+    expression: "SUM(incremental_dollars) / NULLIF(SUM(CASE WHEN on_promo THEN dollars*discount_pct/100 END), 0)"
+    label: "Promo ROI ($ incremental / $ discount)"
+    synonyms: [ROI, "promo efficiency"]
+
+  # ── Panel / Household ─────────────────────────────────────────────────────
+  hh_penetration_pct:
+    table: panel_household
+    expression: "AVG(hh_penetration_pct)"
+    label: "Household Penetration %"
+    synonyms: [penetration, "% HH buying", reach]
+
+  buyers_mm:
+    table: panel_household
+    expression: "AVG(buyers_mm)"
+    label: "Buyers (Millions)"
+
+  trips_per_buyer:
+    table: panel_household
+    expression: "AVG(trips_per_buyer)"
+    label: "Trips per Buyer (Frequency)"
+    synonyms: [frequency, repeat purchase]
+
+  dollars_per_trip:
+    table: panel_household
+    expression: "AVG(dollars_per_trip)"
+    label: "$ per Trip (Basket)"
+    synonyms: ["basket size", "spend per trip"]
+
+  repeat_rate_pct:
+    table: panel_household
+    expression: "AVG(repeat_rate_pct)"
+    label: "Repeat Purchase Rate %"
+    synonyms: [loyalty, repeat]
+
+# -----------------------------------------------------------------------------
+# DOMAINS — top-level functional groupings the chatbot routes by
+# -----------------------------------------------------------------------------
+domains:
+  share:
+    description: "Market share analytics: dollar/unit share, gainers, losers, share-point change"
+    keywords: [share, share point, gaining, losing, leader, leadership]
+
+  velocity:
+    description: "Rate-of-sale, store-level productivity"
+    keywords: [velocity, "rate of sale", ROS, "per store per week"]
+
+  distribution:
+    description: "ACV-weighted distribution, distribution gap, store count"
+    keywords: [distribution, ACV, "% ACV", PCV, stores selling, distribution gap, whitespace]
+
+  pricing:
+    description: "Price levels, price gaps, price-pack architecture"
+    keywords: [price, pricing, price gap, "vs competitor", price index]
+
+  promotion:
+    description: "Promo lift, ROI, % on deal, feature/display effectiveness"
+    keywords: [promo, promotion, lift, TPR, feature, display, deal, ROI]
+
+  panel:
+    description: "Household / consumer panel metrics — penetration, frequency, basket"
+    keywords: [penetration, "% HH", buyers, frequency, basket, loyalty, repeat]
+
+  innovation:
+    description: "New launches, Year-1 trajectory, Pacesetter candidates"
+    keywords: [innovation, launch, new product, pacesetter, year 1, year-1]
+
+  category:
+    description: "Category-level health: size, growth, premium-mix shift"
+    keywords: [category, segment, growth, decline, total category]
+
+# -----------------------------------------------------------------------------
+# INTENT TYPES — drive viz selection in the BI chatbot
+# -----------------------------------------------------------------------------
+intents:
+  METRIC_SNAPSHOT:    { default_viz: metric_card }
+  TREND_ANALYSIS:     { default_viz: line_chart }
+  BREAKDOWN:          { default_viz: bar_chart }
+  RANKING:            { default_viz: horizontal_bar }
+  COMPARISON:         { default_viz: grouped_bar }
+  ANOMALY_DETECTION:  { default_viz: line_chart }
+  DRILL_DOWN:         { default_viz: data_table }
+  SHARE_MOVEMENT:     { default_viz: horizontal_bar }
+  DISTRIBUTION_GAP:   { default_viz: table_with_rag }
+  PROMO_EFFECTIVENESS:{ default_viz: bar_chart }
+  PRICE_GAP:          { default_viz: bar_chart }
+  PACESETTER_WATCH:   { default_viz: line_chart }
+  PANEL_DEEP_DIVE:    { default_viz: bar_chart }
+
+# -----------------------------------------------------------------------------
+# DOMAIN SYNONYM TABLE — used by the intent engine for term resolution
+# -----------------------------------------------------------------------------
+synonyms:
+  share:           [share, "market share", "$ share", "value share", "dollar share"]
+  unit_share:      ["unit share", "volume share"]
+  velocity:        [velocity, "rate of sale", ROS, "$/STR/WK", "per store per week"]
+  ACV:             [ACV, "% ACV", PCV, "% PCV", "ACV weighted distribution"]
+  distribution:    [distribution, "ACV", "% ACV", "weighted distribution"]
+  promo_lift:      [lift, "promo lift", uplift, "incremental %"]
+  TPR:             ["TPR", "temporary price reduction", price cut]
+  feature:         [feature, "ad feature", "circular"]
+  display:         [display, "end cap", "secondary placement"]
+  penetration:     [penetration, "% HH", "household reach", reach]
+  basket:          [basket, "$ per trip", "spend per trip"]
+  pacesetter:      [pacesetter, "year-1 launch", "new launch winner"]
+  JBP:             ["JBP", "joint business plan", "top-to-top"]
+
+# -----------------------------------------------------------------------------
+# DEFAULT FILTER PATTERNS — used when an intent does not specify them
+# -----------------------------------------------------------------------------
+defaults:
+  share_scope:       category_id            # share is always within a category
+  trend_granularity: month                   # default time bucket for trends
+  ranking_limit:     20                      # default Top-N
+  geography_default: USA

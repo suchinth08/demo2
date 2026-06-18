@@ -1,0 +1,6 @@
+site_id,site_name,country,site_type,gxp_scope,fda_estab_id,is_active
+SITE-US-01,Philadelphia Manufacturing,USA,Manufacturing,GMP,3001234,True
+SITE-US-02,Boston R&D Center,USA,R&D,GMP+GLP,3005678,True
+SITE-EU-01,Dublin Manufacturing,Ireland,Manufacturing,GMP,4001100,True
+SITE-EU-02,Frankfurt QC Laboratory,Germany,QC Lab,GMP+GLP,4002200,True
+SITE-AP-01,Hyderabad API Manufacturing,India,Manufacturing,GMP,5001001,True

@@ -1,0 +1,438 @@
+finding_id,audit_id,finding_number,classification,regulatory_ref,process_area,finding_description,root_cause,is_repeat_finding,prior_finding_id,capa_id,response_date,response_status,close_date
+FIND-0001,AUD-0001,1,Major,21 CFR Part 11.10,CAPA System,Major finding in Document Control area,Human Error,False,,CAPA-0119,2022-05-23,Accepted,2022-07-16
+FIND-0002,AUD-0001,2,Major,21 CFR Part 11.10,Supplier Management,Major finding in CAPA System area,Equipment,False,,CAPA-0186,2022-06-16,Accepted,2022-07-22
+FIND-0003,AUD-0001,3,Major,21 CFR 820.100,Supplier Management,Major finding in Document Control area,Material,False,,CAPA-0228,2022-06-01,Accepted,2022-08-22
+FIND-0004,AUD-0001,4,Minor,EU GMP Chapter 5,Computer Systems Validation,Minor finding in Change Control area,Procedure,True,,,2022-06-01,Accepted,2022-07-12
+FIND-0005,AUD-0001,5,Minor,ICH Q10 3.2,Supplier Management,Minor finding in Environmental Monitoring area,Communication,False,,,2022-06-16,Submitted,2022-07-27
+FIND-0006,AUD-0001,6,Minor,EU GMP Chapter 4,Document Control,Minor finding in Computer Systems Validation area,Procedure,False,,,2022-06-18,Accepted,2022-07-18
+FIND-0007,AUD-0001,7,Minor,ICH Q10 3.2,CAPA System,Minor finding in Change Control area,Equipment,False,,,2022-06-20,Accepted,2022-09-11
+FIND-0008,AUD-0001,8,Minor,EU GMP Chapter 5,CAPA System,Minor finding in Supplier Management area,Communication,False,,,2022-06-22,Accepted,2022-08-17
+FIND-0009,AUD-0002,1,Major,EU GMP Chapter 4,Supplier Management,Major finding in Supplier Management area,Communication,False,,CAPA-0152,2022-04-14,Accepted,2022-05-25
+FIND-0010,AUD-0002,2,Major,EU GMP Chapter 5,CAPA System,Major finding in Manufacturing area,Training,True,,CAPA-0202,2022-03-30,Accepted,2022-06-01
+FIND-0011,AUD-0002,3,Major,21 CFR 211.192,Computer Systems Validation,Major finding in CAPA System area,Equipment,False,,CAPA-0191,2022-04-08,Accepted,2022-07-04
+FIND-0012,AUD-0002,4,Major,21 CFR Part 11.10,Environmental Monitoring,Major finding in Manufacturing area,Material,False,,CAPA-0081,2022-04-16,Accepted,2022-06-26
+FIND-0013,AUD-0002,5,Minor,21 CFR Part 11.10,Document Control,Minor finding in Computer Systems Validation area,Equipment,False,,,2022-04-02,Submitted,2022-06-02
+FIND-0014,AUD-0002,6,Minor,EU GMP Chapter 4,Change Control,Minor finding in Environmental Monitoring area,Human Error,False,,,2022-03-31,Accepted,2022-06-24
+FIND-0015,AUD-0002,7,Minor,EU GMP Chapter 4,Change Control,Minor finding in Change Control area,Equipment,True,,,2022-04-15,Submitted,2022-07-01
+FIND-0016,AUD-0002,8,Minor,21 CFR 820.100,Change Control,Minor finding in Document Control area,Material,False,,,2022-04-03,Accepted,2022-06-13
+FIND-0017,AUD-0002,9,Minor,21 CFR 211.100,Training Management,Minor finding in Computer Systems Validation area,Human Error,False,,,2022-03-23,Accepted,2022-05-23
+FIND-0018,AUD-0002,10,Minor,21 CFR Part 11.10,Training Management,Minor finding in Environmental Monitoring area,Training,False,,,2022-03-23,Submitted,2022-05-02
+FIND-0019,AUD-0003,1,Major,ICH Q10 3.2,Batch Record Review,Major finding in Document Control area,Training,False,,CAPA-0220,2022-10-28,Submitted,2022-12-08
+FIND-0020,AUD-0003,2,Major,ICH Q10 3.2,Batch Record Review,Major finding in Supplier Management area,Training,True,,CAPA-0228,2022-10-30,Accepted,2023-01-11
+FIND-0021,AUD-0003,3,Major,21 CFR 211.100,Document Control,Major finding in Environmental Monitoring area,Equipment,False,,CAPA-0223,2022-11-09,Accepted,2023-01-07
+FIND-0022,AUD-0003,4,Minor,21 CFR 211.68,CAPA System,Minor finding in Training Management area,Procedure,False,,,2022-11-18,Accepted,2023-02-12
+FIND-0023,AUD-0003,5,Minor,EU GMP Chapter 5,Document Control,Minor finding in Document Control area,Procedure,False,,,2022-11-22,Accepted,2023-01-02
+FIND-0024,AUD-0003,6,Minor,21 CFR 211.192,Manufacturing,Minor finding in Manufacturing area,Procedure,False,,,2022-11-08,Accepted,2022-12-15
+FIND-0025,AUD-0003,7,Minor,21 CFR 211.192,Batch Record Review,Minor finding in Manufacturing area,Material,False,,,2022-11-08,Accepted,2022-12-23
+FIND-0026,AUD-0003,8,Minor,21 CFR 820.100,Batch Record Review,Minor finding in Document Control area,Material,False,,,2022-10-25,Submitted,2022-12-14
+FIND-0027,AUD-0003,9,Minor,EU GMP Chapter 5,Batch Record Review,Minor finding in Batch Record Review area,Material,False,,,2022-10-30,Accepted,2022-12-05
+FIND-0028,AUD-0004,1,Major,21 CFR 211.100,Environmental Monitoring,Major finding in CAPA System area,Procedure,False,,CAPA-0013,2022-11-04,Accepted,2023-01-22
+FIND-0029,AUD-0004,2,Major,21 CFR 211.68,Change Control,Major finding in Environmental Monitoring area,Material,False,,CAPA-0116,2022-10-30,Accepted,2022-12-20
+FIND-0030,AUD-0004,3,Minor,21 CFR 211.192,Supplier Management,Minor finding in Manufacturing area,Procedure,False,,,2022-10-31,Accepted,2022-12-31
+FIND-0031,AUD-0004,4,Minor,EU GMP Chapter 5,Document Control,Minor finding in Computer Systems Validation area,Material,False,,,2022-11-09,Accepted,2023-01-12
+FIND-0032,AUD-0004,5,Minor,21 CFR 211.68,Environmental Monitoring,Minor finding in Computer Systems Validation area,Communication,False,,,2022-11-12,Submitted,2023-02-04
+FIND-0033,AUD-0004,6,Minor,21 CFR 211.68,Supplier Management,Minor finding in Document Control area,System,False,,,2022-10-22,Open,2022-12-27
+FIND-0034,AUD-0004,7,Minor,21 CFR 211.192,Batch Record Review,Minor finding in Document Control area,Training,False,,,2022-11-13,Submitted,2023-02-08
+FIND-0035,AUD-0005,1,Major,21 CFR 820.100,CAPA System,Major finding in CAPA System area,Training,False,,CAPA-0043,2023-06-14,Accepted,2023-07-18
+FIND-0036,AUD-0005,2,Major,EU GMP Chapter 5,QC Laboratory,Major finding in QC Laboratory area,Human Error,True,,CAPA-0016,2023-06-28,Accepted,2023-09-22
+FIND-0037,AUD-0005,3,Major,EU GMP Chapter 4,QC Laboratory,Major finding in Document Control area,Training,False,,CAPA-0104,2023-06-13,Accepted,2023-09-03
+FIND-0038,AUD-0005,4,Minor,EU GMP Chapter 4,CAPA System,Minor finding in Batch Record Review area,Training,False,,,2023-06-20,Submitted,2023-08-01
+FIND-0039,AUD-0005,5,Minor,21 CFR 820.100,Environmental Monitoring,Minor finding in Change Control area,Equipment,False,,,2023-06-12,Accepted,2023-09-01
+FIND-0040,AUD-0005,6,Minor,21 CFR 820.100,Training Management,Minor finding in Change Control area,Human Error,False,,,2023-06-14,Submitted,2023-08-31
+FIND-0041,AUD-0005,7,Minor,21 CFR 211.68,Computer Systems Validation,Minor finding in QC Laboratory area,Material,False,,,2023-06-08,Accepted,2023-09-04
+FIND-0042,AUD-0006,1,Major,EU GMP Chapter 5,Manufacturing,Major finding in Change Control area,Training,False,,CAPA-0004,2023-11-15,Accepted,2024-01-22
+FIND-0043,AUD-0006,2,Minor,21 CFR 211.100,Batch Record Review,Minor finding in CAPA System area,Human Error,False,,,2023-11-05,Accepted,2024-01-24
+FIND-0044,AUD-0006,3,Minor,21 CFR 211.192,Environmental Monitoring,Minor finding in Computer Systems Validation area,Training,False,,,2023-11-01,Accepted,2023-12-31
+FIND-0045,AUD-0006,4,Minor,ICH Q10 3.2,Change Control,Minor finding in Environmental Monitoring area,Human Error,False,,,2023-11-20,Accepted,2024-01-09
+FIND-0046,AUD-0007,1,Major,21 CFR 820.100,Document Control,Major finding in Document Control area,Equipment,False,,CAPA-0041,2023-04-24,Accepted,2023-07-19
+FIND-0047,AUD-0007,2,Major,EU GMP Chapter 5,Change Control,Major finding in Manufacturing area,Training,False,,CAPA-0043,2023-04-08,Submitted,2023-05-12
+FIND-0048,AUD-0007,3,Major,EU GMP Chapter 5,QC Laboratory,Major finding in Document Control area,Procedure,False,,CAPA-0070,2023-04-07,Accepted,2023-06-25
+FIND-0049,AUD-0007,4,Minor,21 CFR 211.100,Manufacturing,Minor finding in CAPA System area,System,False,,,2023-04-18,Accepted,2023-07-11
+FIND-0050,AUD-0007,5,Minor,21 CFR Part 11.10,Change Control,Minor finding in Manufacturing area,Equipment,False,,,2023-04-29,Open,2023-06-21
+FIND-0051,AUD-0007,6,Minor,21 CFR 211.192,Change Control,Minor finding in Training Management area,Equipment,False,,,2023-04-08,Accepted,2023-06-29
+FIND-0052,AUD-0007,7,Minor,EU GMP Chapter 5,Supplier Management,Minor finding in Training Management area,Equipment,False,,,2023-04-25,Submitted,2023-05-25
+FIND-0053,AUD-0007,8,Minor,21 CFR Part 11.10,Computer Systems Validation,Minor finding in Document Control area,Procedure,False,,,2023-04-17,Accepted,2023-07-09
+FIND-0054,AUD-0007,9,Observation,21 CFR 820.100,CAPA System,Observation finding in Change Control area,Equipment,False,,,2023-04-30,Open,2023-06-26
+FIND-0055,AUD-0008,1,Major,EU GMP Chapter 5,Supplier Management,Major finding in QC Laboratory area,Material,False,,CAPA-0136,2023-07-09,Accepted,2023-09-24
+FIND-0056,AUD-0008,2,Minor,EU GMP Chapter 5,Environmental Monitoring,Minor finding in Computer Systems Validation area,Training,False,,,2023-07-05,Submitted,2023-08-05
+FIND-0057,AUD-0008,3,Minor,ICH Q10 3.2,Computer Systems Validation,Minor finding in Change Control area,System,False,,,2023-06-19,Submitted,2023-08-11
+FIND-0058,AUD-0008,4,Minor,EU GMP Chapter 5,QC Laboratory,Minor finding in Training Management area,Material,False,,,2023-06-17,Accepted,2023-08-21
+FIND-0059,AUD-0008,5,Observation,EU GMP Chapter 5,Document Control,Observation finding in Training Management area,Equipment,False,,,2023-06-16,Accepted,2023-09-04
+FIND-0060,AUD-0008,6,Observation,ICH Q10 3.2,Change Control,Observation finding in Manufacturing area,Procedure,False,,,2023-07-01,Accepted,2023-08-12
+FIND-0061,AUD-0008,7,Observation,21 CFR 211.192,Document Control,Observation finding in Training Management area,Human Error,False,,,2023-06-19,Accepted,2023-07-29
+FIND-0062,AUD-0008,8,Observation,21 CFR 211.100,Manufacturing,Observation finding in Batch Record Review area,Equipment,False,,,2023-06-19,Accepted,2023-09-07
+FIND-0063,AUD-0008,9,Observation,ICH Q10 3.2,Environmental Monitoring,Observation finding in Change Control area,Human Error,True,,,2023-07-03,Accepted,2023-08-10
+FIND-0064,AUD-0008,10,Observation,EU GMP Chapter 4,QC Laboratory,Observation finding in Document Control area,Communication,False,,,2023-06-11,Accepted,2023-07-23
+FIND-0065,AUD-0008,11,Observation,EU GMP Chapter 4,Document Control,Observation finding in Document Control area,Material,False,,,2023-06-26,Accepted,2023-07-29
+FIND-0066,AUD-0008,12,Observation,21 CFR 820.100,CAPA System,Observation finding in QC Laboratory area,Material,False,,,2023-06-13,Accepted,2023-07-24
+FIND-0067,AUD-0009,1,Major,21 CFR 211.192,Computer Systems Validation,Major finding in Computer Systems Validation area,System,True,,CAPA-0083,2024-04-04,Accepted,2024-05-29
+FIND-0068,AUD-0009,2,Minor,ICH Q10 3.2,Document Control,Minor finding in Computer Systems Validation area,Communication,False,,,2024-04-09,Submitted,2024-06-03
+FIND-0069,AUD-0009,3,Minor,EU GMP Chapter 5,Document Control,Minor finding in Document Control area,Equipment,False,,,2024-04-10,Accepted,2024-05-21
+FIND-0070,AUD-0009,4,Minor,21 CFR 211.100,Computer Systems Validation,Minor finding in Environmental Monitoring area,System,False,,,2024-04-01,Submitted,2024-06-13
+FIND-0071,AUD-0009,5,Minor,21 CFR 820.100,Environmental Monitoring,Minor finding in Training Management area,Training,False,,,2024-04-15,Open,2024-06-23
+FIND-0072,AUD-0009,6,Minor,21 CFR 211.100,Environmental Monitoring,Minor finding in Manufacturing area,Training,False,,,2024-04-10,Accepted,2024-05-16
+FIND-0073,AUD-0009,7,Minor,EU GMP Chapter 4,Training Management,Minor finding in CAPA System area,Equipment,False,,,2024-03-27,Accepted,2024-06-07
+FIND-0074,AUD-0010,1,Major,EU GMP Chapter 4,Environmental Monitoring,Major finding in Training Management area,Equipment,False,,CAPA-0220,2024-08-19,Accepted,2024-10-20
+FIND-0075,AUD-0010,2,Minor,21 CFR 211.100,Computer Systems Validation,Minor finding in Batch Record Review area,System,False,,,2024-07-24,Accepted,2024-09-11
+FIND-0076,AUD-0010,3,Minor,21 CFR 211.192,Manufacturing,Minor finding in Supplier Management area,Training,False,,,2024-07-25,Accepted,2024-10-12
+FIND-0077,AUD-0010,4,Minor,21 CFR Part 11.10,Change Control,Minor finding in CAPA System area,Procedure,False,,,2024-08-17,Accepted,2024-10-07
+FIND-0078,AUD-0010,5,Minor,ICH Q10 3.2,Batch Record Review,Minor finding in Manufacturing area,Procedure,False,,,2024-08-09,Submitted,2024-09-08
+FIND-0079,AUD-0010,6,Minor,EU GMP Chapter 4,Supplier Management,Minor finding in QC Laboratory area,Material,False,,,2024-08-20,Accepted,2024-11-06
+FIND-0080,AUD-0010,7,Observation,21 CFR 211.68,Manufacturing,Observation finding in Computer Systems Validation area,Training,False,,,2024-08-10,Accepted,2024-10-25
+FIND-0081,AUD-0010,8,Observation,21 CFR 211.68,Document Control,Observation finding in Batch Record Review area,Procedure,False,,,2024-07-26,Accepted,2024-09-15
+FIND-0082,AUD-0010,9,Observation,21 CFR Part 11.10,Manufacturing,Observation finding in Change Control area,Training,False,,,2024-08-03,Submitted,2024-09-17
+FIND-0083,AUD-0011,1,Major,21 CFR Part 11.10,Environmental Monitoring,Major finding in Training Management area,Procedure,False,,CAPA-0117,2024-07-12,Accepted,2024-10-08
+FIND-0084,AUD-0011,2,Minor,21 CFR 820.100,Computer Systems Validation,Minor finding in Document Control area,Procedure,False,,,2024-07-11,Accepted,2024-09-13
+FIND-0085,AUD-0011,3,Minor,EU GMP Chapter 5,Environmental Monitoring,Minor finding in Manufacturing area,Human Error,False,,,2024-07-29,Submitted,2024-09-05
+FIND-0086,AUD-0011,4,Minor,21 CFR 820.100,Environmental Monitoring,Minor finding in Supplier Management area,Human Error,False,,,2024-07-15,Open,2024-10-03
+FIND-0087,AUD-0011,5,Minor,EU GMP Chapter 4,Training Management,Minor finding in Supplier Management area,Procedure,True,,,2024-07-24,Accepted,2024-09-30
+FIND-0088,AUD-0011,6,Minor,21 CFR 211.68,Change Control,Minor finding in Computer Systems Validation area,Equipment,False,,,2024-08-02,Accepted,2024-10-07
+FIND-0089,AUD-0011,7,Minor,EU GMP Chapter 4,QC Laboratory,Minor finding in Document Control area,System,False,,,2024-07-03,Accepted,2024-09-24
+FIND-0090,AUD-0012,1,Major,ICH Q10 3.2,Batch Record Review,Major finding in Supplier Management area,Training,False,,CAPA-0007,2022-02-17,Accepted,2022-04-29
+FIND-0091,AUD-0012,2,Major,21 CFR 211.68,Environmental Monitoring,Major finding in Computer Systems Validation area,Material,False,,CAPA-0228,2022-01-25,Open,2022-03-31
+FIND-0092,AUD-0012,3,Major,21 CFR 211.192,Environmental Monitoring,Major finding in Environmental Monitoring area,Human Error,False,,CAPA-0122,2022-01-24,Open,2022-04-05
+FIND-0093,AUD-0012,4,Major,21 CFR 211.68,Supplier Management,Major finding in Computer Systems Validation area,Equipment,False,,CAPA-0130,2022-01-21,Accepted,2022-03-05
+FIND-0094,AUD-0012,5,Minor,21 CFR 211.68,Environmental Monitoring,Minor finding in Computer Systems Validation area,Material,False,,,2022-01-29,Accepted,2022-03-13
+FIND-0095,AUD-0012,6,Minor,21 CFR 211.192,Supplier Management,Minor finding in Batch Record Review area,Human Error,False,,,2022-02-14,Accepted,2022-04-15
+FIND-0096,AUD-0012,7,Minor,EU GMP Chapter 5,QC Laboratory,Minor finding in Document Control area,Human Error,False,,,2022-01-19,Accepted,2022-03-26
+FIND-0097,AUD-0012,8,Minor,21 CFR 211.100,Computer Systems Validation,Minor finding in Document Control area,Procedure,False,,,2022-02-14,Submitted,2022-04-12
+FIND-0098,AUD-0012,9,Minor,21 CFR 211.100,Supplier Management,Minor finding in Environmental Monitoring area,System,False,,,2022-02-12,Accepted,2022-04-09
+FIND-0099,AUD-0013,1,Major,21 CFR 211.192,Supplier Management,Major finding in Batch Record Review area,Training,False,,CAPA-0146,2022-08-01,Submitted,2022-10-29
+FIND-0100,AUD-0013,2,Minor,21 CFR 211.192,Environmental Monitoring,Minor finding in QC Laboratory area,Communication,False,,,2022-07-17,Submitted,2022-10-04
+FIND-0101,AUD-0013,3,Minor,21 CFR 211.100,Computer Systems Validation,Minor finding in Document Control area,Equipment,False,,,2022-07-28,Submitted,2022-09-15
+FIND-0102,AUD-0013,4,Minor,ICH Q10 3.2,Batch Record Review,Minor finding in Manufacturing area,Training,False,,,2022-07-19,Accepted,2022-10-01
+FIND-0103,AUD-0013,5,Minor,21 CFR 820.100,Training Management,Minor finding in CAPA System area,Communication,False,,,2022-08-04,Accepted,2022-10-13
+FIND-0104,AUD-0013,6,Minor,21 CFR 211.100,Manufacturing,Minor finding in QC Laboratory area,Material,False,,,2022-07-14,Accepted,2022-09-08
+FIND-0105,AUD-0014,1,Major,21 CFR 211.192,Manufacturing,Major finding in CAPA System area,Equipment,False,,CAPA-0132,2022-08-29,Submitted,2022-10-15
+FIND-0106,AUD-0014,2,Major,21 CFR 211.68,Change Control,Major finding in Training Management area,Equipment,False,,CAPA-0138,2022-08-17,Accepted,2022-10-16
+FIND-0107,AUD-0014,3,Minor,21 CFR 211.68,Environmental Monitoring,Minor finding in Environmental Monitoring area,Communication,False,,,2022-09-08,Accepted,2022-10-22
+FIND-0108,AUD-0014,4,Minor,21 CFR 211.68,Training Management,Minor finding in Environmental Monitoring area,System,False,,,2022-08-20,Accepted,2022-11-07
+FIND-0109,AUD-0014,5,Observation,21 CFR 211.192,Supplier Management,Observation finding in Training Management area,Procedure,False,,,2022-09-02,Accepted,2022-10-30
+FIND-0110,AUD-0014,6,Observation,21 CFR Part 11.10,Document Control,Observation finding in Batch Record Review area,Communication,False,,,2022-08-13,Accepted,2022-10-01
+FIND-0111,AUD-0014,7,Observation,21 CFR 211.68,CAPA System,Observation finding in Document Control area,Equipment,True,,,2022-09-07,Accepted,2022-11-09
+FIND-0112,AUD-0014,8,Observation,21 CFR 211.100,Computer Systems Validation,Observation finding in Change Control area,Procedure,False,,,2022-09-06,Accepted,2022-11-13
+FIND-0113,AUD-0014,9,Observation,21 CFR 211.192,Manufacturing,Observation finding in Manufacturing area,Human Error,False,,,2022-08-27,Accepted,2022-11-25
+FIND-0114,AUD-0014,10,Observation,21 CFR 211.68,Computer Systems Validation,Observation finding in Change Control area,Equipment,True,,,2022-09-06,Accepted,2022-10-27
+FIND-0115,AUD-0014,11,Observation,21 CFR Part 11.10,Manufacturing,Observation finding in Training Management area,Training,False,,,2022-08-15,Accepted,2022-10-11
+FIND-0116,AUD-0014,12,Observation,21 CFR 211.100,Batch Record Review,Observation finding in Environmental Monitoring area,Human Error,False,,,2022-08-31,Accepted,2022-10-30
+FIND-0117,AUD-0015,1,Major,21 CFR 211.192,Environmental Monitoring,Major finding in CAPA System area,System,True,,CAPA-0226,2022-08-12,Accepted,2022-09-28
+FIND-0118,AUD-0015,2,Minor,ICH Q10 3.2,Change Control,Minor finding in Manufacturing area,Procedure,False,,,2022-08-13,Accepted,2022-11-03
+FIND-0119,AUD-0015,3,Minor,21 CFR 211.68,Training Management,Minor finding in Change Control area,Training,False,,,2022-08-16,Submitted,2022-11-05
+FIND-0120,AUD-0015,4,Minor,21 CFR 211.192,Manufacturing,Minor finding in Change Control area,System,False,,,2022-08-09,Accepted,2022-10-04
+FIND-0121,AUD-0015,5,Minor,21 CFR 211.100,Change Control,Minor finding in CAPA System area,Equipment,False,,,2022-08-06,Accepted,2022-09-16
+FIND-0122,AUD-0015,6,Minor,21 CFR Part 11.10,Environmental Monitoring,Minor finding in Document Control area,Training,False,,,2022-07-27,Accepted,2022-10-13
+FIND-0123,AUD-0015,7,Minor,EU GMP Chapter 4,CAPA System,Minor finding in Environmental Monitoring area,Procedure,False,,,2022-07-23,Submitted,2022-10-18
+FIND-0124,AUD-0015,8,Observation,EU GMP Chapter 5,QC Laboratory,Observation finding in CAPA System area,System,False,,,2022-07-20,Accepted,2022-09-20
+FIND-0125,AUD-0015,9,Observation,21 CFR Part 11.10,QC Laboratory,Observation finding in Manufacturing area,System,False,,,2022-08-10,Open,2022-11-03
+FIND-0126,AUD-0015,10,Observation,EU GMP Chapter 4,Supplier Management,Observation finding in Supplier Management area,Training,False,,,2022-08-10,Accepted,2022-10-24
+FIND-0127,AUD-0015,11,Observation,21 CFR 820.100,Supplier Management,Observation finding in QC Laboratory area,Procedure,False,,,2022-08-03,Submitted,2022-09-28
+FIND-0128,AUD-0016,1,Major,EU GMP Chapter 5,Batch Record Review,Major finding in Manufacturing area,Equipment,False,,CAPA-0125,2023-04-16,Open,2023-07-09
+FIND-0129,AUD-0016,2,Major,21 CFR 211.192,Change Control,Major finding in Document Control area,Communication,False,,CAPA-0048,2023-05-10,Accepted,2023-07-03
+FIND-0130,AUD-0016,3,Major,ICH Q10 3.2,Batch Record Review,Major finding in Batch Record Review area,Training,False,,CAPA-0099,2023-05-12,Accepted,2023-06-15
+FIND-0131,AUD-0016,4,Major,ICH Q10 3.2,Change Control,Major finding in CAPA System area,Human Error,False,,CAPA-0097,2023-05-12,Accepted,2023-07-18
+FIND-0132,AUD-0016,5,Minor,21 CFR 211.192,Batch Record Review,Minor finding in Batch Record Review area,Material,False,,,2023-05-12,Submitted,2023-06-26
+FIND-0133,AUD-0016,6,Minor,21 CFR Part 11.10,Environmental Monitoring,Minor finding in Supplier Management area,Equipment,False,,,2023-05-06,Submitted,2023-07-03
+FIND-0134,AUD-0016,7,Minor,ICH Q10 3.2,Document Control,Minor finding in Manufacturing area,Training,False,,,2023-04-23,Accepted,2023-06-03
+FIND-0135,AUD-0016,8,Minor,EU GMP Chapter 4,Batch Record Review,Minor finding in CAPA System area,Training,True,,,2023-05-12,Accepted,2023-07-14
+FIND-0136,AUD-0016,9,Minor,21 CFR 211.100,Change Control,Minor finding in Change Control area,Procedure,False,,,2023-05-06,Accepted,2023-08-01
+FIND-0137,AUD-0017,1,Major,21 CFR 211.100,CAPA System,Major finding in Manufacturing area,Training,False,,CAPA-0053,2023-03-12,Accepted,2023-05-17
+FIND-0138,AUD-0017,2,Major,21 CFR Part 11.10,Change Control,Major finding in Document Control area,Equipment,False,,CAPA-0139,2023-02-21,Accepted,2023-04-12
+FIND-0139,AUD-0017,3,Major,EU GMP Chapter 4,Change Control,Major finding in Change Control area,Procedure,False,,CAPA-0003,2023-03-01,Accepted,2023-05-15
+FIND-0140,AUD-0017,4,Major,21 CFR 211.192,CAPA System,Major finding in QC Laboratory area,Human Error,False,,CAPA-0008,2023-02-18,Accepted,2023-04-20
+FIND-0141,AUD-0017,5,Minor,21 CFR 211.100,Batch Record Review,Minor finding in Manufacturing area,Equipment,False,,,2023-03-02,Accepted,2023-04-09
+FIND-0142,AUD-0017,6,Minor,21 CFR 211.68,QC Laboratory,Minor finding in Environmental Monitoring area,Equipment,False,,,2023-03-07,Submitted,2023-04-11
+FIND-0143,AUD-0017,7,Minor,21 CFR 820.100,Document Control,Minor finding in Computer Systems Validation area,System,False,,,2023-02-28,Accepted,2023-05-28
+FIND-0144,AUD-0017,8,Observation,EU GMP Chapter 5,Computer Systems Validation,Observation finding in Change Control area,Material,False,,,2023-03-07,Accepted,2023-05-22
+FIND-0145,AUD-0017,9,Observation,EU GMP Chapter 4,Document Control,Observation finding in Manufacturing area,Training,False,,,2023-03-13,Open,2023-05-13
+FIND-0146,AUD-0017,10,Observation,21 CFR 211.192,QC Laboratory,Observation finding in CAPA System area,Communication,False,,,2023-03-11,Accepted,2023-05-10
+FIND-0147,AUD-0018,1,Major,EU GMP Chapter 5,Document Control,Major finding in CAPA System area,Procedure,False,,CAPA-0194,2023-12-12,Accepted,2024-02-22
+FIND-0148,AUD-0018,2,Minor,21 CFR 211.192,QC Laboratory,Minor finding in Batch Record Review area,Material,False,,,2023-11-28,Accepted,2024-02-12
+FIND-0149,AUD-0018,3,Minor,21 CFR Part 11.10,CAPA System,Minor finding in CAPA System area,Equipment,True,,,2023-12-03,Accepted,2024-02-17
+FIND-0150,AUD-0018,4,Observation,EU GMP Chapter 4,Manufacturing,Observation finding in Computer Systems Validation area,Procedure,False,,,2023-12-06,Accepted,2024-02-23
+FIND-0151,AUD-0018,5,Observation,21 CFR 211.68,Computer Systems Validation,Observation finding in Supplier Management area,Procedure,False,,,2023-12-10,Accepted,2024-01-23
+FIND-0152,AUD-0018,6,Observation,21 CFR 211.68,Computer Systems Validation,Observation finding in Environmental Monitoring area,Procedure,False,,,2023-11-29,Submitted,2024-02-05
+FIND-0153,AUD-0018,7,Observation,21 CFR 211.68,Supplier Management,Observation finding in QC Laboratory area,Training,True,,,2023-12-12,Accepted,2024-02-22
+FIND-0154,AUD-0018,8,Observation,EU GMP Chapter 5,Training Management,Observation finding in Manufacturing area,Procedure,False,,,2023-12-14,Accepted,2024-01-29
+FIND-0155,AUD-0018,9,Observation,21 CFR 211.100,Supplier Management,Observation finding in QC Laboratory area,Equipment,True,,,2023-12-23,Accepted,2024-02-25
+FIND-0156,AUD-0019,1,Major,21 CFR 211.68,Computer Systems Validation,Major finding in Computer Systems Validation area,Training,False,,CAPA-0073,2024-03-03,Accepted,2024-04-17
+FIND-0157,AUD-0019,2,Major,21 CFR 211.68,Manufacturing,Major finding in QC Laboratory area,Human Error,False,,CAPA-0031,2024-03-16,Accepted,2024-04-16
+FIND-0158,AUD-0019,3,Major,21 CFR 211.192,Change Control,Major finding in Training Management area,Material,False,,CAPA-0007,2024-02-27,Accepted,2024-05-04
+FIND-0159,AUD-0019,4,Minor,21 CFR 211.192,Document Control,Minor finding in CAPA System area,Equipment,False,,,2024-03-15,Open,2024-05-18
+FIND-0160,AUD-0019,5,Minor,EU GMP Chapter 4,Document Control,Minor finding in Computer Systems Validation area,Equipment,False,,,2024-03-12,Accepted,2024-05-06
+FIND-0161,AUD-0019,6,Minor,EU GMP Chapter 5,Training Management,Minor finding in Environmental Monitoring area,Procedure,False,,,2024-03-10,Accepted,2024-05-17
+FIND-0162,AUD-0019,7,Minor,21 CFR 820.100,QC Laboratory,Minor finding in Environmental Monitoring area,Training,False,,,2024-02-26,Accepted,2024-04-08
+FIND-0163,AUD-0019,8,Observation,EU GMP Chapter 4,Manufacturing,Observation finding in Document Control area,Equipment,False,,,2024-03-05,Accepted,2024-04-07
+FIND-0164,AUD-0019,9,Observation,ICH Q10 3.2,Computer Systems Validation,Observation finding in Document Control area,Equipment,False,,,2024-03-17,Open,2024-05-21
+FIND-0165,AUD-0019,10,Observation,21 CFR 211.192,Document Control,Observation finding in Training Management area,Equipment,False,,,2024-02-21,Accepted,2024-04-25
+FIND-0166,AUD-0020,1,Major,EU GMP Chapter 5,Supplier Management,Major finding in Document Control area,Procedure,False,,CAPA-0205,2024-12-06,Accepted,2025-01-16
+FIND-0167,AUD-0020,2,Minor,ICH Q10 3.2,Document Control,Minor finding in Manufacturing area,Communication,False,,,2024-11-22,Submitted,2025-02-03
+FIND-0168,AUD-0020,3,Minor,21 CFR 211.68,QC Laboratory,Minor finding in CAPA System area,System,False,,,2024-11-23,Accepted,2024-12-23
+FIND-0169,AUD-0020,4,Minor,EU GMP Chapter 4,QC Laboratory,Minor finding in Manufacturing area,Procedure,False,,,2024-12-19,Submitted,2025-03-09
+FIND-0170,AUD-0021,1,Major,EU GMP Chapter 5,CAPA System,Major finding in Batch Record Review area,Procedure,False,,CAPA-0225,2024-02-23,Submitted,2024-05-14
+FIND-0171,AUD-0021,2,Major,21 CFR 211.192,Environmental Monitoring,Major finding in Change Control area,Training,False,,CAPA-0180,2024-02-18,Submitted,2024-04-12
+FIND-0172,AUD-0021,3,Minor,21 CFR 820.100,Document Control,Minor finding in Change Control area,Material,False,,,2024-02-16,Accepted,2024-04-20
+FIND-0173,AUD-0021,4,Minor,EU GMP Chapter 5,Computer Systems Validation,Minor finding in Supplier Management area,Human Error,False,,,2024-02-09,Accepted,2024-05-07
+FIND-0174,AUD-0021,5,Observation,21 CFR 211.68,QC Laboratory,Observation finding in Document Control area,Procedure,False,,,2024-02-17,Accepted,2024-04-12
+FIND-0175,AUD-0022,1,Major,21 CFR 820.100,Batch Record Review,Major finding in Document Control area,Equipment,False,,CAPA-0043,2022-08-02,Accepted,2022-10-18
+FIND-0176,AUD-0022,2,Major,21 CFR 211.192,QC Laboratory,Major finding in Change Control area,Training,False,,CAPA-0068,2022-08-02,Accepted,2022-10-15
+FIND-0177,AUD-0022,3,Minor,21 CFR Part 11.10,QC Laboratory,Minor finding in Batch Record Review area,Equipment,False,,,2022-09-01,Accepted,2022-10-15
+FIND-0178,AUD-0022,4,Minor,21 CFR 211.192,Environmental Monitoring,Minor finding in Document Control area,Training,False,,,2022-08-20,Submitted,2022-10-16
+FIND-0179,AUD-0022,5,Minor,21 CFR Part 11.10,QC Laboratory,Minor finding in Computer Systems Validation area,Human Error,True,,,2022-08-29,Accepted,2022-10-14
+FIND-0180,AUD-0022,6,Minor,21 CFR 211.192,Document Control,Minor finding in QC Laboratory area,Procedure,False,,,2022-08-22,Accepted,2022-10-29
+FIND-0181,AUD-0022,7,Minor,EU GMP Chapter 5,CAPA System,Minor finding in Supplier Management area,Training,False,,,2022-08-11,Accepted,2022-10-20
+FIND-0182,AUD-0022,8,Minor,ICH Q10 3.2,QC Laboratory,Minor finding in QC Laboratory area,Equipment,False,,,2022-08-24,Accepted,2022-11-15
+FIND-0183,AUD-0023,1,Major,ICH Q10 3.2,Environmental Monitoring,Major finding in Document Control area,Training,False,,CAPA-0208,2022-06-11,Accepted,2022-08-31
+FIND-0184,AUD-0023,2,Major,EU GMP Chapter 4,Supplier Management,Major finding in Environmental Monitoring area,Training,False,,CAPA-0003,2022-06-05,Accepted,2022-08-29
+FIND-0185,AUD-0023,3,Minor,ICH Q10 3.2,Environmental Monitoring,Minor finding in Document Control area,Training,False,,,2022-06-25,Accepted,2022-07-29
+FIND-0186,AUD-0023,4,Minor,21 CFR 211.68,Training Management,Minor finding in QC Laboratory area,Communication,False,,,2022-06-12,Accepted,2022-07-16
+FIND-0187,AUD-0023,5,Minor,21 CFR 211.100,Environmental Monitoring,Minor finding in Computer Systems Validation area,Material,False,,,2022-06-22,Accepted,2022-07-25
+FIND-0188,AUD-0023,6,Observation,21 CFR 211.68,QC Laboratory,Observation finding in Change Control area,Training,False,,,2022-06-15,Accepted,2022-07-28
+FIND-0189,AUD-0023,7,Observation,EU GMP Chapter 4,Computer Systems Validation,Observation finding in Batch Record Review area,Procedure,False,,,2022-06-11,Submitted,2022-07-27
+FIND-0190,AUD-0023,8,Observation,21 CFR 820.100,Training Management,Observation finding in QC Laboratory area,System,False,,,2022-06-12,Open,2022-08-10
+FIND-0191,AUD-0023,9,Observation,21 CFR Part 11.10,Training Management,Observation finding in Batch Record Review area,Human Error,False,,,2022-06-11,Accepted,2022-08-21
+FIND-0192,AUD-0024,1,Major,21 CFR 820.100,CAPA System,Major finding in QC Laboratory area,Material,False,,CAPA-0127,2022-10-16,Accepted,2022-12-27
+FIND-0193,AUD-0024,2,Major,21 CFR 211.68,QC Laboratory,Major finding in Computer Systems Validation area,Training,False,,CAPA-0048,2022-10-11,Open,2022-12-27
+FIND-0194,AUD-0024,3,Major,21 CFR Part 11.10,Training Management,Major finding in Supplier Management area,Procedure,False,,CAPA-0220,2022-10-26,Accepted,2023-01-05
+FIND-0195,AUD-0024,4,Major,21 CFR 211.192,Document Control,Major finding in Batch Record Review area,Procedure,False,,CAPA-0126,2022-10-04,Accepted,2022-11-15
+FIND-0196,AUD-0024,5,Minor,21 CFR Part 11.10,CAPA System,Minor finding in Change Control area,Training,False,,,2022-10-03,Open,2022-11-27
+FIND-0197,AUD-0024,6,Minor,21 CFR 211.192,Supplier Management,Minor finding in Change Control area,Procedure,False,,,2022-09-30,Submitted,2022-12-21
+FIND-0198,AUD-0024,7,Minor,21 CFR Part 11.10,Environmental Monitoring,Minor finding in Batch Record Review area,Human Error,False,,,2022-10-24,Accepted,2022-12-09
+FIND-0199,AUD-0024,8,Minor,21 CFR 820.100,Batch Record Review,Minor finding in Change Control area,Training,False,,,2022-10-14,Accepted,2022-12-04
+FIND-0200,AUD-0024,9,Observation,21 CFR 211.192,CAPA System,Observation finding in Change Control area,Training,False,,,2022-09-30,Accepted,2022-12-13
+FIND-0201,AUD-0025,1,Major,21 CFR 211.192,Batch Record Review,Major finding in Document Control area,Material,False,,CAPA-0124,2023-02-24,Accepted,2023-04-15
+FIND-0202,AUD-0025,2,Major,EU GMP Chapter 4,QC Laboratory,Major finding in Change Control area,Human Error,False,,CAPA-0015,2023-03-04,Open,2023-05-01
+FIND-0203,AUD-0025,3,Minor,21 CFR 211.100,CAPA System,Minor finding in Supplier Management area,Communication,False,,,2023-03-12,Accepted,2023-04-11
+FIND-0204,AUD-0025,4,Minor,EU GMP Chapter 4,CAPA System,Minor finding in CAPA System area,System,False,,,2023-03-06,Accepted,2023-05-23
+FIND-0205,AUD-0025,5,Minor,21 CFR 211.192,Change Control,Minor finding in Computer Systems Validation area,Procedure,False,,,2023-03-14,Accepted,2023-04-26
+FIND-0206,AUD-0025,6,Minor,21 CFR 211.68,Environmental Monitoring,Minor finding in Environmental Monitoring area,Human Error,False,,,2023-03-07,Submitted,2023-04-07
+FIND-0207,AUD-0025,7,Minor,21 CFR 211.68,CAPA System,Minor finding in Supplier Management area,Procedure,False,,,2023-03-08,Accepted,2023-05-28
+FIND-0208,AUD-0025,8,Minor,EU GMP Chapter 5,Change Control,Minor finding in Batch Record Review area,Equipment,True,,,2023-03-13,Accepted,2023-05-22
+FIND-0209,AUD-0026,1,Major,21 CFR Part 11.10,QC Laboratory,Major finding in Supplier Management area,Training,False,,CAPA-0117,2023-05-25,Accepted,2023-07-17
+FIND-0210,AUD-0026,2,Major,ICH Q10 3.2,Change Control,Major finding in Document Control area,Human Error,False,,CAPA-0063,2023-05-12,Submitted,2023-06-23
+FIND-0211,AUD-0026,3,Major,EU GMP Chapter 5,Environmental Monitoring,Major finding in Manufacturing area,Human Error,False,,CAPA-0187,2023-06-02,Accepted,2023-08-07
+FIND-0212,AUD-0026,4,Major,21 CFR Part 11.10,Batch Record Review,Major finding in CAPA System area,Training,False,,CAPA-0237,2023-05-22,Accepted,2023-07-28
+FIND-0213,AUD-0026,5,Minor,21 CFR Part 11.10,Batch Record Review,Minor finding in Supplier Management area,Material,False,,,2023-05-30,Submitted,2023-08-06
+FIND-0214,AUD-0026,6,Minor,ICH Q10 3.2,Document Control,Minor finding in Batch Record Review area,Material,False,,,2023-05-20,Submitted,2023-08-10
+FIND-0215,AUD-0026,7,Minor,EU GMP Chapter 4,Batch Record Review,Minor finding in CAPA System area,Training,False,,,2023-06-08,Accepted,2023-09-01
+FIND-0216,AUD-0026,8,Minor,21 CFR 211.192,Change Control,Minor finding in CAPA System area,Communication,False,,,2023-05-18,Accepted,2023-07-11
+FIND-0217,AUD-0027,1,Major,21 CFR 211.68,Training Management,Major finding in Change Control area,System,False,,CAPA-0112,2023-02-11,Submitted,2023-05-10
+FIND-0218,AUD-0027,2,Minor,21 CFR 820.100,Batch Record Review,Minor finding in Supplier Management area,Material,False,,,2023-02-15,Accepted,2023-04-17
+FIND-0219,AUD-0027,3,Minor,21 CFR 211.192,QC Laboratory,Minor finding in Environmental Monitoring area,Material,False,,,2023-03-09,Submitted,2023-05-22
+FIND-0220,AUD-0027,4,Observation,21 CFR 211.192,Change Control,Observation finding in CAPA System area,Equipment,False,,,2023-03-10,Accepted,2023-05-20
+FIND-0221,AUD-0027,5,Observation,EU GMP Chapter 4,Training Management,Observation finding in Environmental Monitoring area,Equipment,False,,,2023-02-21,Accepted,2023-03-27
+FIND-0222,AUD-0027,6,Observation,EU GMP Chapter 4,Batch Record Review,Observation finding in QC Laboratory area,Procedure,False,,,2023-02-17,Accepted,2023-04-24
+FIND-0223,AUD-0027,7,Observation,EU GMP Chapter 4,Environmental Monitoring,Observation finding in Document Control area,Material,False,,,2023-03-10,Accepted,2023-05-06
+FIND-0224,AUD-0027,8,Observation,EU GMP Chapter 4,Batch Record Review,Observation finding in Environmental Monitoring area,Training,False,,,2023-03-02,Accepted,2023-04-16
+FIND-0225,AUD-0027,9,Observation,21 CFR Part 11.10,Change Control,Observation finding in CAPA System area,Procedure,False,,,2023-03-10,Accepted,2023-06-01
+FIND-0226,AUD-0027,10,Observation,21 CFR 211.192,Environmental Monitoring,Observation finding in Training Management area,Procedure,False,,,2023-03-01,Accepted,2023-04-06
+FIND-0227,AUD-0027,11,Observation,EU GMP Chapter 5,Computer Systems Validation,Observation finding in Supplier Management area,Procedure,False,,,2023-02-22,Accepted,2023-04-24
+FIND-0228,AUD-0028,1,Major,ICH Q10 3.2,Supplier Management,Major finding in Computer Systems Validation area,Procedure,True,,CAPA-0202,2024-06-21,Submitted,2024-09-10
+FIND-0229,AUD-0028,2,Major,EU GMP Chapter 4,Document Control,Major finding in QC Laboratory area,Training,False,,CAPA-0098,2024-06-24,Accepted,2024-08-13
+FIND-0230,AUD-0028,3,Major,EU GMP Chapter 4,Manufacturing,Major finding in Manufacturing area,Training,False,,CAPA-0132,2024-06-25,Accepted,2024-08-24
+FIND-0231,AUD-0028,4,Major,21 CFR 211.192,CAPA System,Major finding in CAPA System area,Equipment,False,,CAPA-0234,2024-06-20,Accepted,2024-08-16
+FIND-0232,AUD-0028,5,Minor,21 CFR 820.100,QC Laboratory,Minor finding in Computer Systems Validation area,Human Error,True,,,2024-07-14,Submitted,2024-09-10
+FIND-0233,AUD-0028,6,Minor,ICH Q10 3.2,CAPA System,Minor finding in Document Control area,Human Error,True,,,2024-06-27,Accepted,2024-09-24
+FIND-0234,AUD-0028,7,Minor,21 CFR 820.100,Supplier Management,Minor finding in Environmental Monitoring area,Training,False,,,2024-07-19,Accepted,2024-10-01
+FIND-0235,AUD-0028,8,Minor,21 CFR 820.100,Document Control,Minor finding in Batch Record Review area,Material,False,,,2024-06-21,Accepted,2024-07-25
+FIND-0236,AUD-0029,1,Major,21 CFR Part 11.10,Change Control,Major finding in Manufacturing area,Procedure,False,,CAPA-0040,2024-05-15,Accepted,2024-06-21
+FIND-0237,AUD-0029,2,Major,EU GMP Chapter 4,Supplier Management,Major finding in Document Control area,Procedure,False,,CAPA-0235,2024-04-29,Accepted,2024-06-11
+FIND-0238,AUD-0029,3,Major,ICH Q10 3.2,Computer Systems Validation,Major finding in Manufacturing area,Communication,False,,CAPA-0004,2024-05-11,Accepted,2024-07-11
+FIND-0239,AUD-0029,4,Major,21 CFR 820.100,Batch Record Review,Major finding in Manufacturing area,System,False,,CAPA-0228,2024-05-17,Accepted,2024-08-08
+FIND-0240,AUD-0029,5,Minor,21 CFR 211.68,Change Control,Minor finding in Environmental Monitoring area,Training,False,,,2024-05-04,Submitted,2024-06-19
+FIND-0241,AUD-0029,6,Minor,21 CFR 211.68,CAPA System,Minor finding in Training Management area,Procedure,False,,,2024-05-07,Accepted,2024-07-24
+FIND-0242,AUD-0030,1,Major,21 CFR Part 11.10,Computer Systems Validation,Major finding in Manufacturing area,Equipment,False,,CAPA-0118,2024-04-02,Accepted,2024-05-25
+FIND-0243,AUD-0030,2,Minor,EU GMP Chapter 4,Training Management,Minor finding in Supplier Management area,Human Error,False,,,2024-03-22,Submitted,2024-06-18
+FIND-0244,AUD-0030,3,Minor,21 CFR 211.192,CAPA System,Minor finding in Document Control area,Equipment,False,,,2024-04-11,Submitted,2024-05-19
+FIND-0245,AUD-0030,4,Minor,ICH Q10 3.2,Supplier Management,Minor finding in Manufacturing area,Training,False,,,2024-03-29,Accepted,2024-05-13
+FIND-0246,AUD-0030,5,Minor,21 CFR 211.192,Environmental Monitoring,Minor finding in Document Control area,Material,False,,,2024-03-26,Accepted,2024-05-30
+FIND-0247,AUD-0030,6,Minor,EU GMP Chapter 4,Change Control,Minor finding in Computer Systems Validation area,Procedure,False,,,2024-04-07,Accepted,2024-07-05
+FIND-0248,AUD-0030,7,Observation,21 CFR Part 11.10,CAPA System,Observation finding in Document Control area,Procedure,False,,,2024-03-22,Accepted,2024-05-28
+FIND-0249,AUD-0030,8,Observation,21 CFR 211.100,QC Laboratory,Observation finding in Training Management area,Communication,False,,,2024-04-18,Accepted,2024-07-14
+FIND-0250,AUD-0030,9,Observation,21 CFR Part 11.10,Supplier Management,Observation finding in Supplier Management area,Training,False,,,2024-03-21,Submitted,2024-06-15
+FIND-0251,AUD-0030,10,Observation,EU GMP Chapter 5,Batch Record Review,Observation finding in Manufacturing area,Procedure,False,,,2024-03-30,Accepted,2024-06-21
+FIND-0252,AUD-0030,11,Observation,21 CFR 211.192,CAPA System,Observation finding in Change Control area,Equipment,True,,,2024-04-01,Accepted,2024-06-11
+FIND-0253,AUD-0030,12,Observation,21 CFR 211.68,Change Control,Observation finding in Change Control area,Training,False,,,2024-04-02,Accepted,2024-06-07
+FIND-0254,AUD-0031,1,Major,EU GMP Chapter 5,Manufacturing,Major finding in Training Management area,System,False,,CAPA-0114,2024-01-24,Accepted,2024-03-14
+FIND-0255,AUD-0031,2,Major,21 CFR 211.100,Supplier Management,Major finding in Supplier Management area,System,False,,CAPA-0011,2024-01-28,Submitted,2024-04-14
+FIND-0256,AUD-0031,3,Major,21 CFR 211.100,QC Laboratory,Major finding in Batch Record Review area,Training,False,,CAPA-0127,2024-01-26,Accepted,2024-03-31
+FIND-0257,AUD-0031,4,Minor,ICH Q10 3.2,Change Control,Minor finding in Environmental Monitoring area,Human Error,False,,,2024-01-21,Accepted,2024-03-07
+FIND-0258,AUD-0031,5,Minor,ICH Q10 3.2,CAPA System,Minor finding in Supplier Management area,Training,False,,,2024-01-24,Accepted,2024-02-24
+FIND-0259,AUD-0031,6,Minor,21 CFR 211.100,Change Control,Minor finding in CAPA System area,Equipment,False,,,2024-01-22,Accepted,2024-03-03
+FIND-0260,AUD-0031,7,Minor,21 CFR 211.68,QC Laboratory,Minor finding in Training Management area,Equipment,False,,,2024-01-30,Submitted,2024-03-06
+FIND-0261,AUD-0031,8,Observation,ICH Q10 3.2,Training Management,Observation finding in Supplier Management area,Material,False,,,2024-01-28,Submitted,2024-02-28
+FIND-0262,AUD-0031,9,Observation,21 CFR 211.68,Environmental Monitoring,Observation finding in Environmental Monitoring area,Material,False,,,2024-01-25,Submitted,2024-04-02
+FIND-0263,AUD-0032,1,Major,EU GMP Chapter 4,Supplier Management,Major finding in Environmental Monitoring area,System,False,,CAPA-0156,2022-02-17,Open,2022-05-16
+FIND-0264,AUD-0032,2,Major,EU GMP Chapter 5,Document Control,Major finding in Environmental Monitoring area,Equipment,True,,CAPA-0118,2022-03-04,Accepted,2022-04-29
+FIND-0265,AUD-0032,3,Major,21 CFR 820.100,CAPA System,Major finding in QC Laboratory area,Procedure,False,,CAPA-0115,2022-03-07,Accepted,2022-05-07
+FIND-0266,AUD-0032,4,Major,21 CFR 211.100,Change Control,Major finding in CAPA System area,Training,False,,CAPA-0085,2022-03-05,Accepted,2022-04-06
+FIND-0267,AUD-0032,5,Minor,EU GMP Chapter 5,Computer Systems Validation,Minor finding in Document Control area,Procedure,False,,,2022-03-06,Accepted,2022-05-08
+FIND-0268,AUD-0032,6,Minor,21 CFR 820.100,Supplier Management,Minor finding in Manufacturing area,Material,False,,,2022-03-01,Accepted,2022-04-02
+FIND-0269,AUD-0032,7,Minor,21 CFR 820.100,Training Management,Minor finding in Training Management area,Procedure,False,,,2022-02-26,Accepted,2022-04-27
+FIND-0270,AUD-0033,1,Major,ICH Q10 3.2,Supplier Management,Major finding in Batch Record Review area,Training,False,,CAPA-0010,2022-02-19,Accepted,2022-04-18
+FIND-0271,AUD-0033,2,Major,21 CFR Part 11.10,Supplier Management,Major finding in Document Control area,Human Error,False,,CAPA-0037,2022-02-13,Accepted,2022-04-03
+FIND-0272,AUD-0033,3,Minor,EU GMP Chapter 4,QC Laboratory,Minor finding in Environmental Monitoring area,Equipment,False,,,2022-02-19,Accepted,2022-04-20
+FIND-0273,AUD-0033,4,Minor,21 CFR 211.68,CAPA System,Minor finding in Environmental Monitoring area,Material,False,,,2022-02-08,Accepted,2022-03-29
+FIND-0274,AUD-0033,5,Minor,ICH Q10 3.2,CAPA System,Minor finding in Change Control area,System,False,,,2022-02-01,Accepted,2022-04-20
+FIND-0275,AUD-0033,6,Minor,21 CFR 820.100,Training Management,Minor finding in QC Laboratory area,Equipment,False,,,2022-02-20,Accepted,2022-04-19
+FIND-0276,AUD-0034,1,Critical,21 CFR 211.100,QC Laboratory,Critical finding in Supplier Management area,Procedure,False,,CAPA-0181,2022-04-24,Accepted,2022-07-04
+FIND-0277,AUD-0034,2,Major,21 CFR 820.100,CAPA System,Major finding in Change Control area,Procedure,False,,CAPA-0097,2022-04-24,Submitted,2022-07-10
+FIND-0278,AUD-0034,3,Major,EU GMP Chapter 5,Manufacturing,Major finding in Supplier Management area,Training,False,,CAPA-0111,2022-04-15,Submitted,2022-05-16
+FIND-0279,AUD-0034,4,Minor,21 CFR 820.100,Manufacturing,Minor finding in Manufacturing area,Material,False,,,2022-04-27,Submitted,2022-07-11
+FIND-0280,AUD-0034,5,Minor,21 CFR 211.100,QC Laboratory,Minor finding in Batch Record Review area,Procedure,False,,,2022-04-03,Accepted,2022-05-08
+FIND-0281,AUD-0035,1,Major,21 CFR 211.100,Environmental Monitoring,Major finding in Batch Record Review area,Equipment,False,,CAPA-0166,2023-06-04,Submitted,2023-07-22
+FIND-0282,AUD-0035,2,Major,21 CFR 820.100,Manufacturing,Major finding in Manufacturing area,System,False,,CAPA-0099,2023-06-05,Accepted,2023-07-08
+FIND-0283,AUD-0035,3,Major,21 CFR 820.100,Computer Systems Validation,Major finding in Computer Systems Validation area,Procedure,False,,CAPA-0189,2023-06-10,Open,2023-08-16
+FIND-0284,AUD-0035,4,Major,21 CFR 211.192,Supplier Management,Major finding in Environmental Monitoring area,Procedure,False,,CAPA-0164,2023-06-29,Open,2023-08-10
+FIND-0285,AUD-0035,5,Minor,21 CFR 211.192,Environmental Monitoring,Minor finding in QC Laboratory area,Communication,False,,,2023-06-02,Submitted,2023-08-07
+FIND-0286,AUD-0035,6,Minor,ICH Q10 3.2,Change Control,Minor finding in Training Management area,Equipment,False,,,2023-06-20,Accepted,2023-08-13
+FIND-0287,AUD-0035,7,Observation,ICH Q10 3.2,Environmental Monitoring,Observation finding in Environmental Monitoring area,Procedure,False,,,2023-06-05,Accepted,2023-07-13
+FIND-0288,AUD-0035,8,Observation,ICH Q10 3.2,CAPA System,Observation finding in Manufacturing area,Training,False,,,2023-06-25,Open,2023-07-27
+FIND-0289,AUD-0035,9,Observation,21 CFR 211.192,Change Control,Observation finding in CAPA System area,Procedure,False,,,2023-06-29,Accepted,2023-07-31
+FIND-0290,AUD-0035,10,Observation,21 CFR Part 11.10,Environmental Monitoring,Observation finding in Supplier Management area,Training,True,,,2023-06-08,Accepted,2023-07-30
+FIND-0291,AUD-0035,11,Observation,21 CFR 211.100,Computer Systems Validation,Observation finding in Computer Systems Validation area,System,False,,,2023-06-02,Accepted,2023-08-11
+FIND-0292,AUD-0035,12,Observation,ICH Q10 3.2,Training Management,Observation finding in Manufacturing area,Procedure,False,,,2023-06-28,Accepted,2023-08-10
+FIND-0293,AUD-0036,1,Critical,21 CFR 211.100,Supplier Management,Critical finding in Environmental Monitoring area,Training,False,,CAPA-0193,2023-05-05,Accepted,2023-06-17
+FIND-0294,AUD-0036,2,Major,EU GMP Chapter 5,Environmental Monitoring,Major finding in Batch Record Review area,System,True,,CAPA-0092,2023-05-22,Accepted,2023-07-01
+FIND-0295,AUD-0036,3,Major,21 CFR Part 11.10,Environmental Monitoring,Major finding in Manufacturing area,Material,False,,CAPA-0077,2023-05-19,Accepted,2023-06-19
+FIND-0296,AUD-0036,4,Major,EU GMP Chapter 5,Document Control,Major finding in Change Control area,Material,False,,CAPA-0086,2023-05-31,Accepted,2023-08-15
+FIND-0297,AUD-0036,5,Minor,EU GMP Chapter 4,Manufacturing,Minor finding in Manufacturing area,Human Error,False,,,2023-05-10,Accepted,2023-06-18
+FIND-0298,AUD-0036,6,Minor,21 CFR 820.100,Batch Record Review,Minor finding in Document Control area,Procedure,False,,,2023-06-02,Submitted,2023-07-16
+FIND-0299,AUD-0036,7,Minor,EU GMP Chapter 5,Manufacturing,Minor finding in Environmental Monitoring area,Material,True,,,2023-06-02,Accepted,2023-07-25
+FIND-0300,AUD-0036,8,Minor,21 CFR 820.100,Change Control,Minor finding in QC Laboratory area,Training,False,,,2023-05-13,Accepted,2023-08-01
+FIND-0301,AUD-0036,9,Minor,21 CFR Part 11.10,Batch Record Review,Minor finding in QC Laboratory area,Training,False,,,2023-05-20,Accepted,2023-08-02
+FIND-0302,AUD-0037,1,Critical,EU GMP Chapter 5,Supplier Management,Critical finding in Document Control area,Training,True,,CAPA-0186,2023-02-01,Accepted,2023-04-02
+FIND-0303,AUD-0037,2,Major,EU GMP Chapter 4,CAPA System,Major finding in Batch Record Review area,Training,False,,CAPA-0024,2023-01-18,Open,2023-03-05
+FIND-0304,AUD-0037,3,Major,ICH Q10 3.2,Change Control,Major finding in Training Management area,Human Error,False,,CAPA-0004,2023-01-31,Accepted,2023-04-06
+FIND-0305,AUD-0037,4,Minor,21 CFR 211.100,Document Control,Minor finding in Batch Record Review area,System,True,,,2023-01-30,Accepted,2023-03-21
+FIND-0306,AUD-0037,5,Minor,EU GMP Chapter 5,Computer Systems Validation,Minor finding in Document Control area,Procedure,False,,,2023-01-20,Accepted,2023-04-13
+FIND-0307,AUD-0037,6,Minor,ICH Q10 3.2,Batch Record Review,Minor finding in CAPA System area,Training,True,,,2023-02-12,Submitted,2023-03-18
+FIND-0308,AUD-0037,7,Minor,21 CFR 211.192,CAPA System,Minor finding in Document Control area,Procedure,False,,,2023-01-24,Accepted,2023-03-07
+FIND-0309,AUD-0037,8,Minor,ICH Q10 3.2,QC Laboratory,Minor finding in QC Laboratory area,Human Error,True,,,2023-02-15,Accepted,2023-04-06
+FIND-0310,AUD-0038,1,Major,EU GMP Chapter 5,Batch Record Review,Major finding in Batch Record Review area,Training,False,,CAPA-0025,2023-03-21,Open,2023-05-15
+FIND-0311,AUD-0038,2,Major,21 CFR 820.100,Supplier Management,Major finding in Change Control area,Training,False,,CAPA-0219,2023-03-20,Accepted,2023-04-21
+FIND-0312,AUD-0038,3,Major,21 CFR 820.100,Batch Record Review,Major finding in Change Control area,Training,True,,CAPA-0046,2023-03-23,Accepted,2023-05-16
+FIND-0313,AUD-0038,4,Minor,21 CFR 211.100,Batch Record Review,Minor finding in Document Control area,Human Error,False,,,2023-03-13,Accepted,2023-04-25
+FIND-0314,AUD-0038,5,Minor,21 CFR 820.100,CAPA System,Minor finding in Batch Record Review area,Training,False,,,2023-03-22,Accepted,2023-05-02
+FIND-0315,AUD-0038,6,Minor,ICH Q10 3.2,Training Management,Minor finding in CAPA System area,Training,False,,,2023-03-29,Submitted,2023-05-14
+FIND-0316,AUD-0039,1,Major,21 CFR 211.192,Manufacturing,Major finding in Batch Record Review area,Equipment,False,,CAPA-0110,2024-07-29,Accepted,2024-09-08
+FIND-0317,AUD-0039,2,Major,EU GMP Chapter 5,CAPA System,Major finding in Environmental Monitoring area,Material,False,,CAPA-0163,2024-08-21,Accepted,2024-10-30
+FIND-0318,AUD-0039,3,Major,21 CFR 820.100,Manufacturing,Major finding in Batch Record Review area,Equipment,False,,CAPA-0161,2024-08-24,Accepted,2024-11-01
+FIND-0319,AUD-0039,4,Minor,EU GMP Chapter 5,Environmental Monitoring,Minor finding in Training Management area,Procedure,False,,,2024-08-05,Accepted,2024-09-28
+FIND-0320,AUD-0039,5,Minor,EU GMP Chapter 5,QC Laboratory,Minor finding in Batch Record Review area,Human Error,False,,,2024-08-10,Accepted,2024-10-27
+FIND-0321,AUD-0039,6,Minor,21 CFR 211.192,QC Laboratory,Minor finding in CAPA System area,Human Error,False,,,2024-08-28,Accepted,2024-11-05
+FIND-0322,AUD-0040,1,Critical,EU GMP Chapter 4,Environmental Monitoring,Critical finding in Environmental Monitoring area,Material,False,,CAPA-0171,2024-08-14,Accepted,2024-09-26
+FIND-0323,AUD-0040,2,Major,ICH Q10 3.2,Change Control,Major finding in Batch Record Review area,Equipment,False,,CAPA-0087,2024-08-12,Submitted,2024-09-20
+FIND-0324,AUD-0040,3,Major,ICH Q10 3.2,Computer Systems Validation,Major finding in Batch Record Review area,Training,False,,CAPA-0027,2024-08-18,Accepted,2024-09-22
+FIND-0325,AUD-0040,4,Major,ICH Q10 3.2,CAPA System,Major finding in Supplier Management area,Human Error,False,,CAPA-0083,2024-08-04,Accepted,2024-11-02
+FIND-0326,AUD-0040,5,Minor,EU GMP Chapter 5,Supplier Management,Minor finding in Environmental Monitoring area,Training,False,,,2024-08-03,Accepted,2024-09-28
+FIND-0327,AUD-0040,6,Minor,21 CFR 211.192,Manufacturing,Minor finding in Batch Record Review area,Equipment,False,,,2024-08-02,Accepted,2024-10-10
+FIND-0328,AUD-0040,7,Minor,21 CFR 211.100,Environmental Monitoring,Minor finding in Training Management area,Procedure,False,,,2024-08-18,Accepted,2024-11-16
+FIND-0329,AUD-0041,1,Major,21 CFR 211.68,Computer Systems Validation,Major finding in Change Control area,Material,False,,CAPA-0198,2024-09-21,Accepted,2024-10-27
+FIND-0330,AUD-0041,2,Major,ICH Q10 3.2,Computer Systems Validation,Major finding in Supplier Management area,Human Error,False,,CAPA-0005,2024-09-28,Accepted,2024-11-05
+FIND-0331,AUD-0041,3,Major,21 CFR 820.100,Training Management,Major finding in Change Control area,Communication,False,,CAPA-0074,2024-09-17,Accepted,2024-10-29
+FIND-0332,AUD-0041,4,Major,21 CFR Part 11.10,Environmental Monitoring,Major finding in Change Control area,Procedure,False,,CAPA-0072,2024-09-18,Submitted,2024-12-04
+FIND-0333,AUD-0041,5,Minor,21 CFR 211.192,Environmental Monitoring,Minor finding in Manufacturing area,Procedure,False,,,2024-10-05,Accepted,2025-01-01
+FIND-0334,AUD-0041,6,Minor,21 CFR 211.100,Computer Systems Validation,Minor finding in Change Control area,Material,False,,,2024-09-28,Accepted,2024-12-18
+FIND-0335,AUD-0041,7,Observation,EU GMP Chapter 4,Document Control,Observation finding in CAPA System area,Procedure,False,,,2024-10-07,Accepted,2024-12-08
+FIND-0336,AUD-0041,8,Observation,21 CFR 211.100,Change Control,Observation finding in Environmental Monitoring area,Material,False,,,2024-09-11,Accepted,2024-10-29
+FIND-0337,AUD-0041,9,Observation,ICH Q10 3.2,Computer Systems Validation,Observation finding in Document Control area,Procedure,False,,,2024-09-11,Submitted,2024-10-25
+FIND-0338,AUD-0041,10,Observation,21 CFR 211.100,Document Control,Observation finding in Training Management area,Communication,False,,,2024-09-16,Accepted,2024-11-07
+FIND-0339,AUD-0041,11,Observation,21 CFR 211.68,Training Management,Observation finding in Environmental Monitoring area,Material,False,,,2024-09-27,Accepted,2024-12-04
+FIND-0340,AUD-0042,1,Major,21 CFR 820.100,Manufacturing,Major finding in Supplier Management area,Material,False,,CAPA-0073,2024-06-16,Accepted,2024-08-21
+FIND-0341,AUD-0042,2,Major,EU GMP Chapter 4,Training Management,Major finding in Document Control area,Communication,False,,CAPA-0222,2024-06-23,Accepted,2024-08-30
+FIND-0342,AUD-0042,3,Minor,EU GMP Chapter 4,Supplier Management,Minor finding in Training Management area,Training,False,,,2024-06-03,Accepted,2024-07-21
+FIND-0343,AUD-0042,4,Minor,21 CFR 211.100,Document Control,Minor finding in Document Control area,Human Error,False,,,2024-06-23,Accepted,2024-09-20
+FIND-0344,AUD-0042,5,Minor,21 CFR 211.68,Change Control,Minor finding in Supplier Management area,Equipment,False,,,2024-06-30,Submitted,2024-09-22
+FIND-0345,AUD-0043,1,Major,21 CFR 820.100,Manufacturing,Major finding in Supplier Management area,Human Error,False,,CAPA-0240,2022-03-18,Accepted,2022-05-22
+FIND-0346,AUD-0043,2,Minor,21 CFR 211.68,CAPA System,Minor finding in QC Laboratory area,Training,False,,,2022-02-26,Accepted,2022-05-11
+FIND-0347,AUD-0043,3,Minor,21 CFR 211.100,Computer Systems Validation,Minor finding in Batch Record Review area,Training,False,,,2022-03-15,Open,2022-05-08
+FIND-0348,AUD-0043,4,Minor,21 CFR Part 11.10,Training Management,Minor finding in Training Management area,Material,True,,,2022-03-04,Accepted,2022-05-29
+FIND-0349,AUD-0043,5,Minor,21 CFR 211.100,Batch Record Review,Minor finding in Manufacturing area,Human Error,False,,,2022-03-16,Submitted,2022-04-23
+FIND-0350,AUD-0043,6,Minor,21 CFR 211.68,Change Control,Minor finding in Supplier Management area,Equipment,False,,,2022-03-08,Accepted,2022-04-25
+FIND-0351,AUD-0043,7,Minor,21 CFR Part 11.10,Manufacturing,Minor finding in QC Laboratory area,Training,False,,,2022-02-26,Accepted,2022-05-11
+FIND-0352,AUD-0044,1,Major,21 CFR 211.100,CAPA System,Major finding in Supplier Management area,Material,False,,CAPA-0021,2022-03-25,Accepted,2022-06-03
+FIND-0353,AUD-0044,2,Major,21 CFR 211.100,Environmental Monitoring,Major finding in Training Management area,Material,False,,CAPA-0074,2022-03-25,Accepted,2022-06-04
+FIND-0354,AUD-0044,3,Major,EU GMP Chapter 4,Document Control,Major finding in Training Management area,Material,False,,CAPA-0022,2022-03-17,Open,2022-04-29
+FIND-0355,AUD-0044,4,Major,ICH Q10 3.2,Change Control,Major finding in Environmental Monitoring area,Training,False,,CAPA-0141,2022-03-19,Accepted,2022-05-10
+FIND-0356,AUD-0044,5,Minor,21 CFR 211.192,Computer Systems Validation,Minor finding in Manufacturing area,Human Error,False,,,2022-03-16,Accepted,2022-05-25
+FIND-0357,AUD-0044,6,Minor,21 CFR 211.100,Computer Systems Validation,Minor finding in Batch Record Review area,Equipment,False,,,2022-03-21,Submitted,2022-05-07
+FIND-0358,AUD-0044,7,Minor,EU GMP Chapter 5,Environmental Monitoring,Minor finding in Environmental Monitoring area,System,False,,,2022-04-04,Accepted,2022-07-03
+FIND-0359,AUD-0044,8,Minor,21 CFR 211.68,QC Laboratory,Minor finding in Training Management area,Equipment,False,,,2022-03-07,Accepted,2022-05-22
+FIND-0360,AUD-0044,9,Minor,EU GMP Chapter 5,Environmental Monitoring,Minor finding in CAPA System area,Procedure,False,,,2022-03-20,Submitted,2022-05-07
+FIND-0361,AUD-0045,1,Major,21 CFR 211.68,Manufacturing,Major finding in Environmental Monitoring area,Human Error,False,,CAPA-0122,2022-04-17,Accepted,2022-05-19
+FIND-0362,AUD-0045,2,Minor,EU GMP Chapter 4,Training Management,Minor finding in CAPA System area,Training,False,,,2022-05-03,Submitted,2022-07-04
+FIND-0363,AUD-0045,3,Minor,ICH Q10 3.2,Change Control,Minor finding in Manufacturing area,Training,False,,,2022-05-06,Submitted,2022-07-03
+FIND-0364,AUD-0045,4,Minor,21 CFR 211.68,Document Control,Minor finding in Environmental Monitoring area,Procedure,False,,,2022-04-09,Accepted,2022-06-21
+FIND-0365,AUD-0045,5,Minor,21 CFR 211.100,Computer Systems Validation,Minor finding in Change Control area,Equipment,False,,,2022-05-01,Accepted,2022-06-26
+FIND-0366,AUD-0045,6,Minor,21 CFR 211.100,Training Management,Minor finding in QC Laboratory area,Human Error,False,,,2022-04-22,Accepted,2022-05-30
+FIND-0367,AUD-0045,7,Observation,21 CFR 211.192,Change Control,Observation finding in Change Control area,Equipment,False,,,2022-04-23,Accepted,2022-06-26
+FIND-0368,AUD-0045,8,Observation,21 CFR 211.192,Supplier Management,Observation finding in CAPA System area,Procedure,False,,,2022-04-16,Accepted,2022-06-23
+FIND-0369,AUD-0045,9,Observation,EU GMP Chapter 4,Training Management,Observation finding in Document Control area,Material,False,,,2022-04-06,Accepted,2022-06-03
+FIND-0370,AUD-0045,10,Observation,21 CFR 820.100,QC Laboratory,Observation finding in Training Management area,Material,False,,,2022-04-09,Open,2022-05-31
+FIND-0371,AUD-0046,1,Major,ICH Q10 3.2,Manufacturing,Major finding in Training Management area,System,False,,CAPA-0240,2022-11-10,Accepted,2023-01-10
+FIND-0372,AUD-0046,2,Major,21 CFR Part 11.10,Supplier Management,Major finding in CAPA System area,Training,False,,CAPA-0238,2022-11-11,Accepted,2023-02-03
+FIND-0373,AUD-0046,3,Minor,EU GMP Chapter 4,Training Management,Minor finding in Batch Record Review area,Procedure,True,,,2022-12-08,Submitted,2023-03-08
+FIND-0374,AUD-0046,4,Minor,21 CFR 211.100,Batch Record Review,Minor finding in QC Laboratory area,Human Error,False,,,2022-11-19,Accepted,2023-02-05
+FIND-0375,AUD-0046,5,Minor,21 CFR 211.100,Manufacturing,Minor finding in Manufacturing area,Equipment,False,,,2022-12-09,Accepted,2023-02-06
+FIND-0376,AUD-0046,6,Minor,21 CFR 211.192,Supplier Management,Minor finding in Document Control area,Training,False,,,2022-12-08,Accepted,2023-02-19
+FIND-0377,AUD-0046,7,Observation,21 CFR 820.100,Document Control,Observation finding in Environmental Monitoring area,Training,False,,,2022-11-29,Accepted,2023-02-25
+FIND-0378,AUD-0046,8,Observation,21 CFR 211.68,CAPA System,Observation finding in Computer Systems Validation area,Equipment,False,,,2022-12-02,Submitted,2023-02-12
+FIND-0379,AUD-0047,1,Major,EU GMP Chapter 5,QC Laboratory,Major finding in Computer Systems Validation area,Material,False,,CAPA-0152,2023-03-06,Accepted,2023-05-19
+FIND-0380,AUD-0047,2,Major,EU GMP Chapter 4,Change Control,Major finding in Batch Record Review area,Human Error,False,,CAPA-0001,2023-03-06,Submitted,2023-05-13
+FIND-0381,AUD-0047,3,Major,21 CFR 211.68,Manufacturing,Major finding in QC Laboratory area,Human Error,False,,CAPA-0134,2023-03-07,Accepted,2023-05-10
+FIND-0382,AUD-0047,4,Major,21 CFR 211.100,Document Control,Major finding in Environmental Monitoring area,Procedure,False,,CAPA-0118,2023-03-01,Accepted,2023-04-28
+FIND-0383,AUD-0047,5,Minor,21 CFR Part 11.10,Document Control,Minor finding in Training Management area,Procedure,False,,,2023-02-28,Accepted,2023-04-25
+FIND-0384,AUD-0047,6,Minor,ICH Q10 3.2,Supplier Management,Minor finding in Training Management area,Procedure,False,,,2023-02-24,Submitted,2023-03-29
+FIND-0385,AUD-0047,7,Minor,21 CFR 211.68,Supplier Management,Minor finding in Manufacturing area,Training,False,,,2023-02-24,Submitted,2023-05-04
+FIND-0386,AUD-0047,8,Minor,ICH Q10 3.2,Manufacturing,Minor finding in Manufacturing area,Procedure,False,,,2023-03-09,Submitted,2023-05-09
+FIND-0387,AUD-0047,9,Observation,EU GMP Chapter 5,Document Control,Observation finding in Supplier Management area,Procedure,False,,,2023-02-22,Accepted,2023-05-10
+FIND-0388,AUD-0047,10,Observation,21 CFR 211.192,CAPA System,Observation finding in Manufacturing area,Equipment,False,,,2023-02-25,Submitted,2023-04-13
+FIND-0389,AUD-0047,11,Observation,21 CFR 211.192,Manufacturing,Observation finding in Training Management area,Material,False,,,2023-03-11,Accepted,2023-06-09
+FIND-0390,AUD-0047,12,Observation,21 CFR 211.100,QC Laboratory,Observation finding in Supplier Management area,Procedure,False,,,2023-03-08,Accepted,2023-05-31
+FIND-0391,AUD-0048,1,Major,21 CFR 820.100,CAPA System,Major finding in Change Control area,System,False,,CAPA-0087,2023-11-01,Accepted,2023-12-19
+FIND-0392,AUD-0048,2,Major,21 CFR 820.100,Training Management,Major finding in QC Laboratory area,System,False,,CAPA-0236,2023-11-06,Submitted,2024-01-08
+FIND-0393,AUD-0048,3,Major,EU GMP Chapter 4,Document Control,Major finding in Change Control area,System,False,,CAPA-0101,2023-10-09,Accepted,2024-01-03
+FIND-0394,AUD-0048,4,Major,21 CFR 211.100,Computer Systems Validation,Major finding in Change Control area,Training,False,,CAPA-0076,2023-10-27,Open,2024-01-03
+FIND-0395,AUD-0048,5,Minor,21 CFR 211.68,Manufacturing,Minor finding in Training Management area,Procedure,False,,,2023-10-12,Accepted,2023-12-30
+FIND-0396,AUD-0048,6,Minor,EU GMP Chapter 5,CAPA System,Minor finding in Batch Record Review area,Training,False,,,2023-10-11,Accepted,2023-12-18
+FIND-0397,AUD-0048,7,Observation,21 CFR 211.68,Environmental Monitoring,Observation finding in CAPA System area,Communication,False,,,2023-11-04,Submitted,2024-01-21
+FIND-0398,AUD-0048,8,Observation,21 CFR 211.100,CAPA System,Observation finding in Batch Record Review area,Training,True,,,2023-10-14,Accepted,2023-12-17
+FIND-0399,AUD-0048,9,Observation,EU GMP Chapter 5,Document Control,Observation finding in Change Control area,Training,False,,,2023-11-03,Accepted,2024-01-14
+FIND-0400,AUD-0048,10,Observation,21 CFR 820.100,CAPA System,Observation finding in CAPA System area,Procedure,False,,,2023-10-11,Accepted,2023-12-18
+FIND-0401,AUD-0049,1,Major,EU GMP Chapter 5,Environmental Monitoring,Major finding in Manufacturing area,Material,False,,CAPA-0017,2023-09-06,Accepted,2023-10-29
+FIND-0402,AUD-0049,2,Minor,EU GMP Chapter 4,Document Control,Minor finding in Computer Systems Validation area,Equipment,False,,,2023-08-30,Accepted,2023-11-25
+FIND-0403,AUD-0049,3,Minor,EU GMP Chapter 4,QC Laboratory,Minor finding in CAPA System area,Training,False,,,2023-08-11,Accepted,2023-10-04
+FIND-0404,AUD-0050,1,Major,21 CFR 211.100,Batch Record Review,Major finding in Manufacturing area,Human Error,False,,CAPA-0091,2024-09-28,Accepted,2024-12-06
+FIND-0405,AUD-0050,2,Major,21 CFR 211.100,Computer Systems Validation,Major finding in Computer Systems Validation area,Procedure,False,,CAPA-0108,2024-09-06,Submitted,2024-10-27
+FIND-0406,AUD-0050,3,Major,21 CFR Part 11.10,Environmental Monitoring,Major finding in Training Management area,Training,True,,CAPA-0201,2024-09-08,Accepted,2024-11-12
+FIND-0407,AUD-0050,4,Minor,EU GMP Chapter 5,Computer Systems Validation,Minor finding in Supplier Management area,Training,False,,,2024-09-25,Accepted,2024-12-15
+FIND-0408,AUD-0050,5,Minor,21 CFR 211.192,Change Control,Minor finding in CAPA System area,Training,False,,,2024-09-04,Accepted,2024-11-03
+FIND-0409,AUD-0050,6,Minor,21 CFR Part 11.10,Document Control,Minor finding in Environmental Monitoring area,System,False,,,2024-09-24,Accepted,2024-11-20
+FIND-0410,AUD-0050,7,Minor,21 CFR 211.192,Change Control,Minor finding in CAPA System area,System,False,,,2024-09-10,Accepted,2024-11-01
+FIND-0411,AUD-0051,1,Major,EU GMP Chapter 4,Change Control,Major finding in Batch Record Review area,Procedure,False,,CAPA-0006,2024-10-13,Accepted,2025-01-11
+FIND-0412,AUD-0051,2,Major,EU GMP Chapter 5,CAPA System,Major finding in Batch Record Review area,Material,False,,CAPA-0145,2024-10-25,Open,2024-12-03
+FIND-0413,AUD-0051,3,Major,21 CFR 211.100,CAPA System,Major finding in Change Control area,Procedure,False,,CAPA-0089,2024-11-02,Accepted,2025-01-11
+FIND-0414,AUD-0051,4,Major,ICH Q10 3.2,Batch Record Review,Major finding in CAPA System area,Training,False,,CAPA-0123,2024-10-23,Submitted,2024-12-26
+FIND-0415,AUD-0051,5,Minor,21 CFR Part 11.10,Supplier Management,Minor finding in CAPA System area,Material,False,,,2024-10-14,Accepted,2024-12-04
+FIND-0416,AUD-0051,6,Minor,EU GMP Chapter 5,CAPA System,Minor finding in Supplier Management area,Training,False,,,2024-11-08,Accepted,2025-01-26
+FIND-0417,AUD-0051,7,Minor,21 CFR 211.68,Environmental Monitoring,Minor finding in QC Laboratory area,Training,False,,,2024-11-07,Accepted,2024-12-25
+FIND-0418,AUD-0051,8,Minor,21 CFR 820.100,QC Laboratory,Minor finding in Training Management area,Material,False,,,2024-10-25,Accepted,2024-12-11
+FIND-0419,AUD-0051,9,Minor,21 CFR 820.100,CAPA System,Minor finding in Computer Systems Validation area,Communication,False,,,2024-10-22,Accepted,2024-12-16
+FIND-0420,AUD-0051,10,Minor,ICH Q10 3.2,Batch Record Review,Minor finding in Computer Systems Validation area,Communication,False,,,2024-11-04,Accepted,2025-01-01
+FIND-0421,AUD-0052,1,Major,EU GMP Chapter 5,Document Control,Major finding in Environmental Monitoring area,Equipment,False,,CAPA-0146,2024-09-22,Accepted,2024-11-15
+FIND-0422,AUD-0052,2,Major,21 CFR 211.100,Change Control,Major finding in Document Control area,Human Error,False,,CAPA-0197,2024-09-28,Accepted,2024-11-25
+FIND-0423,AUD-0052,3,Minor,21 CFR Part 11.10,Change Control,Minor finding in Batch Record Review area,Human Error,False,,,2024-10-10,Submitted,2024-12-23
+FIND-0424,AUD-0052,4,Minor,21 CFR 820.100,Manufacturing,Minor finding in Manufacturing area,Human Error,True,,,2024-10-02,Accepted,2024-12-07
+FIND-0425,AUD-0052,5,Minor,EU GMP Chapter 5,Document Control,Minor finding in Change Control area,Training,False,,,2024-10-01,Accepted,2024-12-27
+FIND-0426,AUD-0052,6,Minor,21 CFR 211.68,Manufacturing,Minor finding in QC Laboratory area,Communication,False,,,2024-10-05,Submitted,2024-12-03
+FIND-0427,AUD-0053,1,Major,EU GMP Chapter 4,Computer Systems Validation,Major finding in Supplier Management area,System,False,,CAPA-0037,2024-03-20,Submitted,2024-05-01
+FIND-0428,AUD-0053,2,Major,21 CFR 211.192,Document Control,Major finding in Batch Record Review area,System,False,,CAPA-0070,2024-04-10,Accepted,2024-06-24
+FIND-0429,AUD-0053,3,Major,ICH Q10 3.2,Computer Systems Validation,Major finding in Document Control area,Procedure,False,,CAPA-0105,2024-04-02,Accepted,2024-06-13
+FIND-0430,AUD-0053,4,Minor,ICH Q10 3.2,CAPA System,Minor finding in Document Control area,Training,False,,,2024-04-14,Open,2024-07-09
+FIND-0431,AUD-0053,5,Minor,21 CFR 211.68,Document Control,Minor finding in Supplier Management area,Procedure,False,,,2024-03-22,Open,2024-04-29
+FIND-0432,AUD-0053,6,Observation,21 CFR 820.100,CAPA System,Observation finding in CAPA System area,Procedure,False,,,2024-03-26,Accepted,2024-05-31
+FIND-0433,AUD-0053,7,Observation,21 CFR 211.192,Supplier Management,Observation finding in Batch Record Review area,Procedure,False,,,2024-04-17,Submitted,2024-06-26
+FIND-0434,AUD-0053,8,Observation,ICH Q10 3.2,Document Control,Observation finding in QC Laboratory area,System,False,,,2024-03-24,Accepted,2024-06-20
+FIND-0435,AUD-0053,9,Observation,21 CFR 211.192,Document Control,Observation finding in Supplier Management area,Communication,False,,,2024-03-31,Open,2024-05-17
+FIND-0436,AUD-0053,10,Observation,21 CFR 211.68,Training Management,Observation finding in CAPA System area,Training,False,,,2024-04-13,Accepted,2024-06-30
+FIND-0437,AUD-0053,11,Observation,21 CFR 820.100,QC Laboratory,Observation finding in Document Control area,Human Error,False,,,2024-04-16,Open,2024-07-10

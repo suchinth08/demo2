@@ -1,0 +1,18 @@
+# Vercel hosts ONLY the static frontend (frontend/index.html + root assets).
+# The API + all Python source runs on Railway — exclude everything else.
+
+chatbot
+config
+data
+docs
+malloy
+ontology
+schema
+_archive_pharma
+*.log
+*.db
+*.pptx
+
+# Never upload secrets to the frontend host
+.env
+.env.*

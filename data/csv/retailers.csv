@@ -1,0 +1,16 @@
+retailer_id,retailer_name,channel,region,total_stores,channel_acv_share_pct
+RET-001,Walmart,Mass,USA,4615,18.4
+RET-002,Target,Mass,USA,1956,6.2
+RET-003,Kroger,Grocery,USA,2719,9.1
+RET-004,Albertsons,Grocery,USA,2271,5.4
+RET-005,Publix,Grocery,USA,1356,3.2
+RET-006,Whole Foods,Grocery,USA,535,1.1
+RET-007,Costco,Club,USA,600,5.9
+RET-008,Sam's Club,Club,USA,600,3.7
+RET-009,Amazon,eCommerce,USA,1,14.5
+RET-010,CVS,Drug,USA,9967,3.4
+RET-011,Walgreens,Drug,USA,8886,3.1
+RET-012,Sephora,Beauty Specialty,USA,600,1.0
+RET-013,Ulta Beauty,Beauty Specialty,USA,1385,1.4
+RET-014,Best Buy,Electronics,USA,977,2.0
+RET-015,Home Depot,Home Improvement,USA,2335,3.0

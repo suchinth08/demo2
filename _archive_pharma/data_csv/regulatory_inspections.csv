@@ -1,0 +1,10 @@
+inspection_id,site_id,inspecting_authority,inspection_type,inspection_start_date,inspection_end_date,lead_investigator,form_483_issued,form_483_observation_count,warning_letter_issued,import_alert_issued,overall_outcome,response_due_date
+INSP-0001,SITE-US-01,FDA,Follow-Up,2022-03-11,2022-03-16,Investigator 2,True,4,False,False,VAI,2022-03-31
+INSP-0002,SITE-US-01,FDA,Pre-Approval,2023-06-15,2023-06-20,Investigator 1,True,1,False,False,NAI,2023-07-05
+INSP-0003,SITE-US-01,FDA,Follow-Up,2024-09-18,2024-09-23,Investigator 4,True,5,False,False,NAI,2024-10-08
+INSP-0004,SITE-EU-01,EMA,Routine,2022-03-16,2022-03-19,Investigator 18,False,0,True,False,OAI,2022-04-03
+INSP-0005,SITE-EU-01,EMA,Routine,2023-07-18,2023-07-21,Investigator 5,False,0,False,False,VAI,2023-08-05
+INSP-0006,SITE-EU-01,EMA,Routine,2024-05-12,2024-05-16,Investigator 17,False,0,False,False,VAI,2024-05-31
+INSP-0007,SITE-AP-01,EMA,Follow-Up,2022-04-13,2022-04-19,Investigator 16,False,0,False,False,NAI,2022-05-04
+INSP-0008,SITE-AP-01,EMA,Routine,2023-02-03,2023-02-08,Investigator 18,False,0,False,False,NAI,2023-02-23
+INSP-0009,SITE-AP-01,EMA,Routine,2024-05-01,2024-05-05,Investigator 15,True,5,False,False,VAI,2024-05-20
